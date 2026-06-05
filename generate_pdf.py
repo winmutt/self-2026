@@ -14,6 +14,7 @@ from reportlab.pdfgen import canvas
 from reportlab.platypus.flowables import TopPadder
 from reportlab.platypus.doctemplate import PageTemplate, Frame
 import os
+from PIL import Image as PILImage
 
 # Custom canvas that draws a full-page black background for every page
 def draw_black_background(canvas, doc):
@@ -32,6 +33,28 @@ def draw_black_background(canvas, doc):
 
 # Output file
 output_pdf = '/opt/opencode/src/self-2026/assets/AMD_Strix_Halo_Talk.pdf'
+
+def get_scaled_image(path, max_width, max_height):
+    """Load image and scale to fit within max_width/max_height while preserving aspect ratio"""
+    try:
+        pil_img = PILImage.open(path)
+        orig_w, orig_h = pil_img.size
+        aspect = orig_w / orig_h
+        
+        # Scale to fit within constraints
+        if max_width / max_height > aspect:
+            # Height is limiting factor
+            new_h = max_height
+            new_w = new_h * aspect
+        else:
+            # Width is limiting factor
+            new_w = max_width
+            new_h = new_w / aspect
+        
+        return Image(path, width=new_w, height=new_h)
+    except Exception as e:
+        print(f"Warning: Could not load image {path}: {e}")
+        return None
 
 
 
@@ -150,11 +173,9 @@ def create_pdf():
     
     # GitHub activity image
     body.append(Paragraph("GitHub Activity: 10-Year History", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/github_activity_original.png', width=7*inch, height=2.5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_activity_original.png', 7*inch, 3*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(Spacer(1, 0.5*inch))
     body.append(Paragraph("The Catalyst Effect - Nov 2025: Strix Halo acquisition led to 3.5x contribution increase", normal_style))
@@ -185,11 +206,9 @@ def create_pdf():
     
     # Corsair AI Workstation render
     body.append(Paragraph("The Corsair AI Workstation 300", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/corsair_rig.png', width=7*inch, height=4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/corsair_rig.png', 7*inch, 5*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(Spacer(1, 0.3*inch))
     body.append(Paragraph("Note: Corsair 300 shares motherboard with other Strix Halo manufacturers (Sixunited)", normal_style))
@@ -198,20 +217,16 @@ def create_pdf():
     
     # Corsair price comparison
     body.append(Paragraph("Price Comparison", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/corsair_price.png', width=7*inch, height=5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/corsair_price.png', 7*inch, 6*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("CRSR Stock Performance", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/crsr_stock.png', width=7*inch, height=4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/crsr_stock.png', 7*inch, 4*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(Spacer(1, 0.3*inch))
     
@@ -297,11 +312,9 @@ def create_pdf():
     
     # Opencode screenshot
     body.append(Paragraph("Opencode - Preferred Agent UI", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', width=7*inch, height=4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 7*inch, 4*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(Spacer(1, 0.3*inch))
     body.append(Paragraph("• Cline: Good for direct coding tasks", normal_style))
@@ -408,11 +421,9 @@ def create_pdf():
     
     # Performance chart
     body.append(Paragraph("Performance Timeline", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/timeline.png', width=7*inch, height=3*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/timeline.png', 7*inch, 3.5*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(PageBreak())
     
@@ -444,11 +455,9 @@ def create_pdf():
     
     # WWS Dashboard screenshot
     body.append(Paragraph("WWS Dashboard", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/dashboard.png', width=7*inch, height=4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/dashboard.png', 7*inch, 4*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(PageBreak())
     
@@ -532,11 +541,9 @@ def create_pdf():
     
     # Home Assistant screenshot
     body.append(Paragraph("Home Assistant on Echo Show", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/ha.jpeg', width=5*inch, height=4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 5*inch, 4*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(PageBreak())
     
@@ -637,11 +644,9 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     
     body.append(Paragraph("Concrete Sign Mold Design", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/concrete_sign.png', width=6*inch, height=4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 6*inch, 6*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(PageBreak())
     
@@ -692,11 +697,9 @@ def create_pdf():
     
     # Catalyst diagram
     body.append(Paragraph("AMD Strix Halo: Catalyst for OSS Reinvigoration", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/catalyst_diagram.png', width=7*inch, height=5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/catalyst_diagram.png', 7*inch, 6*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(PageBreak())
     
@@ -720,21 +723,17 @@ def create_pdf():
     
     # Contribution calendar
     body.append(Paragraph("2026 Contribution Calendar", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/contribution_calendar_2026.png', width=7*inch, height=3*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/contribution_calendar_2026.png', 7*inch, 3*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(Spacer(1, 0.5*inch))
     
     # Project breakdown
     body.append(Paragraph("Project Contributions (Nov 2025 - Jun 2026)", subheading_style))
-    try:
-        img = Image('/opt/opencode/src/self-2026/assets/project_breakdown.png', width=7*inch, height=4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/project_breakdown.png', 7*inch, 5*inch)
+    if img:
         body.append(img)
-    except:
-        pass
     
     body.append(PageBreak())
     
