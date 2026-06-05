@@ -170,8 +170,9 @@ def create_pdf():
         body.append(Paragraph(f"  • {item}", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
-    # GitHub activity image
+    # GitHub activity image (on new page)
     body.append(Paragraph("GitHub Activity: 10-Year History", subheading_style))
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_activity_original.png', 7*inch, 3*inch)
     if img:
@@ -179,6 +180,8 @@ def create_pdf():
     
     body.append(Spacer(1, 0.5*inch))
     body.append(Paragraph("The Catalyst Effect - Nov 2025: Strix Halo acquisition led to 3.5x contribution increase", normal_style))
+    
+    body.append(PageBreak())
     
     body.append(PageBreak())
     
@@ -203,6 +206,7 @@ def create_pdf():
     body.append(Paragraph("Performance was poor across shared 6GB GDDR6 VRAM", normal_style))
     body.append(Paragraph("Decided to invest in 128GB RAM for APU upgrade", normal_style))
     body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
     
     # Corsair AI Workstation render
     body.append(Paragraph("The Corsair AI Workstation 300", subheading_style))
@@ -214,6 +218,7 @@ def create_pdf():
     body.append(Paragraph("Note: Corsair 300 shares motherboard with other Strix Halo manufacturers (Sixunited)", normal_style))
     
     body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
     
     # Corsair price comparison
     body.append(Paragraph("Price Comparison", subheading_style))
@@ -222,6 +227,7 @@ def create_pdf():
         body.append(img)
     
     body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
     
     body.append(Paragraph("CRSR Stock Performance", subheading_style))
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/crsr_stock.png', 7*inch, 4*inch)
@@ -309,6 +315,7 @@ def create_pdf():
     body.append(Paragraph("• Significantly improves throughput and reduces latency", normal_style))
     
     body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
     
     # Opencode screenshot
     body.append(Paragraph("Opencode - Preferred Agent UI", subheading_style))
@@ -418,6 +425,7 @@ def create_pdf():
     body.append(Paragraph("Input tokens: 193,795 | Output tokens: 5,997 | TTFT: 2,267s (37.8 min) | TPS: 18.65", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
     # Performance chart
     body.append(Paragraph("Performance Timeline", subheading_style))
@@ -452,6 +460,7 @@ def create_pdf():
     body.append(Paragraph("• Team collaboration features", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
     # WWS Dashboard screenshot
     body.append(Paragraph("WWS Dashboard", subheading_style))
@@ -538,6 +547,7 @@ def create_pdf():
     body.append(timeline_table)
     
     body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
     # Home Assistant screenshot
     body.append(Paragraph("Home Assistant on Echo Show", subheading_style))
@@ -642,6 +652,7 @@ def create_pdf():
     body.append(Paragraph("6. Finish and potentially sell on Etsy", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
     body.append(Paragraph("Concrete Sign Mold Design", subheading_style))
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 6*inch, 6*inch)
@@ -694,6 +705,7 @@ def create_pdf():
         body.append(Paragraph(f"  {insight}", normal_style))
     
     body.append(Spacer(1, 1*inch))
+    body.append(PageBreak())
     
     # Catalyst diagram
     body.append(Paragraph("AMD Strix Halo: Catalyst for OSS Reinvigoration", subheading_style))
@@ -720,6 +732,7 @@ def create_pdf():
     ))
     
     body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
     # Contribution calendar
     body.append(Paragraph("2026 Contribution Calendar", subheading_style))
@@ -728,6 +741,7 @@ def create_pdf():
         body.append(img)
     
     body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
     # Project breakdown
     body.append(Paragraph("Project Contributions (Nov 2025 - Jun 2026)", subheading_style))
