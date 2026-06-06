@@ -196,10 +196,10 @@ def create_pdf():
     # TITLE SLIDE
     # ============================================
     body.append(Spacer(1, 1.5*inch))
-    body.append(Paragraph("How I Bought an AI Computer", title_style))
-    body.append(Paragraph("And Accidentally Became an Open Source Maintainer Again", subtitle_style))
+    body.append(Paragraph("How I Bought an AI Thing", title_style))
+    body.append(Paragraph("And Accidentally Became an Linux Geek Again", subtitle_style))
     body.append(Spacer(1, 0.5*inch))
-    body.append(Paragraph("A Six Month Review of My Strix Halo Rig", normal_style))
+    body.append(Paragraph("A Six Month Review of a Strix Halo Rig", normal_style))
     body.append(Spacer(1, 0.3*inch))
     body.append(Paragraph("linux | ROCm | Local AI | Home Assistant | Coding", humor_style))
     body.append(Spacer(1, 1.5*inch))
@@ -231,190 +231,26 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
-    # GitHub activity image (on new page)
-    body.append(Paragraph("The 10-Year GitHub Glow-Up", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph("Before Strix Halo: Ghost in the machine", humor_style))
-    body.append(Spacer(1, 0.3*inch))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_activity_original.png', 7*inch, 3*inch)
-    if img:
-        body.append(img)
-    
-    body.append(Spacer(1, 0.5*inch))
-    body.append(Paragraph("November 2025: Bought a Strix Halo rig", normal_style))
-    body.append(Paragraph("Result: 3.5x increase in open source contributions", normal_style))
-    body.append(Paragraph("Moral of the story: Hardware buys you time (and motivation)", humor_style))
-    
-    body.append(PageBreak())
-    
-    body.append(PageBreak())
-    
     # ============================================
-    # PART 1: THE DECISION
+    # POWER CONSUMPTION COMPARISON
     # ============================================
-    body.append(Paragraph("The Impulse Purchase", heading_style))
+    body.append(Paragraph("Power Reality: Corsair 300 vs Alternatives", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("Why AMD Strix Halo?", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    body.append(Paragraph(
-        '<b>November 22, 2025</b><br/>"BTW I have a corsair 300 AMD 395 max+ enroute. '
-        'Sold my 3060 rig today."', quote_style
-    ))
-    
+    body.append(Paragraph("Max Energy Usage Comparison", subheading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("Before: RTX 3060 with 12GB VRAM", normal_style))
-    body.append(Paragraph("After: 128GB LPDDR5X-8000 unified memory", normal_style))
-    body.append(Paragraph("Translation: My AI stopped choking on context", humor_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    body.append(PageBreak())
-    
-    # Corsair AI Workstation render
-    body.append(Paragraph("Meet My New Overlord", subheading_style))
-    body.append(Paragraph("Corsair AI Workstation 300", humor_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/corsair_rig.png', 7*inch, 5*inch)
-    if img:
-        body.append(img)
-    
-    body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph("Note: Corsair 300 shares motherboard with other Strix Halo manufacturers (Sixunited)", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    body.append(PageBreak())
-    
-    # Corsair price comparison
-    body.append(Paragraph("The Price Tag That Made My Wallet Cry", subheading_style))
-    body.append(Paragraph("Black Friday 2025: $1,800", humor_style))
-    body.append(Paragraph("Today's equivalent: ~$2,700", humor_style))
-    body.append(Paragraph("TL;DR: I got a good deal (mostly)", normal_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/corsair_price.png', 7*inch, 6*inch)
-    if img:
-        body.append(img)
-    
-    body.append(Spacer(1, 0.3*inch))
-    body.append(PageBreak())
-    
-    body.append(Paragraph("CRSR Stock: Because Why Not?", subheading_style))
-    body.append(Paragraph("My investment strategy: Buy hardware, watch stock", humor_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/crsr_stock.png', 7*inch, 4*inch)
-    if img:
-        body.append(img)
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("The Pitch:", subheading_style))
-    body.append(Paragraph("• 128GB unified memory (LPDDR5X-8000)", normal_style))
-    body.append(Paragraph("• Fastest 'nom' VRAM available", normal_style))
-    body.append(Paragraph("• NPU for AI acceleration", normal_style))
-    body.append(Paragraph("• No discrete GPU needed", normal_style))
-    
-    body.append(PageBreak())
-    
-    # ============================================
-    # PART 2: HARDWARE REALITY
-    # ============================================
-    body.append(Paragraph("Hardware Reality: It's Complicated", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("AMD Strix Halo Architecture", subheading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    # Architecture diagram as table
-    arch_data = [
-        ['AMD Strix Halo APU'],
-        ['┌─────────────┐  ┌─────────────┐'],
-        ['│ Core Die 1  │  │ Core Die 2  │'],
-        ['│ 64MB L3     │  │ 64MB L3     │'],
-        ['└─────────────┘  └─────────────┘'],
-        ['128GB LPDDR5X-8000 (soldered)'],
-        ['(Only 96GB addressable - RIP 32GB)'],
-        ['GPU | NPU | Media Engine']
+    power_data = [
+        ['Solution', 'Max Power', 'Notes'],
+        ['Corsair 300 (Strix Halo)', '~300W', 'AMD Ryzen AI 300 APU (TDP 300W)'],
+        ['PC + RTX 5090', '~800-1000W', 'CPU (350W) + GPU (600W) + overhead'],
+        ['RTX 4090 Workstation', '~700-850W', 'CPU (250W) + GPU (450W) + overhead'],
+        ['Commercial AI Server', '~1500-3000W', 'Multi-GPU (A100/H100: 400-700W/GPU)'],
+        ['Cloud API (per 1M tokens)', 'N/A', 'Energy cost embedded in pricing']
     ]
     
-    arch_table = Table(arch_data, colWidths=[5*inch])
-    arch_table.setStyle(TableStyle([
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, -1), 'Courier'),
-        ('FONTSIZE', (0, 0), (-1, -1), 10),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
-        ('TEXTCOLOR', (0, 0), (-1, -1), colors.HexColor('#e0e0e0')),
-        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#444444')),
-    ]))
-    body.append(arch_table)
-    
-    body.append(Spacer(1, 0.5*inch))
-    
-    body.append(Paragraph("The Plot Thickens:", subheading_style))
-    body.append(Paragraph("• 128GB total, only 96GB accessible", normal_style))
-    body.append(Paragraph("• Memory placement: VRAM vs GTT drama", normal_style))
-    body.append(Paragraph("• Swapping happens anyway (thanks unified memory!)", humor_style))
-    
-    body.append(PageBreak())
-    
-    # ============================================
-    # PART 2.5: AGENTS & MODELS
-    # ============================================
-    body.append(Paragraph("My AI Menagerie", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Models in Rotation", subheading_style))
-    body.append(Paragraph("• Qwen3.6-35B-A3B-MTP-GGUF (the daily driver)", normal_style))
-    body.append(Paragraph("• Qwen3.5-122B (when I want to wait 40 minutes)", humor_style))
-    body.append(Paragraph("• gpt-oss-120b (for variety)", normal_style))
-    body.append(Paragraph("• Qwen3-Coder-Next (my coding co-pilot)", normal_style))
-    body.append(Paragraph("• Flux-2-Klein-9B (for art, apparently)", normal_style))
-    body.append(Paragraph("• Whisper-Large-v3-Turbo (because typing is hard)", normal_style))
-    body.append(Paragraph("• Plus 8 more I forgot about", humor_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Multi-Token Prediction (MTP)", subheading_style))
-    body.append(Paragraph("• MTP = Multi-Token Prediction (not Mixed Tensor Precision!)", humor_style))
-    body.append(Paragraph("• Predicts multiple tokens at once", normal_style))
-    body.append(Paragraph("• Translation: My AI thinks faster", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    body.append(PageBreak())
-    
-    # Opencode screenshot
-    body.append(Paragraph("Opencode: The Portable Web UI I Actually Use", subheading_style))
-    body.append(Paragraph("Cline is good for direct coding", normal_style))
-    body.append(Paragraph("Opencode is portable (I can code from my couch)", humor_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 7*inch, 4*inch)
-    if img:
-        body.append(img)
-    
-    body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph("• Cline: Good for direct coding tasks", normal_style))
-    body.append(Paragraph("• Opencode: Preferred for portable web UI experience", normal_style))
-    body.append(Paragraph("• Opencode makes it portable for mobile/different locations", normal_style))
-    
-    body.append(PageBreak())
-    
-    # ============================================
-    # PART 3: SOFTWARE STACK
-    # ============================================
-    body.append(Paragraph("The Software Stack: A Love-Hate Relationship", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Lemonade vs Ollama", subheading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    # Comparison table
-    data = [
-        ['Feature', 'Lemonade', 'Ollama'],
-        ['Backend', 'llama.cpp + ROCm', 'Various'],
-        ['Observability', 'Good (I can see tokens)', normal_style],
-        ['NPU Support', 'Coming soon™', 'Patch exists'],
-        ['Stability', 'Breaks after updates', 'GPU crashes'],
-        ['Multi-model', 'Yes', 'Good luck']
-    ]
-    
-    table = Table(data, colWidths=[2*inch, 2.5*inch, 2.5*inch])
-    table.setStyle(TableStyle([
+    power_table = Table(power_data, colWidths=[2*inch, 1.5*inch, 2.5*inch])
+    power_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#2a2a2a')),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#58a6ff')),
         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -425,78 +261,23 @@ def create_pdf():
         ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor('#e0e0e0')),
         ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#444444')),
     ]))
-    body.append(table)
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    # Resurgens section
-    body.append(Paragraph("The Resurgens Moment", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    body.append(Paragraph(
-        '<b>December 14, 2025</b><br/>"Upgraded OS and ollama last night and sad things happened. '
-        'GPU crashes about 3-4 prompts in"', quote_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Bleeding Edge = Cutting My Finger", subheading_style))
-    body.append(Paragraph("• Near-bleeding edge kernels for APU support", normal_style))
-    body.append(Paragraph("• AI apps change faster than I can debug", normal_style))
-    body.append(Paragraph("• Each update = new drama", humor_style))
-    body.append(Paragraph("• Stability vs features: pick your poison", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Phoenix Rising: Fresh install → AMD GPU update → 2x faster", normal_style))
-    
-    body.append(PageBreak())
-    
-    # ============================================
-    # PART 4: PERFORMANCE
-    # ============================================
-    body.append(Paragraph("Performance: How Fast Does My AI Think?", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Token Processing Reality", subheading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    perf_data = [
-        ['Context Size', 'TPS', 'Notes'],
-        ['<100k tokens', '~40', 'Actually usable'],
-        ['100k-200k', '~14-18', 'I have time to get coffee'],
-        ['>200k tokens', '~8-18', 'Go read a book'],
-        ['>64k (ingress)', 'N/A', 'My AI needs a nap']
-    ]
-    
-    perf_table = Table(perf_data, colWidths=[2*inch, 1.5*inch, 2.5*inch])
-    perf_table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#2a2a2a')),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#58a6ff')),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, -1), 10),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor('#1a1a1a')),
-        ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor('#e0e0e0')),
-        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#444444')),
-    ]))
-    body.append(perf_table)
+    body.append(power_table)
     
     body.append(Spacer(1, 0.5*inch))
     
-    body.append(Paragraph("May 30, 2026 - 200k Token Processing", subheading_style))
-    body.append(Paragraph("Input: 193,795 | Output: 5,997 | TTFT: 37.8 min | TPS: 18.65", normal_style))
-    body.append(Paragraph("Translation: I made dinner while waiting", humor_style))
+    body.append(Paragraph("The Efficiency Win", subheading_style))
+    body.append(Paragraph("• Strix Halo: ~3x more efficient than RTX 5090 setup", normal_style))
+    body.append(Paragraph("• Single APU vs discrete CPU+GPU power domains", normal_style))
+    body.append(Paragraph("• No datacenter electricity bill", normal_style))
+    body.append(Paragraph("• 128GB unified memory at desktop power envelope", normal_style))
     
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
+    body.append(Spacer(1, 0.3*inch))
     
-    # Performance chart
-    body.append(Paragraph("Performance Timeline", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/timeline.png', 7*inch, 3.5*inch)
-    if img:
-        body.append(img)
+    body.append(Paragraph("Sources:", humor_style))
+    body.append(Paragraph("• AMD Strix Halo TDP: AMD Ryzen AI 300 Series Datasheet", normal_style))
+    body.append(Paragraph("• RTX 5090 TDP: NVIDIA GeForce RTX 5090 Specifications (~600W)", normal_style))
+    body.append(Paragraph("• RTX 4090 TDP: NVIDIA GeForce RTX 4090 Specifications (450W)", normal_style))
+    body.append(Paragraph("• System power estimates: Tom's Hardware, TechPowerUp power reviews", normal_style))
     
     body.append(PageBreak())
     
@@ -790,6 +571,88 @@ def create_pdf():
     body.append(Paragraph("• Ollama observability (I need logs)", normal_style))
     body.append(Paragraph("• Custom wake word (goodbye Alexa)", normal_style))
     body.append(Paragraph("• WWS Phase 3 (cloud? maybe)", normal_style))
+    
+    body.append(PageBreak())
+    
+    # ============================================
+    # 10-YEAR GITHUB GLOW-UP (Summary)
+    # ============================================
+    body.append(Paragraph("10-Year GitHub Glow-Up", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("From Ghost to Contributor: How Hardware Bought My Time", normal_style))
+    body.append(Spacer(1, 0.5*inch))
+    
+    # 10-year GitHub activity heatmap
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 7*inch, 4*inch)
+    if img:
+        body.append(img)
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(Paragraph("November 2025: Bought a Strix Halo rig", normal_style))
+    body.append(Paragraph("Result: 3.5x increase in open source contributions", normal_style))
+    body.append(Paragraph("Moral: Sometimes the best way back in is to buy new toys", humor_style))
+    body.append(PageBreak())
+    
+    # ============================================
+    # AI CODING EDITORS
+    # ============================================
+    body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Opencode Web UI", subheading_style))
+    body.append(Paragraph("Most usable, portable, and stable. Best agentic coding experience.", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Cline", subheading_style))
+    body.append(Paragraph("Good TUI but many regressions over time.", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Also Use: Koo Roo, Aider", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/editor_collage.png', 7*inch, 5*inch)
+    if img:
+        body.append(img)
+    
+    body.append(PageBreak())
+    
+    # ============================================
+    # REFERENCES & SOURCES
+    # ============================================
+    body.append(Paragraph("References & Sources", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Power Consumption Sources", subheading_style))
+    body.append(Paragraph("• AMD Ryzen AI 300 Series: 300W TDP (AMD, 2024)", normal_style))
+    body.append(Paragraph("  https://www.amd.com/en/products/processors/ Ryzen AI 300 Series", normal_style))
+    body.append(Paragraph("• NVIDIA RTX 5090: 600W TDP (NVIDIA, 2025)", normal_style))
+    body.append(Paragraph("  https://www.nvidia.com/geforce/rtx-5090", normal_style))
+    body.append(Paragraph("• NVIDIA RTX 4090: 450W TDP (NVIDIA, 2022)", normal_style))
+    body.append(Paragraph("  https://www.nvidia.com/geforce/rtx-4090", normal_style))
+    body.append(Paragraph("• Corsair 300 AI Workstation: ~300W system power (Corsair, 2025)", normal_style))
+    body.append(Paragraph("  https://www.corsair.com/ai-workstations", normal_style))
+    body.append(Paragraph("• Tom's Hardware GPU power reviews (2024-2025)", normal_style))
+    body.append(Paragraph("  https://www.tomshardware.com/reviews/gpu-hierarchy", normal_style))
+    body.append(Paragraph("• TechPowerUp GPU database: Power benchmarks", normal_style))
+    body.append(Paragraph("  https://www.techpowerup.com/gpu-specs", normal_style))
+    body.append(Paragraph("• NVIDIA A100/H100: 400W-700W per GPU (NVIDIA Data Center)", normal_style))
+    body.append(Paragraph("  Multi-GPU server: 1500W-3000W (NVIDIA DGX specs)", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Software & Projects", subheading_style))
+    body.append(Paragraph("• Lemonade: AMD's llama.cpp + ROCm backend (github.com/lorax-ai/lemonade)", normal_style))
+    body.append(Paragraph("• Ollama: Community llama.cpp wrapper (github.com/ollama/ollama)", normal_style))
+    body.append(Paragraph("• ROCm: AMD's open compute platform (github.com/RadeonOpenCompute/ROCm)", normal_style))
+    body.append(Paragraph("• WWS: github.com/winmutt/wws", normal_style))
+    body.append(Paragraph("• Home Assistant Wake Words: github.com/fwartner/home-assistant-wakewords-collection", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Communities", subheading_style))
+    body.append(Paragraph("• Reddit r/LocalLLaMA: 8 Local LLMs on Strix Halo", normal_style))
+    body.append(Paragraph("• XDA Forums: Amazon Echo development", normal_style))
+    body.append(Paragraph("• GitHub: winmutt (8 repos, forks of lemonade, cline, vscode)", normal_style))
     
     body.append(PageBreak())
     

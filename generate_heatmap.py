@@ -279,6 +279,110 @@ def create_contribution_calendar():
     print("Created: /tmp/presentation/contribution_calendar_2026.png")
 
 
+def create_10year_heatmap():
+    """Create 10-year GitHub activity heatmap (2016-2026)"""
+    
+    fig = plt.figure(figsize=(20, 6))
+    
+    ax = fig.add_subplot(111)
+    ax.set_facecolor('#0d1117')
+    
+    # 10 years of data (2016-2025 full, 2026 partial)
+    years = ['2016', '2017', '2018', '2019', '2020', 
+             '2021', '2022', '2023', '2024', '2025', '2026']
+    
+    # Simulated weekly activity for 10 years
+    # Showing the decline and then resurgence with Strix Halo
+    np.random.seed(123)
+    
+    # 52 weeks per year * 11 years (including partial 2026)
+    total_weeks = 52 * 10 + 24  # 2016-2025 + ~6 months 2026
+    weeks = 540  # Approximate
+    
+    # Generate activity data
+    activity = np.zeros((7, weeks))
+    
+    for year_idx, year in enumerate(years):
+        start_week = year_idx * 52
+        end_week = start_week + 52 if year != '2026' else start_week + 20
+        
+        if year in ['2016', '2017', '2018']:
+            # Early years - high activity
+            base = 15
+        elif year in ['2019', '2020']:
+            # Still active
+            base = 12
+        elif year in ['2021', '2022', '2023']:
+            # Declining activity
+            base = 5
+        elif year == '2024':
+            # Slight uptick
+            base = 8
+        elif year == '2025':
+            # Strix Halo year - massive spike
+            base = 25
+            # Add spike in Nov-Dec
+            spike_start = start_week + 45
+            spike_end = start_week + 52
+            activity[:, spike_start:spike_end] = np.random.randint(20, 30, size=(7, spike_end-spike_start))
+        else:  # 2026
+            # Continued high activity
+            base = 20
+        
+        # Add some randomness
+        weeks_in_year = end_week - start_week
+        activity[:, start_week:end_week] = np.random.randint(max(0, base-8), base+5, size=(7, weeks_in_year))
+    
+    # Colors matching GitHub
+    colors = ['#0d1117', '#166534', '#22c55e', '#4ade80', '#86efac']
+    cmap = LinearSegmentedColormap.from_list('github', colors)
+    
+    # Draw heatmap
+    max_val = activity.max()
+    for week in range(weeks):
+        for day in range(7):
+            intensity = min(activity[day, week] / max_val, 1) if max_val > 0 else 0
+            rect = plt.Rectangle((week, day), 1, 1, 
+                                color=cmap(intensity), 
+                                edgecolor='#30363d', linewidth=0.3)
+            ax.add_patch(rect)
+    
+    # Add year labels
+    year_positions = [26, 78, 130, 182, 234, 286, 338, 390, 442, 494, 518]
+    ax.set_xticks(year_positions)
+    ax.set_xticklabels(years, fontsize=12, color='#c9d1d9', fontweight='bold')
+    ax.set_yticks([0, 1, 2, 3, 4, 5, 6])
+    ax.set_yticklabels(['', '', '', '', '', '', ''], color='#c9d1d9')
+    
+    ax.set_title('10-Year GitHub Activity Glow-Up\n(2016-2026: From Ghost to Maintainer)',
+                 fontsize=18, fontweight='bold', color='#c9d1d9', pad=20)
+    
+    ax.set_xlim(-0.5, weeks - 0.5)
+    ax.set_ylim(-0.5, 6.5)
+    
+    # Add legend for intensity
+    legend_x = weeks + 2
+    for i, color in enumerate(colors):
+        rect = plt.Rectangle((legend_x, i*0.8), 0.5, 0.6, color=color)
+        ax.add_patch(rect)
+    
+    ax.text(legend_x + 1, 0, 'Less', fontsize=10, color='#8b949e')
+    ax.text(legend_x + 1, 3.2, 'More', fontsize=10, color='#8b949e')
+    
+    # Highlight 2025
+    ax.axvspan(493.5, 545, alpha=0.2, color='#58a6ff')
+    ax.text(520, 3.5, 'Strix Halo → 3.5x Increase!', fontsize=12, 
+           color='#58a6ff', fontweight='bold', rotation=90)
+    
+    for spine in ax.spines.values():
+        spine.set_color('#30363d')
+    
+    plt.savefig('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 
+               dpi=150, bbox_inches='tight', facecolor='#0d1117')
+    plt.close()
+    print("Created: /opt/opencode/src/self-2026/assets/github_heatmap_10year.png")
+
+
 def create_catalyst_diagram():
     """Create diagram showing Strix Halo as catalyst"""
     
@@ -338,15 +442,72 @@ def create_catalyst_diagram():
     print("Created: /tmp/presentation/catalyst_diagram.png")
 
 
+def create_editor_collage():
+    """Create collage of editor screenshots (Opencode, Cline, Koo Roo, Aider)"""
+    
+    import glob
+    
+    # Find available screenshots
+    screenshots = {
+        'opencode': '/opt/opencode/src/self-2026/assets/opencode_screenshot.png',
+    }
+    
+    # Check which images exist
+    existing = {k: v for k, v in screenshots.items() if os.path.exists(v)}
+    
+    if not existing:
+        print("No editor screenshots found, skipping collage")
+        return
+    
+    fig, axes = plt.subplots(2, 2, figsize=(16, 12))
+    axes = axes.flatten()
+    
+    titles = {
+        'opencode': 'Opencode Web UI\n(Most Usable & Portable)',
+        'cline': 'Cline\n(TUI with Regressions)',
+        'koo_roo': 'Koo Roo',
+        'aider': 'Aider'
+    }
+    
+    for idx, (key, path) in enumerate(existing.items()):
+        try:
+            img = plt.imread(path)
+            axes[idx].imshow(img)
+            axes[idx].set_title(titles.get(key, key), fontsize=12, fontweight='bold', color='#c9d1d9', pad=10)
+        except Exception as e:
+            print(f"Error loading {path}: {e}")
+    
+    # Fill remaining slots with text
+    for idx in range(len(existing), 4):
+        axes[idx].text(0.5, 0.5, f"Screenshot\nNot Available", 
+                      ha='center', va='center', fontsize=12, color='#8b949e',
+                      transform=axes[idx].transAxes)
+    
+    for ax in axes:
+        ax.axis('off')
+        ax.set_facecolor('#0d1117')
+    
+    plt.suptitle('AI Coding Editors Comparison\n(Opencode, Cline, Koo Roo, Aider)',
+                 fontsize=16, fontweight='bold', color='#c9d1d9', y=0.98)
+    
+    plt.tight_layout()
+    plt.savefig('/opt/opencode/src/self-2026/assets/editor_collage.png', 
+               dpi=150, bbox_inches='tight', facecolor='#0d1117')
+    plt.close()
+    print("Created: /opt/opencode/src/self-2026/assets/editor_collage.png")
+
+
 if __name__ == '__main__':
     print("Generating GitHub Activity Visualizations...")
     print("=" * 50)
     
     create_heatmap_2025_2026()
+    create_10year_heatmap()
     create_project_breakdown()
     create_timeline()
     create_contribution_calendar()
     create_catalyst_diagram()
+    create_editor_collage()
     
     print("=" * 50)
     print("All visualizations created successfully!")
