@@ -242,7 +242,7 @@ def create_pdf():
     
     power_data = [
         ['Solution', 'Max Power', 'Notes'],
-        ['Corsair 300 (Strix Halo)', '~300W', 'AMD Ryzen AI Max 395: 140-157W sustained, ~400W transients'],
+        ['Corsair 300 (Strix Halo)', '~300W', 'AMD Ryzen AI Max 395: 140-157W sustained'],
         ['PC + RTX 5090', '~800-1000W', 'CPU (350W) + GPU (600W) + overhead'],
         ['RTX 4090 Workstation', '~700-850W', 'CPU (250W) + GPU (450W) + overhead'],
         ['Commercial AI Server', '~1500-3000W', 'Multi-GPU (A100/H100: 400-700W/GPU)'],
@@ -624,10 +624,8 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("Power Consumption Sources", subheading_style))
-    body.append(Paragraph("• AMD Ryzen AI Max 395: 140-157W sustained power, ~400W transient spikes", normal_style))
-    body.append(Paragraph("  Framework motherboard discussion (Reddit r/framework, 2025)", normal_style))
+    body.append(Paragraph("• AMD Ryzen AI Max 395: 140-157W sustained power (Framework Reddit, 2025)", normal_style))
     body.append(Paragraph("  https://www.reddit.com/r/framework/comments/1najh1n/max_wattage_of_the_ryzen_ai_max_395_motherboard/", normal_style))
-    body.append(Paragraph("• Framework recommends 500W PSU for transient headroom", normal_style))
     body.append(Paragraph("• NVIDIA RTX 5090: 600W TDP (NVIDIA, 2025)", normal_style))
     body.append(Paragraph("  https://www.nvidia.com/geforce/rtx-5090", normal_style))
     body.append(Paragraph("• NVIDIA RTX 4090: 450W TDP (NVIDIA, 2022)", normal_style))
