@@ -249,7 +249,7 @@ def create_pdf():
         ['Cloud API (per 1M tokens)', 'N/A', 'Energy cost embedded in pricing']
     ]
     
-    power_table = Table(power_data, colWidths=[2*inch, 1.5*inch, 2.5*inch])
+    power_table = Table(power_data, colWidths=[2.2*inch, 1.8*inch, 3*inch])
     power_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#2a2a2a')),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#58a6ff')),
@@ -523,7 +523,7 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     
     body.append(Paragraph("What Didn't ✗", subheading_style))
-    body.append(Paragraph("• Memory: 32GB disappeared forever", normal_style))
+    body.append(Paragraph("• Memory: 32GB reserved for Lemonade/llama.cpp/opencode", normal_style))
     body.append(Paragraph("• Ollama: Still crashes after updates", normal_style))
     body.append(Paragraph("• NPU: Coming soon™ (always)", normal_style))
     body.append(Paragraph("• Context >64k: TPS drops like a stone", normal_style))
@@ -548,14 +548,6 @@ def create_pdf():
     
     for insight in insights:
         body.append(Paragraph(f"  {insight}", normal_style))
-    
-    body.append(Spacer(1, 1*inch))
-    
-    # Catalyst diagram
-    body.append(Paragraph("The Catalyst Effect", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/catalyst_diagram.png', 7*inch, 6*inch)
-    if img:
-        body.append(img)
     
     body.append(PageBreak())
     
@@ -657,7 +649,7 @@ def create_pdf():
     body.append(Paragraph(
         "Lemonade = llama.cpp with AMD ROCm backend optimizations. "
         "Not just a wrapper - AMD-engineered builds with GPU acceleration. "
-        "github.com/lorax-ai/lemonade | github.com/RadeonOpenCompute/ROCm",
+        "github.com/winmutt/lemonade | github.com/RadeonOpenCompute/ROCm",
         normal_style
     ))
     
@@ -678,7 +670,7 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph(
-        '<b>Sources</b><br/>github.com/lorax-ai/lemonade | github.com/RadeonOpenCompute/ROCm | '
+        '<b>Sources</b><br/>github.com/winmutt/lemonade | github.com/RadeonOpenCompute/ROCm | '
         'github.com/ROCm/ROCm/issues/5926',
         humor_style
     ))
@@ -826,7 +818,7 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("Software & Projects", subheading_style))
-    body.append(Paragraph("• Lemonade: AMD's llama.cpp + ROCm backend (github.com/lorax-ai/lemonade)", normal_style))
+    body.append(Paragraph("• Lemonade: AMD's llama.cpp + ROCm backend (github.com/winmutt/lemonade)", normal_style))
     body.append(Paragraph("• Ollama: Community llama.cpp wrapper (github.com/ollama/ollama)", normal_style))
     body.append(Paragraph("• ROCm: AMD's open compute platform (github.com/RadeonOpenCompute/ROCm)", normal_style))
     body.append(Paragraph("• ROCm Issue #5926: Memory management bugs (github.com/ROCm/ROCm/issues/5926)", normal_style))
