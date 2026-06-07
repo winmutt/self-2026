@@ -593,13 +593,61 @@ def create_pdf():
         body.append(img)
     
     body.append(Spacer(1, 0.5*inch))
+    
+    body.append(Paragraph("Contribution Breakdown", subheading_style))
+    body.append(Paragraph("• WWS: 38% (remote workspace provisioning)", normal_style))
+    body.append(Paragraph("• Lemonade: 15% (NPU backend, core affinity)", normal_style))
+    body.append(Paragraph("• Home Assistant: 12% (wake words, Echo)", normal_style))
+    body.append(Paragraph("• Cline: 8% (TUI regressions)", normal_style))
+    body.append(Paragraph("• Concrete Signs: 5% (Blender/OpenSCAD)", normal_style))
+    body.append(Paragraph("• Other: 10% (miscellaneous)", normal_style))
+    
+    body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
-    # Project breakdown
-    body.append(Paragraph("Project Contributions (Nov 2025 - Jun 2026)", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/project_breakdown.png', 7*inch, 5*inch)
-    if img:
-        body.append(img)
+    # ============================================
+    # NPU SUPPORT
+    # ============================================
+    body.append(Paragraph("NPU Support: FastFlowLM + Lemonade", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("March 11, 2026: Linux NPU Support Added", subheading_style))
+    body.append(Paragraph(
+        "FastFlowLM now runs LLMs on AMD XDNA 2 NPU with Linux support. "
+        "Lemonade ties everything together for a streamlined experience.",
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Power Efficiency", subheading_style))
+    body.append(Paragraph("• Over 10x more power-efficient than GPU", normal_style))
+    body.append(Paragraph("• Runs fully on NPU - no GPU or CPU load", normal_style))
+    body.append(Paragraph("• Ultra-lightweight runtime (17 MB)", normal_style))
+    body.append(Paragraph("• Installs within 20 seconds", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Supported Processors", subheading_style))
+    body.append(Paragraph("• Strix Halo (Ryzen AI Max+ 395)", normal_style))
+    body.append(Paragraph("• Strix Point, Kraken Point (300-series)", normal_style))
+    body.append(Paragraph("• Gorgon Point (400-series)", normal_style))
+    body.append(Paragraph("• Z2 Extreme (handheld devices)", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Key Features", subheading_style))
+    body.append(Paragraph("• Context up to 256k tokens", normal_style))
+    body.append(Paragraph("• Vision, Audio, Embedding, MoE support", normal_style))
+    body.append(Paragraph("• OpenAI-compatible API", normal_style))
+    body.append(Paragraph("• Just like Ollama - but NPU-optimized", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph(
+        '<b>Sources</b><br/>github.com/FastFlowLM/FastFlowLM | lemonade-server.ai/flm_npu_linux.html',
+        humor_style
+    ))
     
     body.append(PageBreak())
     
@@ -627,13 +675,20 @@ def create_pdf():
     # ============================================
     # 10-YEAR GITHUB GLOW-UP (Summary)
     # ============================================
-    body.append(Paragraph("10-Year GitHub Glow-Up", heading_style))
+    body.append(Paragraph("26 Years of Open Source (2000-2026)", heading_style))
     body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph("From Ghost to Contributor: How Hardware Bought My Time", normal_style))
+    body.append(Paragraph("From LKML to Strix Halo: How Hardware Bought My Time", normal_style))
     body.append(Spacer(1, 0.5*inch))
     
+    # LKML 2000 screenshot
+    body.append(Paragraph("June 9, 2000: LKML Post", subheading_style))
+    body.append(Paragraph("Subject: HighPoint IDE RAID (kernel 2.2.14)", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
     # 10-year GitHub activity heatmap
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 7*inch, 4*inch)
+    body.append(Paragraph("GitHub Activity: Strix Halo Catalyst (2016-2026)", subheading_style))
+    body.append(Paragraph("(Note: Simulated data for illustration)", humor_style))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 7*inch, 3.5*inch)
     if img:
         body.append(img)
     

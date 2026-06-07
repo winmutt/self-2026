@@ -280,7 +280,7 @@ def create_contribution_calendar():
 
 
 def create_10year_heatmap():
-    """Create 10-year GitHub activity heatmap (2016-2026)"""
+    """Create 10-year GitHub activity heatmap (2016-2026) - Simulated for presentation"""
     
     fig = plt.figure(figsize=(20, 6))
     
@@ -289,17 +289,10 @@ def create_10year_heatmap():
     
     # 10 years of data (2016-2025 full, 2026 partial)
     years = ['2016', '2017', '2018', '2019', '2020', 
-             '2021', '2022', '2023', '2024', '2025', '2026']
+              '2021', '2022', '2023', '2024', '2025', '2026']
     
-    # Simulated weekly activity for 10 years
-    # Showing the decline and then resurgence with Strix Halo
     np.random.seed(123)
-    
-    # 52 weeks per year * 11 years (including partial 2026)
-    total_weeks = 52 * 10 + 24  # 2016-2025 + ~6 months 2026
-    weeks = 540  # Approximate
-    
-    # Generate activity data
+    weeks = 540
     activity = np.zeros((7, weeks))
     
     for year_idx, year in enumerate(years):
@@ -307,37 +300,27 @@ def create_10year_heatmap():
         end_week = start_week + 52 if year != '2026' else start_week + 20
         
         if year in ['2016', '2017', '2018']:
-            # Early years - high activity
             base = 15
         elif year in ['2019', '2020']:
-            # Still active
             base = 12
         elif year in ['2021', '2022', '2023']:
-            # Declining activity
             base = 5
         elif year == '2024':
-            # Slight uptick
             base = 8
         elif year == '2025':
-            # Strix Halo year - massive spike
             base = 25
-            # Add spike in Nov-Dec
             spike_start = start_week + 45
             spike_end = start_week + 52
             activity[:, spike_start:spike_end] = np.random.randint(20, 30, size=(7, spike_end-spike_start))
-        else:  # 2026
-            # Continued high activity
+        else:
             base = 20
         
-        # Add some randomness
         weeks_in_year = end_week - start_week
         activity[:, start_week:end_week] = np.random.randint(max(0, base-8), base+5, size=(7, weeks_in_year))
     
-    # Colors matching GitHub
     colors = ['#0d1117', '#166534', '#22c55e', '#4ade80', '#86efac']
     cmap = LinearSegmentedColormap.from_list('github', colors)
     
-    # Draw heatmap
     max_val = activity.max()
     for week in range(weeks):
         for day in range(7):
@@ -347,20 +330,18 @@ def create_10year_heatmap():
                                 edgecolor='#30363d', linewidth=0.3)
             ax.add_patch(rect)
     
-    # Add year labels
     year_positions = [26, 78, 130, 182, 234, 286, 338, 390, 442, 494, 518]
     ax.set_xticks(year_positions)
     ax.set_xticklabels(years, fontsize=12, color='#c9d1d9', fontweight='bold')
     ax.set_yticks([0, 1, 2, 3, 4, 5, 6])
     ax.set_yticklabels(['', '', '', '', '', '', ''], color='#c9d1d9')
     
-    ax.set_title('10-Year GitHub Activity Glow-Up\n(2016-2026: From Ghost to Maintainer)',
-                 fontsize=18, fontweight='bold', color='#c9d1d9', pad=20)
+    ax.set_title('GitHub Activity: Strix Halo Catalyst (2016-2026)\n(Note: Simulated data for illustration)',
+                  fontsize=18, fontweight='bold', color='#c9d1d9', pad=20)
     
     ax.set_xlim(-0.5, weeks - 0.5)
     ax.set_ylim(-0.5, 6.5)
     
-    # Add legend for intensity
     legend_x = weeks + 2
     for i, color in enumerate(colors):
         rect = plt.Rectangle((legend_x, i*0.8), 0.5, 0.6, color=color)
@@ -369,7 +350,6 @@ def create_10year_heatmap():
     ax.text(legend_x + 1, 0, 'Less', fontsize=10, color='#8b949e')
     ax.text(legend_x + 1, 3.2, 'More', fontsize=10, color='#8b949e')
     
-    # Highlight 2025
     ax.axvspan(493.5, 545, alpha=0.2, color='#58a6ff')
     ax.text(520, 3.5, 'Strix Halo → 3.5x Increase!', fontsize=12, 
            color='#58a6ff', fontweight='bold', rotation=90)
@@ -380,7 +360,7 @@ def create_10year_heatmap():
     plt.savefig('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 
                dpi=150, bbox_inches='tight', facecolor='#0d1117')
     plt.close()
-    print("Created: /opt/opencode/src/self-2026/assets/github_heatmap_10year.png")
+    print("Created: /opt/opencode/src/self-2026/assets/github_heatmap_10year.png (simulated)")
 
 
 def create_catalyst_diagram():
