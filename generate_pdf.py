@@ -290,7 +290,7 @@ def create_pdf():
     
     # APU die diagram
     body.append(Paragraph("APU Die Architecture", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 6*inch, 4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5*inch)
     if img:
         body.append(img)
     
