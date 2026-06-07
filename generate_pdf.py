@@ -454,7 +454,7 @@ def create_pdf():
     
     body.append(Paragraph(
         '<b>Filed</b><br/>January 7, 2026<br/>'
-        '<b>Repository</b><br/>https://github.com/amazon-oss/releases<br/>'
+        '<b>Repository</b><br/>https://github.com/amazon-oss/releases/issues/4<br/>'
         '<b>Status</b><br/>Open (still waiting, it\'s fine)',
         normal_style
     ))
