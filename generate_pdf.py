@@ -595,13 +595,94 @@ def create_pdf():
     
     body.append(Paragraph("Contribution Breakdown", subheading_style))
     body.append(Paragraph("• WWS: 38% (remote workspace provisioning)", normal_style))
-    body.append(Paragraph("• Lemonade: 15% (NPU backend, core affinity)", normal_style))
+    body.append(Paragraph("• Lemonade: 15% (NPU backend, NUMA/CPU pinning)", normal_style))
+    body.append(Paragraph("• ROCm: 8% (Issue #5926 memory management)", normal_style))
     body.append(Paragraph("• Home Assistant: 12% (wake words, Echo)", normal_style))
     body.append(Paragraph("• Cline: 8% (TUI regressions)", normal_style))
     body.append(Paragraph("• Concrete Signs: 5% (Blender/OpenSCAD)", normal_style))
     body.append(Paragraph("• Other: 10% (miscellaneous)", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # ============================================
+    # ROCm AND LEMONADE SERVER
+    # ============================================
+    body.append(Paragraph("ROCm: AMD's Open Compute Platform", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("What is ROCm?", subheading_style))
+    body.append(Paragraph(
+        "ROCm (Radeon Open Compute Platform) is AMD's open source GPU computing "
+        "ecosystem - their answer to NVIDIA's CUDA. Maintained by AMD engineers "
+        "on GitHub (github.com/RadeonOpenCompute/ROCm).",
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("The ROCm Timeline:", subheading_style))
+    body.append(Paragraph("• November 2025: ROCm 6.3 released with Strix Halo support", normal_style))
+    body.append(Paragraph("• Nightly builds: Continuous integration, bleeding edge", normal_style))
+    body.append(Paragraph("• Issue #5926: Memory management bugs in ROCm 6.3", normal_style))
+    body.append(Paragraph("  github.com/ROCm/ROCm/issues/5926", normal_style))
+    body.append(Paragraph("• Status: Open (part of ongoing Strix Halo journey)", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("ROCm Nightly Builds", subheading_style))
+    body.append(Paragraph(
+        "Nightly builds = daily automated compilations from ROCm's main branch. "
+        "Get latest features immediately, but expect bugs. Trade-off: "
+        "2x performance gains vs occasional crashes.",
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("The Pain (and Gain)", subheading_style))
+    body.append(Paragraph("• Fresh install ('declare bankruptcy'): reformat → fresh kernel → fresh ROCm", normal_style))
+    body.append(Paragraph("• Result: GPU crashes fixed, 2x faster performance", normal_style))
+    body.append(Paragraph("• Lesson: ROCm is stable enough, but bleeding edge requires patience", normal_style))
+    
+    body.append(PageBreak())
+    
+    # ============================================
+    # LEMONADE SERVER
+    # ============================================
+    body.append(Paragraph("Lemonade Server: AMD's llama.cpp + ROCm", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("What is Lemonade?", subheading_style))
+    body.append(Paragraph(
+        "Lemonade = llama.cpp with AMD ROCm backend optimizations. "
+        "Not just a wrapper - AMD-engineered builds with GPU acceleration. "
+        "github.com/lorax-ai/lemonade | github.com/RadeonOpenCompute/ROCm",
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Lemonade vs Ollama", subheading_style))
+    body.append(Paragraph("• Ollama: Community llama.cpp wrapper (proprietary blend)", normal_style))
+    body.append(Paragraph("• Lemonade: AMD-maintained llama.cpp + ROCm builds", normal_style))
+    body.append(Paragraph("• Backend: AMD engineers maintain both Lemonade and ROCm", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("My Contributions:", subheading_style))
+    body.append(Paragraph("• Issue #1070: NUMA/CPU pinning bug (dual CCD problem)", normal_style))
+    body.append(Paragraph("• NPU backend support for FastFlowLM integration", normal_style))
+    body.append(Paragraph("• Core affinity optimization for multi-model setups", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph(
+        '<b>Sources</b><br/>github.com/lorax-ai/lemonade | github.com/RadeonOpenCompute/ROCm | '
+        'github.com/ROCm/ROCm/issues/5926',
+        humor_style
+    ))
+    
     body.append(PageBreak())
     
     # ============================================
@@ -748,6 +829,7 @@ def create_pdf():
     body.append(Paragraph("• Lemonade: AMD's llama.cpp + ROCm backend (github.com/lorax-ai/lemonade)", normal_style))
     body.append(Paragraph("• Ollama: Community llama.cpp wrapper (github.com/ollama/ollama)", normal_style))
     body.append(Paragraph("• ROCm: AMD's open compute platform (github.com/RadeonOpenCompute/ROCm)", normal_style))
+    body.append(Paragraph("• ROCm Issue #5926: Memory management bugs (github.com/ROCm/ROCm/issues/5926)", normal_style))
     body.append(Paragraph("• WWS: github.com/winmutt/wws", normal_style))
     body.append(Paragraph("• Home Assistant Wake Words: github.com/fwartner/home-assistant-wakewords-collection", normal_style))
     
