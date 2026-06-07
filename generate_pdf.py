@@ -361,7 +361,7 @@ def create_pdf():
     
     # Concrete sign image
     body.append(Paragraph("Concrete Sign Mold Design", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 6*inch, 4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 5.5*inch, 3.5*inch)
     if img:
         body.append(img)
     
