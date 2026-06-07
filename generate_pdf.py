@@ -320,14 +320,16 @@ def create_pdf():
     
     body.append(Paragraph("Hardware Reality", subheading_style))
     body.append(Paragraph("• One processor, but 2x core dies with separate 64MB L3 caches", normal_style))
-    body.append(Paragraph("• NUMA-like behavior across dies", normal_style))
+    body.append(Paragraph("• Traditional NUMA tools detect only 1 node (not 2 CCDs)", normal_style))
+    body.append(Paragraph("• numactl, NUMATopologyFilter can't see CCD boundaries", normal_style))
     body.append(Paragraph("• llama-server threads not pinned to specific cores", normal_style))
     
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("The Solution (Proposed)", subheading_style))
-    body.append(Paragraph("• Custom core affinity logic (not numactl)", normal_style))
-    body.append(Paragraph("• Pin llama-server to specific cores based on:", normal_style))
+    body.append(Paragraph("• Manual core pinning (like Red Hat's vcpu_pin_set approach)", normal_style))
+    body.append(Paragraph("• Reserve cores per CCD, pin llama-server accordingly", normal_style))
+    body.append(Paragraph("• Pin based on:", normal_style))
     body.append(Paragraph("  - Number of models loaded", normal_style))
     body.append(Paragraph("  - CCD boundaries (manual NUMA mapping)", normal_style))
     body.append(Paragraph("• Prevent cache-crossing penalties", normal_style))
@@ -824,7 +826,7 @@ def create_pdf():
     body.append(Paragraph("• ROCm Issue #5926: Memory management bugs (github.com/ROCm/ROCm/issues/5926)", normal_style))
     body.append(Paragraph("• WWS: github.com/winmutt/wws", normal_style))
     body.append(Paragraph("• Home Assistant Wake Words: github.com/fwartner/home-assistant-wakewords-collection", normal_style))
-    body.append(Paragraph("• numactl/CPU Pinning: Red Hat OpenStack docs", normal_style))
+    body.append(Paragraph("• NUMA/CPU Pinning: Red Hat OpenStack docs (vcpu_pin_set, NUMATopologyFilter)", normal_style))
     body.append(Paragraph("  https://docs.redhat.com/en/documentation/red_hat_openstack_platform/10/html/instances_and_images_guide/ch-cpu_pinning", normal_style))
     
     body.append(Spacer(1, 0.3*inch))
