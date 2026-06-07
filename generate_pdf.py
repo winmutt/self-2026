@@ -394,9 +394,11 @@ def create_pdf():
     
     body.append(Paragraph("The Process:", subheading_style))
     body.append(Paragraph("1. Unlock bootloader via amonet exploit", normal_style))
+    body.append(Paragraph("  github.com/R0rt1z2/amonet", normal_style))
     body.append(Paragraph("2. Install TWRP recovery", normal_style))
     body.append(Paragraph("3. Flash LineageOS 18.1 (Android 11)", normal_style))
     body.append(Paragraph("4. Configure ViewAssist for Home Assistant", normal_style))
+    body.append(Paragraph("  dinki.github.io/View-Assist", normal_style))
     
     body.append(Spacer(1, 0.3*inch))
     
