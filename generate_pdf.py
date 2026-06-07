@@ -824,6 +824,8 @@ def create_pdf():
     body.append(Paragraph("• ROCm Issue #5926: Memory management bugs (github.com/ROCm/ROCm/issues/5926)", normal_style))
     body.append(Paragraph("• WWS: github.com/winmutt/wws", normal_style))
     body.append(Paragraph("• Home Assistant Wake Words: github.com/fwartner/home-assistant-wakewords-collection", normal_style))
+    body.append(Paragraph("• numactl/CPU Pinning: Red Hat OpenStack docs", normal_style))
+    body.append(Paragraph("  https://docs.redhat.com/en/documentation/red_hat_openstack_platform/10/html/instances_and_images_guide/ch-cpu_pinning", normal_style))
     
     body.append(Spacer(1, 0.3*inch))
     
