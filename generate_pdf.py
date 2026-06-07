@@ -307,12 +307,12 @@ def create_pdf():
     body.append(PageBreak())
     
     # NUMA/CPU pinning issue
-    body.append(Paragraph("Bug #1070: Core Affinity & Dual CCD Problem", heading_style))
+    body.append(Paragraph("Feat #1070: NUMA Tools Don't See Dual CCD", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph(
-        '<b>Issue</b><br/>Threads bouncing across L3 caches (core complex dies) '
-        'when running multiple models. Performance hit from crossing cache boundaries.',
+        '<b>Feature Request</b><br/>Traditional NUMA tools detect only 1 node. '
+        "numactl core pinning doesn't work. Need custom core affinity for dual CCD.",
         normal_style
     ))
     
@@ -325,18 +325,18 @@ def create_pdf():
     
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("The Fix (Proposed)", subheading_style))
+    body.append(Paragraph("The Solution (Proposed)", subheading_style))
+    body.append(Paragraph("• Custom core affinity logic (not numactl)", normal_style))
     body.append(Paragraph("• Pin llama-server to specific cores based on:", normal_style))
     body.append(Paragraph("  - Number of models loaded", normal_style))
-    body.append(Paragraph("  - NUMA nodes (die boundaries)", normal_style))
-    body.append(Paragraph("  - Core complex dies", normal_style))
+    body.append(Paragraph("  - CCD boundaries (manual NUMA mapping)", normal_style))
     body.append(Paragraph("• Prevent cache-crossing penalties", normal_style))
     
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph(
-        '<b>GitHub Issue</b><br/>github.com/lemonade-sdk/lemonade/issues/1070<br/>'
-        '<b>Status</b><br/>Open (enhancement request)',
+        '<b>GitHub Feature Request</b><br/>github.com/lemonade-sdk/lemonade/issues/1070<br/>'
+        '<b>Status</b><br/>Open (custom NUMA mapping needed)',
         humor_style
     ))
     
@@ -587,7 +587,7 @@ def create_pdf():
     
     body.append(Paragraph("Contribution Breakdown", subheading_style))
     body.append(Paragraph("• WWS: 38% (remote workspace provisioning)", normal_style))
-    body.append(Paragraph("• Lemonade: 15% (NPU backend, NUMA/CPU pinning)", normal_style))
+    body.append(Paragraph("• Lemonade: 15% (NPU backend, custom NUMA mapping)", normal_style))
     body.append(Paragraph("• ROCm: 8% (Issue #5926 memory management)", normal_style))
     body.append(Paragraph("• Home Assistant: 12% (wake words, Echo)", normal_style))
     body.append(Paragraph("• Cline: 8% (TUI regressions)", normal_style))
@@ -663,7 +663,7 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("My Contributions:", subheading_style))
-    body.append(Paragraph("• Issue #1070: NUMA/CPU pinning bug (dual CCD problem)", normal_style))
+    body.append(Paragraph("• Feat #1070: Custom NUMA mapping (traditional tools fail)", normal_style))
     body.append(Paragraph("• NPU backend support for FastFlowLM integration", normal_style))
     body.append(Paragraph("• Core affinity optimization for multi-model setups", normal_style))
     
