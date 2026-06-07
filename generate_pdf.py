@@ -274,7 +274,7 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("Sources:", humor_style))
-    body.append(Paragraph("• AMD Ryzen AI Max 395: 140-157W sustained, transient spikes to ~400W (Framework Reddit, 2025)", normal_style))
+    body.append(Paragraph("• AMD Ryzen AI Max 395: 140-157W sustained (Framework Reddit, 2025)", normal_style))
     body.append(Paragraph("• Framework recommends 500W PSU for transient headroom", normal_style))
     body.append(Paragraph("• RTX 5090 TDP: NVIDIA GeForce RTX 5090 Specifications (~600W)", normal_style))
     body.append(Paragraph("• RTX 4090 TDP: NVIDIA GeForce RTX 4090 Specifications (450W)", normal_style))
