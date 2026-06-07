@@ -395,7 +395,6 @@ def create_pdf():
     body.append(Paragraph("• KVM/Podman isolated environments", normal_style))
     body.append(Paragraph("• code-server (VSCode in browser)", normal_style))
     body.append(Paragraph("• GitHub OAuth + RBAC", normal_style))
-    body.append(Paragraph("• Months of work, zero Athena", humor_style))
     
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
