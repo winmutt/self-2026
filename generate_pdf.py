@@ -283,7 +283,98 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # PART 5: WWS PROJECT
+    # PART 5: THE HARDWARE
+    # ============================================
+    body.append(Paragraph("The Hardware: AMD Ryzen AI Max+ 395", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    # APU die diagram
+    body.append(Paragraph("APU Die Architecture", subheading_style))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 6*inch, 4*inch)
+    if img:
+        body.append(img)
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Physical Layout", subheading_style))
+    body.append(Paragraph("• 16 cores (12 performance + 4 efficiency)", normal_style))
+    body.append(Paragraph("• 2x Core Complex Dies (CCD) with 64MB L3 cache each", normal_style))
+    body.append(Paragraph("• 768KB L1d + 512KB L1i + 16MB L2", normal_style))
+    body.append(Paragraph("• Integrated RDNA 3.5 GPU (40 CUs)", normal_style))
+    body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory (soldered)", normal_style))
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # NUMA/CPU pinning issue
+    body.append(Paragraph("Bug #1070: Core Affinity & Dual CCD Problem", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph(
+        '<b>Issue</b><br/>Threads bouncing across L3 caches (core complex dies) '
+        'when running multiple models. Performance hit from crossing cache boundaries.',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Hardware Reality", subheading_style))
+    body.append(Paragraph("• One processor, but 2x core dies with separate 64MB L3 caches", normal_style))
+    body.append(Paragraph("• NUMA-like behavior across dies", normal_style))
+    body.append(Paragraph("• llama-server threads not pinned to specific cores", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("The Fix (Proposed)", subheading_style))
+    body.append(Paragraph("• Pin llama-server to specific cores based on:", normal_style))
+    body.append(Paragraph("  - Number of models loaded", normal_style))
+    body.append(Paragraph("  - NUMA nodes (die boundaries)", normal_style))
+    body.append(Paragraph("  - Core complex dies", normal_style))
+    body.append(Paragraph("• Prevent cache-crossing penalties", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph(
+        '<b>GitHub Issue</b><br/>github.com/lemonade-sdk/lemonade/issues/1070<br/>'
+        '<b>Status</b><br/>Open (enhancement request)',
+        humor_style
+    ))
+    
+    body.append(PageBreak())
+    
+    # ============================================
+    # PART 5B: BLENDER CONCRETE EXAMPLE
+    # ============================================
+    body.append(Paragraph("Blender: Concrete Sign Mold", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("December 1, 2025", subheading_style))
+    body.append(Paragraph(
+        '"I am going to use it to create a 3d printed cast '
+        'for a silicone mold so I can some desktop signs out of concrete."', quote_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    # Concrete sign image
+    body.append(Paragraph("Concrete Sign Mold Design", subheading_style))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 6*inch, 4*inch)
+    if img:
+        body.append(img)
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("The Process", subheading_style))
+    body.append(Paragraph("1. AI generates OpenSCAD design", normal_style))
+    body.append(Paragraph("2. Export to STL", normal_style))
+    body.append(Paragraph("3. 3D print mold", normal_style))
+    body.append(Paragraph("4. Create silicone mold", normal_style))
+    body.append(Paragraph("5. Cast concrete", normal_style))
+    
+    body.append(PageBreak())
+    
+    # ============================================
+    # PART 6: WWS PROJECT
     # ============================================
     body.append(Paragraph("Project WWS: I Vibe-Coded an Entire System", heading_style))
     body.append(Spacer(1, 0.3*inch))
@@ -418,48 +509,7 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # PART 7: CONCRETE SIGNS
-    # ============================================
-    body.append(Paragraph("From AI to Concrete: My PE's Worst Nightmare", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("The Motivation", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    body.append(Paragraph(
-        '<b>December 1, 2025</b><br/>"I am going to use it to create a 3d printed cast '
-        'for a silicone mold so I can some desktop signs out of concrete."', quote_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph(
-        '"For my PE, she\'s always belaboring the need to get concrete and not speak in abstract."',
-        quote_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("The Process", subheading_style))
-    body.append(Paragraph("1. AI generates OpenSCAD design", normal_style))
-    body.append(Paragraph("2. Export to STL", normal_style))
-    body.append(Paragraph("3. 3D print mold", normal_style))
-    body.append(Paragraph("4. Create silicone mold", normal_style))
-    body.append(Paragraph("5. Cast concrete", normal_style))
-    body.append(Paragraph("6. Sell on Etsy (eventually)", humor_style))
-    
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
-    
-    body.append(Paragraph("Concrete Sign Mold Design", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 6*inch, 6*inch)
-    if img:
-        body.append(img)
-    
-    body.append(PageBreak())
-    
-    # ============================================
-    # PART 8: LESSONS LEARNED
+    # PART 7: LESSONS LEARNED
     # ============================================
     body.append(Paragraph("Lessons Learned (Mostly)", heading_style))
     body.append(Spacer(1, 0.3*inch))
@@ -484,7 +534,6 @@ def create_pdf():
     # ============================================
     # KEY INSIGHTS
     # ============================================
-    body.append(Paragraph("Key Insights (Take What You Want)", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
     insights = [
