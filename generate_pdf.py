@@ -196,8 +196,8 @@ def create_pdf():
     # TITLE SLIDE
     # ============================================
     body.append(Spacer(1, 1.5*inch))
-    body.append(Paragraph("How I Bought an AI Thing", title_style))
-    body.append(Paragraph("And Accidentally Became an Linux Geek Again", subtitle_style))
+    body.append(Paragraph("Six Months with AMD Strix Halo", title_style))
+    body.append(Paragraph("Local AI, Open Source, and Hardware Reality", subtitle_style))
     body.append(Spacer(1, 0.5*inch))
     body.append(Paragraph("A Six Month Review of a Strix Halo Rig", normal_style))
     body.append(Spacer(1, 0.3*inch))
