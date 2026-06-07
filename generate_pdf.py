@@ -374,40 +374,6 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # PART 6: WWS PROJECT
-    # ============================================
-    body.append(Paragraph("Project WWS: I Vibe-Coded an Entire System", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Winmutt Work Spaces", subheading_style))
-    body.append(Paragraph("github.com/winmutt/wws", normal_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph(
-        '<b>May 12, 2026</b><br/>"Definitely no Athena and its taken months '
-        'to get there but this is something I entirely vibe coded."', quote_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("What is WWS?", subheading_style))
-    body.append(Paragraph("• Remote workspace provisioning", normal_style))
-    body.append(Paragraph("• KVM/Podman isolated environments", normal_style))
-    body.append(Paragraph("• code-server (VSCode in browser)", normal_style))
-    body.append(Paragraph("• GitHub OAuth + RBAC", normal_style))
-    
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
-    
-    # WWS Dashboard screenshot
-    body.append(Paragraph("WWS Dashboard", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/dashboard.png', 7*inch, 4*inch)
-    if img:
-        body.append(img)
-    
-    body.append(PageBreak())
-    
-    # ============================================
     # PART 6: HOME ASSISTANT
     # ============================================
     body.append(Paragraph("Cutting the Alexa Cord", heading_style))
@@ -507,7 +473,42 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # PART 7: LESSONS LEARNED
+    # PART 7: WWS PROJECT
+    # ============================================
+    body.append(Paragraph("Project WWS: I Vibe-Coded an Entire System", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Winmutt Work Spaces", subheading_style))
+    body.append(Paragraph("github.com/winmutt/wws", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph(
+        '<b>May 12, 2026</b><br/>"Definitely no Athena and its taken months '
+        'to get there but this is something I entirely vibe coded."', quote_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("What is WWS?", subheading_style))
+    body.append(Paragraph("• Remote workspace provisioning", normal_style))
+    body.append(Paragraph("• KVM/Podman isolated environments", normal_style))
+    body.append(Paragraph("• code-server (VSCode in browser)", normal_style))
+    body.append(Paragraph("• GitHub OAuth + RBAC", normal_style))
+    body.append(Paragraph("• First commit: Feb 22, 2026", normal_style))
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # WWS Dashboard screenshot
+    body.append(Paragraph("WWS Dashboard", subheading_style))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/dashboard.png', 7*inch, 4*inch)
+    if img:
+        body.append(img)
+    
+    body.append(PageBreak())
+    
+    # ============================================
+    # PART 8: LESSONS LEARNED
     # ============================================
     body.append(Paragraph("Lessons Learned (Mostly)", heading_style))
     body.append(Spacer(1, 0.3*inch))
@@ -516,8 +517,8 @@ def create_pdf():
     body.append(Paragraph("• Cline + Qwen3-Coder: Actually produces code", normal_style))
     body.append(Paragraph("• Prompt Caching: Things hum now", normal_style))
     body.append(Paragraph("• AMD GPU Libraries: 2x faster (worth the pain)", normal_style))
+    body.append(Paragraph("• WWS Project: Vibe-coded from Feb 22 (first commit) to May 12", normal_style))
     body.append(Paragraph("• Home Assistant: Alexa is dead, long live OSS", normal_style))
-    body.append(Paragraph("• WWS Project: Months of vibe-coding complete", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
     
