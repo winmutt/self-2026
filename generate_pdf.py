@@ -290,7 +290,7 @@ def create_pdf():
     
     # APU die diagram
     body.append(Paragraph("APU Die Architecture", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7*inch, 4.5*inch)
     if img:
         body.append(img)
     
@@ -298,10 +298,11 @@ def create_pdf():
     
     body.append(Paragraph("Physical Layout", subheading_style))
     body.append(Paragraph("• 16 cores (12 performance + 4 efficiency)", normal_style))
-    body.append(Paragraph("• 2x Core Complex Dies (CCD) with 64MB L3 cache each", normal_style))
+    body.append(Paragraph("• 2x Core Complex Dies (CCD) with 64MB L3 cache each (community analysis)", normal_style))
     body.append(Paragraph("• 768KB L1d + 512KB L1i + 16MB L2", normal_style))
     body.append(Paragraph("• Integrated RDNA 3.5 GPU (40 CUs)", normal_style))
     body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory (soldered)", normal_style))
+    body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 teardown analysis (Chiphell, TechPowerUp)", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
