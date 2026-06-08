@@ -950,22 +950,57 @@ def create_pdf():
     body.append(Paragraph("From LKML to Strix Halo: How Hardware Bought My Time", normal_style))
     body.append(Spacer(1, 0.5*inch))
     
-    # LKML 2000 screenshot
-    body.append(Paragraph("June 9, 2000: LKML Post", subheading_style))
-    body.append(Paragraph("Subject: HighPoint IDE RAID (kernel 2.2.14)", normal_style))
+    # The Story
+    body.append(Paragraph("The Long Detour", subheading_style))
+    body.append(Paragraph(
+        'For 20+ years I built corporate SaaS products. Cloud disconnected me from the metal. '
+        'Linux became something I deployed to, not something I touched daily. '
+        'The kernel, the drivers, the hardware—left that world behind.',
+        normal_style
+    ))
     body.append(Spacer(1, 0.3*inch))
     
+    # LKML 2000 email text
+    body.append(Paragraph("June 9, 2000: Asking on LKML", subheading_style))
+    body.append(Paragraph(
+        '<font face="Courier" size="8">'
+        'From: Rolf Martin-Hoster (winmutt@hotmail.com)'
+        '<br/>Date: Thu Jun 08 2000 - 19:24:59 EST'
+        '<br/>Subject: HighPoint IDE RAID (kernel 2.2.14)'
+        '<br/>'
+        '<br/>Does anyone know where I can find developer info about the driver for this'
+        '<br/>chipset?'
+        '<br/>'
+        '<br/>-Rolf'
+        '</font>',
+        normal_style
+    ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph(
+        'Back then: Hands-on with kernel 2.2.14, digging into IDE RAID drivers, '
+        'asking questions on linux-kernel mailing list.',
+        humor_style
+    ))
+    body.append(Spacer(1, 0.5*inch))
+    
     # 10-year GitHub activity heatmap
-    body.append(Paragraph("GitHub Activity: Strix Halo Catalyst (2016-2026)", subheading_style))
-    body.append(Paragraph("(2025-2026: Real GitHub API data | Earlier: Estimated)", normal_style))
+    body.append(Paragraph("The Return: GitHub Activity (2018-2026)", subheading_style))
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 7*inch, 3.5*inch)
     if img:
         body.append(img)
     
-    body.append(Spacer(1, 0.5*inch))
-    body.append(Paragraph("November 2025: Bought a Strix Halo rig", normal_style))
-    body.append(Paragraph("Result: 3.5x increase in open source contributions", normal_style))
-    body.append(Paragraph("Moral: Sometimes the best way back in is to buy new toys", humor_style))
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph(
+        '2018-2024: Ghost town. 2025: Strix Halo arrives. '
+        'November 2025: Back on the metal, every single day.',
+        normal_style
+    ))
+    body.append(Paragraph(
+        'Result: 3.5x increase in open source contributions. '
+        'Moral: Sometimes the best way back in is to buy new toys.',
+        humor_style
+    ))
     body.append(PageBreak())
     
     # ============================================
