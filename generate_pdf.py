@@ -493,11 +493,9 @@ def create_pdf():
     
     body.append(PageBreak())
     
-    # Issue #1070 - NUMA Tools Don't See Dual CCD
-    body.append(Paragraph("Feat #1070: NUMA Tools Don't See Dual CCD", heading_style))
+    # Issue #1070 - Core affinity
+    body.append(Paragraph("[enhancement] Core affinity when running multiple models.", heading_style))
     body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("[enhancement] Core affinity when running multiple models.", subheading_style))
     body.append(Spacer(1, 0.2*inch))
     
     body.append(Paragraph(
@@ -540,52 +538,34 @@ def create_pdf():
     
     body.append(PageBreak())
     
-    # Evidence section
-    body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", heading_style))
+    # Evidence: ps output with red boxes
+    body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7*inch, 4*inch)
+    if img_ps:
+        body.append(img_ps)
+    
     body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph(
-        '<font face="Courier" size="8">'
-        'PS Output (last column = last CPU used):'
-        '<br/>---------------------------------------------------'
-        '<br/>PID     LAST_CPU  AVG_MHZ  COMMAND'
-        '<br/>56840   6         55.7     llama-server (Model 1)'
-        '<br/>56840   20        54.2     llama-server (Model 1)'
-        '<br/>59798   0         51.2     llama-server (Model 2)'
-        '<br/>59798   2         47.5     llama-server (Model 2)'
-        '<br/>---------------------------------------------------'
-        '<br/>56840   22        55.7     llama-server (Model 1)'
-        '<br/>56840   4         54.2     llama-server (Model 1)'
-        '<br/>59798   16        51.2     llama-server (Model 2)'
-        '<br/>59798   2         47.5     llama-server (Model 2)'
-        '<br/>---------------------------------------------------'
-        '</font>',
-        normal_style
-    ))
     
+    # Evidence: lscpu topology with red boxes
+    body.append(Paragraph("Hardware Topology: CCD Boundaries (lscpu)", subheading_style))
     body.append(Spacer(1, 0.2*inch))
     
-    body.append(Paragraph(
-        'Notice: Core IDs jump across CCD boundaries (0-7 = CCD0, 8-15 = CCD1)'
-        '<br/>Threads on same PID bounce between CCDs → L3 cache misses → slower inference'
-        '<br/>',
-        normal_style
-    ))
+    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7*inch, 4*inch)
+    if img_lscpu:
+        body.append(img_lscpu)
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("Hardware Topology (from lscpu):", subheading_style))
+    body.append(Paragraph("The Problem: NUMA Tools Can't See CCD Boundaries", subheading_style))
     body.append(Paragraph(
-        '<font face="Courier" size="7">'
-        'CPU  NODE  SOCKET  CORE  L1d:L1i:L2:L3  MAXMHZ    AVG_MHZ'
-        '<br/>---  ----  ------  ----  ----------  --------  --------'
-        '<br/>0-7   0      0      0-7   *:*:*:0     5187.0    4900+ (CCD0)'
-        '<br/>8-15  0      0      8-15  *:*:*:1     5187.0    2000-4600 (CCD1)'
-        '<br/>16-23 0      0      0-7   *:*:*:0     5187.0    4900+ (CCD0 SMT)'
-        '<br/>24-31 0      0      8-15  *:*:*:1     5187.0    2000-2800 (CCD1 SMT)'
+        "• Traditional NUMA tools (numactl, NUMATopologyFilter) detect only 1 node"
+        '<br/>• Cannot see CCD boundaries automatically'
+        '<br/>• Manual core pinning required to keep workloads on same CCD'
+        '<br/>• Running multiple LLMs: threads bounce across CCDs → L3 cache thrashing'
         '<br/>'
-        'L3 Cache: 64MB total (2 instances: 32MB per CCD)'
-        '<br/>NUMA: Only 1 node detected (0-31), cannot see CCD boundaries'
-        '</font>',
+        '<b>Result:</b> Cross-CCD traffic → slower inference, higher latency',
         normal_style
     ))
     
