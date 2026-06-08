@@ -441,7 +441,7 @@ def create_pdf():
     
     # Home Assistant screenshot
     body.append(Paragraph("Home Assistant on Echo Show", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 5*inch, 4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', page_width - 2*margin, 4*inch)
     if img:
         body.append(img)
     
