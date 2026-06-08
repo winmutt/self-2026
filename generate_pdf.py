@@ -493,8 +493,85 @@ def create_pdf():
     
     body.append(PageBreak())
     
+    # NUMA Architecture Comparison
+    body.append(Paragraph("Traditional NUMA vs. Strix Halo APU", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Traditional NUMA Architecture:", subheading_style))
+    body.append(Paragraph(
+        '<font face="Courier">┌─────────────────────────┐  ┌─────────────────────────┐'
+        '<br/>│    NUMA Node 0        │  │    NUMA Node 1        │'
+        '<br/>│  ┌───────────────┐    │  │  ┌───────────────┐    │'
+        '<br/>│  │ 4-8 Cores     │    │  │  │ 4-8 Cores     │    │'
+        '<br/>│  │ 32MB L3 Cache │    │  │  │ 32MB L3 Cache │    │'
+        '<br/>│  └───────┬───────┘    │  │  └───────┬───────┘    │'
+        '<br/>│          │            │  │          │            │'
+        '<br/>│  ┌───────▼───────┐    │  │  ┌───────▼───────┐    │'
+        '<br/>│  │ Memory Ctrl   │    │  │  │ Memory Ctrl   │    │'
+        '<br/>│  │ (Local RAM)   │    │  │  │ (Local RAM)   │'
+        '<br/>│  └───────────────┘    │  │  └───────────────┘    │'
+        '<br/>└──────────┬────────────┘  └──────────┬────────────┘'
+        '<br/>           │                         │'
+        '<br/>           └───────────┬─────────────┘'
+        '<br/>                       │'
+        '<br/>              (High-latency interconnect)'
+        '<br/></font>',
+        normal_style
+    ))
+    body.append(Paragraph(
+        "Each node has dedicated cores, L3 cache, and memory. Process pinned to Node 0 "
+        "stays in Node 0's cache/memory domain.",
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Strix Halo APU Architecture:", subheading_style))
+    body.append(Paragraph(
+        '<font face="Courier">┌─────────────────────────────────────────────────┐'
+        '<br/>│              Single NUMA Node                     │'
+        '<br/>│                                                 │'
+        '<br/>│  ┌─────────────────────┐  ┌─────────────────────┐'
+        '<br/>│  │    CCD 0            │  │    CCD 1            │'
+        '<br/>│  │  ┌──────────────┐    │  │  ┌──────────────┐    │'
+        '<br/>│  │  │ 8 Cores      │    │  │  │ 8 Cores      │    │'
+        '<br/>│  │  │ 32MB L3 Cache│    │  │  │ 32MB L3 Cache│    │'
+        '<br/>│  │  └──────┬───────┘    │  │  └──────┬───────┘    │'
+        '<br/>│  └─────────┼────────────┘  └─────────┼────────────┘'
+        '<br/>│            │                         │'
+        '<br/>│            └───────────┬─────────────┘'
+        '<br/>│                        │'
+        '<br/>│  ┌─────────────────────▼───────────────┐'
+        '<br/>│  │    Unified Memory (128GB LPDDR5X)   │'
+        '<br/>│  │         (Shared by all cores)       │'
+        '<br/>│  └─────────────────────────────────────┘'
+        '<br/>└─────────────────────────────────────────────────┘'
+        '<br/></font>',
+        normal_style
+    ))
+    body.append(Paragraph(
+        "Single NUMA node, but 2 CCDs with separate L3 caches. Threads bounce "
+        "across CCDs → cross-CCD traffic → performance degradation.",
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("The Problem:", subheading_style))
+    body.append(Paragraph(
+        "• Traditional NUMA tools (numactl, NUMATopologyFilter) detect only 1 node"
+        '<br/>• Cannot see CCD boundaries automatically'
+        '<br/>• Manual core pinning required to keep workloads on same CCD'
+        '<br/>• Running multiple LLMs: pin each to separate CCD to avoid cache thrashing'
+        '<br/>'
+        '<b>Result:</b> Better L3 cache locality = faster inference, less latency',
+        normal_style
+    ))
+    
+    body.append(PageBreak())
+    
     # Issue #1070 - Core affinity
-    body.append(Paragraph("Issue #1070: Core Affinity for Multi-Model Workloads", heading_style))
+    body.append(Paragraph("Issue #1070: Core Affinity When Running Multiple Models", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("[enhancement] Core affinity when running multiple models.", subheading_style))
@@ -509,25 +586,64 @@ def create_pdf():
     
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("The Problem", subheading_style))
-    body.append(Paragraph("• Running multiple LLMs on Strix Halo", normal_style))
-    body.append(Paragraph("• llama-server threads bounce across L3 caches (CCDs)", normal_style))
-    body.append(Paragraph("• Cross-CCD traffic degrades performance", normal_style))
+    body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", subheading_style))
+    body.append(Paragraph(
+        '<font face="Courier" size="8">'
+        'PS Output (last column = last CPU used):'
+        '<br/>---------------------------------------------------'
+        '<br/>PID     LAST_CPU  AVG_MHZ  COMMAND'
+        '<br/>56840   6         55.7     llama-server (Model 1)'
+        '<br/>56840   20        54.2     llama-server (Model 1)'
+        '<br/>59798   0         51.2     llama-server (Model 2)'
+        '<br/>59798   2         47.5     llama-server (Model 2)'
+        '<br/>---------------------------------------------------'
+        '<br/>56840   22        55.7     llama-server (Model 1)'
+        '<br/>56840   4         54.2     llama-server (Model 1)'
+        '<br/>59798   16        51.2     llama-server (Model 2)'
+        '<br/>59798   2         47.5     llama-server (Model 2)'
+        '<br/>---------------------------------------------------'
+        '</font>',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph(
+        'Notice: Core IDs jump across CCD boundaries (0-7 = CCD0, 8-15 = CCD1)'
+        '<br/>Threads on same PID bounce between CCDs → L3 cache misses → slower inference'
+        '<br/>',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph("Hardware Topology (from lscpu):", subheading_style))
+    body.append(Paragraph(
+        '<font face="Courier" size="7">'
+        'CPU  NODE  SOCKET  CORE  L1d:L1i:L2:L3  MAXMHZ    AVG_MHZ'
+        '<br/>---  ----  ------  ----  ----------  --------  --------'
+        '<br/>0-7   0      0      0-7   *:*:*:0     5187.0    4900+ (CCD0)'
+        '<br/>8-15  0      0      8-15  *:*:*:1     5187.0    2000-4600 (CCD1)'
+        '<br/>16-23 0      0      0-7   *:*:*:0     5187.0    4900+ (CCD0 SMT)'
+        '<br/>24-31 0      0      8-15  *:*:*:1     5187.0    2000-2800 (CCD1 SMT)'
+        '<br/>'
+        'L3 Cache: 64MB total (2 instances: 32MB per CCD)'
+        '<br/>NUMA: Only 1 node detected (0-31), cannot see CCD boundaries'
+        '</font>',
+        normal_style
+    ))
     
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("Proposed Solution", subheading_style))
-    body.append(Paragraph("• Pin llama-server to specific cores based on:", normal_style))
-    body.append(Paragraph("  - Number of models loaded", normal_style))
-    body.append(Paragraph("  - NUMA nodes (virtual)", normal_style))
-    body.append(Paragraph("  - Core Complex Dies (CCDs)", normal_style))
-    body.append(Paragraph("• Prevent cross-cache/cache-line traffic", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
     body.append(Paragraph(
-        '<b>Why it matters</b><br/>Better L3 cache locality = faster inference, less latency',
-        humor_style
+        'Pin llama-server instances to specific CCDs:'
+        '<br/>• Model 1 → CCD0 (cores 0-7, 16-23)'
+        '<br/>• Model 2 → CCD1 (cores 8-15, 24-31)'
+        '<br/>'
+        '<b>Result:</b> Each model stays in its own L3 cache domain → no cross-CCD traffic'
+        '<br/>',
+        normal_style
     ))
     
     body.append(PageBreak())
