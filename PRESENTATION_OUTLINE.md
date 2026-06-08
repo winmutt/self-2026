@@ -43,7 +43,7 @@
 4. Performance Deep Dive (7 min)
 5. Project: WWS (6 min)
 6. Project: Home Assistant (5 min)
-7. Project: Concrete Signs (3 min)
+7. Project: 3D Modeling (3 min)
 8. Lessons Learned (4 min)
 
 **Visual**: Timeline graphic
@@ -108,14 +108,15 @@
 
 #### Slide 8: Architecture Quirks
 **Content**:
-- Single APU, dual core dies
-- 2x 64MB L3 caches
-- NUMA-like behavior
-- Core affinity matters
+- Single APU, dual core dies (CCDs)
+- 2x 32MB L3 caches (one per CCD)
+- NUMA Challenge: Single node, but 2 CCDs with separate L3 caches
+- Solution: Manual core pinning to maximize L3 cache locality
+- Issue #1070: Core affinity for multi-model workloads
 
-**Quote**: "Its one apu but 2 core dies and 2x64mb l3 caches."
+**Quote**: "I am on a Strix Halo AMD Ryzen AI Max+ 395 and am running multiple models. I've noticed that the threads on llamma-server are bouncing around across L3 caches (core complex dies)."
 
-**Visual**: Die shot or core layout
+**Visual**: Die shot with CCD boundaries and cache layout
 
 ---
 
@@ -342,19 +343,19 @@ Jan 29 ┤ End-to-end complete
 
 ---
 
-### Part 7: Concrete Signs (3 minutes)
+### Part 7: 3D Modeling with Strix Halo (3 minutes)
 
-#### Slide 26: From AI to Physical
+#### Slide 26: AI-Assisted Physical Design
 **Content**:
 - December 1: "I am going to use it to create a 3d printed cast for a silicone mold so I can some desktop signs out of concrete."
-- For PE: "She's always belaboring the need to get concrete and not speak in abstract."
-- Etsy potential
+- Blender + OpenSCAD workflow
+- More physical projects coming soon
 
 **Visual**: Process flow diagram
 
 ---
 
-#### Slide 27: Concrete Sign Molds
+#### Slide 27: Concrete Sign Mold Design
 **Content**:
 - OpenSCAD designs
 - "example" - Cursive (Dancing Script)
@@ -366,18 +367,17 @@ Jan 29 ┤ End-to-end complete
 - `use_case_sign_mold.scad`
 - `generate.py`
 
-**Visual**: `/opt/opencode/src/concrete/sign-molds/example_sign_mold_preview.png`
+**Visual**: `/opt/opencode/src/self-2026/assets/concrete_sign.png`
 
 ---
 
 #### Slide 28: Process
 **Content**:
-1. AI generates OpenSCAD design
+1. AI generates OpenSCAD/Blender design
 2. Export to STL
 3. 3D print mold (PETG/ABS)
 4. Create silicone mold
 5. Cast concrete
-6. Finish and sell
 
 **Visual**: Step-by-step photos (if available)
 
@@ -390,8 +390,9 @@ Jan 29 ┤ End-to-end complete
 - Cline + Qwen3-Coder: "Making some really good results"
 - Prompt caching: "Things are really humming now"
 - AMD GPU libraries: 2x performance improvement
-- Home Assistant: Fully functional
+- Home Assistant: Fully functional with local LLM
 - WWS: Months of development, now complete
+- 3D Modeling: Blender/OpenSCAD for physical objects
 
 **Visual**: Green checkmarks
 
@@ -537,7 +538,8 @@ Jan 29 ┤ End-to-end complete
 - WWS: https://github.com/winmutt/wws
 - Lemonade: https://github.com/winmutt/lemonade
 - Cline: https://github.com/winmutt/cline
-- Concrete: `/opt/opencode/src/concrete/sign-molds/`
+- 3D Modeling: `/opt/opencode/src/self-2026/assets/concrete_sign.png`
+- More physical projects coming soon
 
 ### Communities
 - Reddit r/LocalLLaMA

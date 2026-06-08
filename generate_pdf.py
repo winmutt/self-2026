@@ -298,7 +298,7 @@ def create_pdf():
     
     body.append(Paragraph("Physical Layout", subheading_style))
     body.append(Paragraph("• 16 cores (12 performance + 4 efficiency)", normal_style))
-    body.append(Paragraph("• 2x Core Complex Dies (CCD) with 64MB L3 cache each (community analysis)", normal_style))
+    body.append(Paragraph("• 2x Core Complex Dies (CCD) with 32MB L3 cache each", normal_style))
     body.append(Paragraph("• 768KB L1d + 512KB L1i + 16MB L2", normal_style))
     body.append(Paragraph("• Integrated RDNA 3.5 GPU (40 CUs)", normal_style))
     body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory (soldered)", normal_style))
@@ -320,7 +320,13 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("Hardware Reality", subheading_style))
-    body.append(Paragraph("• One processor, but 2x core dies with separate 64MB L3 caches", normal_style))
+    body.append(Paragraph("• One processor, but 2x core dies with separate 32MB L3 caches", normal_style))
+    body.append(Spacer(1, 0.2*inch))
+    body.append(Paragraph("NUMA Challenge:", subheading_style))
+    body.append(Paragraph("• Traditional NUMA: 2 nodes, each with own cores + L3 cache", normal_style))
+    body.append(Paragraph("• Strix Halo: Single node, but 2 CCDs with separate L3 caches", normal_style))
+    body.append(Paragraph("• Problem: Process/thread pinning needed to keep workloads on same CCD", normal_style))
+    body.append(Paragraph("• Solution: Manual core pinning to maximize L3 cache locality", normal_style))
     body.append(Paragraph("• Traditional NUMA tools detect only 1 node (not 2 CCDs)", normal_style))
     body.append(Paragraph("• numactl, NUMATopologyFilter can't see CCD boundaries", normal_style))
     body.append(Paragraph("• llama-server threads not pinned to specific cores", normal_style))
@@ -346,17 +352,15 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # PART 5B: BLENDER CONCRETE EXAMPLE
+    # PART 5B: 3D MODELING WITH STRIX HALO
     # ============================================
-    body.append(Paragraph("Blender: Concrete Sign Mold", heading_style))
+    body.append(Paragraph("3D Modeling with Strix Halo", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("December 1, 2025", subheading_style))
-    body.append(Paragraph(
-        '"I am going to use it to create a 3d printed cast '
-        'for a silicone mold so I can some desktop signs out of concrete."', quote_style
-    ))
+    body.append(Paragraph("AI-Assisted Physical Design", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
     
+    body.append(Paragraph("Blender + OpenSCAD workflow for creating physical objects", normal_style))
     body.append(Spacer(1, 0.3*inch))
     
     # Concrete sign image
@@ -368,11 +372,14 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("The Process", subheading_style))
-    body.append(Paragraph("1. AI generates OpenSCAD design", normal_style))
+    body.append(Paragraph("1. AI generates OpenSCAD/Blender design", normal_style))
     body.append(Paragraph("2. Export to STL", normal_style))
     body.append(Paragraph("3. 3D print mold", normal_style))
     body.append(Paragraph("4. Create silicone mold", normal_style))
     body.append(Paragraph("5. Cast concrete", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("December 1, 2025 — More physical projects coming soon", humor_style))
     
     body.append(PageBreak())
     
@@ -483,6 +490,45 @@ def create_pdf():
     
     body.append(Paragraph("All devices use MediaTek MT8163 SoC", normal_style))
     body.append(Paragraph("LineageOS 18.1 (Android 11) - community builds by @R0rt1z2", normal_style))
+    
+    body.append(PageBreak())
+    
+    # Issue #1070 - Core affinity
+    body.append(Paragraph("Issue #1070: Core Affinity for Multi-Model Workloads", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("[enhancement] Core affinity when running multiple models.", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph(
+        '<b>Filed</b><br/>February 8, 2026<br/>'
+        '<b>Repository</b><br/>github.com/lemonade-sdk/lemonade/issues/1070<br/>'
+        '<b>Status</b><br/>Open',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("The Problem", subheading_style))
+    body.append(Paragraph("• Running multiple LLMs on Strix Halo", normal_style))
+    body.append(Paragraph("• llama-server threads bounce across L3 caches (CCDs)", normal_style))
+    body.append(Paragraph("• Cross-CCD traffic degrades performance", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Proposed Solution", subheading_style))
+    body.append(Paragraph("• Pin llama-server to specific cores based on:", normal_style))
+    body.append(Paragraph("  - Number of models loaded", normal_style))
+    body.append(Paragraph("  - NUMA nodes (virtual)", normal_style))
+    body.append(Paragraph("  - Core Complex Dies (CCDs)", normal_style))
+    body.append(Paragraph("• Prevent cross-cache/cache-line traffic", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph(
+        '<b>Why it matters</b><br/>Better L3 cache locality = faster inference, less latency',
+        humor_style
+    ))
     
     body.append(PageBreak())
     

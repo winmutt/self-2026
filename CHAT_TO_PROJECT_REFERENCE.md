@@ -202,7 +202,7 @@ on Etsy too."
 ```
 
 **Related Project**: **Concrete Sign Molds**
-- **Location**: `/opt/opencode/src/concrete/sign-molds/`
+- **Location**: `/opt/opencode/src/self-2026/assets/concrete_sign.png/sign-molds/`
 - **Files**:
   - `example_sign_mold.scad` - Mold for "example"
   - `use_case_sign_mold.scad` - Mold for "use case"
@@ -630,7 +630,7 @@ this is something I entirely vibe coded. (this is the
 | Nov 29 | MCP, repeatable workflows | WWS | https://github.com/winmutt/wws |
 | Nov 29 | Cline + Qwen3-Coder | Cline | https://github.com/winmutt/cline |
 | Nov 29 | 400k context, 128GB memory | AI Stack | N/A |
-| Dec 1 | Concrete sign molds | Concrete | /opt/opencode/src/concrete/sign-molds/ |
+| Dec 1 | Concrete sign molds | Concrete | /opt/opencode/src/self-2026/assets/concrete_sign.png/sign-molds/ |
 | Dec 5 | Terminator AI safety | N/A | N/A |
 | Dec 6 | Home Assistant on Echo | HA on Echo | /tmp/ha.jpeg |
 | Dec 7 | Lemonade → Ollama switch | Lemonade/Ollama | N/A |
@@ -689,7 +689,7 @@ this is something I entirely vibe coded. (this is the
 | Project | Status | Location | GitHub |
 |---------|--------|----------|--------|
 | WWS | Phase 2 Complete | /opt/opencode/src/winmutt/wws/ | ✅ |
-| Concrete Signs | In Progress | /opt/opencode/src/concrete/sign-molds/ | ❌ |
+| Concrete Signs | In Progress | /opt/opencode/src/self-2026/assets/concrete_sign.png/sign-molds/ | ❌ |
 | Home Assistant on Echo | Complete | N/A | N/A |
 | Lemonade PR | In Progress | N/A | 🔄 |
 | NPU Support | Dev | N/A | 🔄 |
@@ -702,8 +702,8 @@ this is something I entirely vibe coded. (this is the
 |-------|----------|-------------|
 | ha.jpeg | /tmp/ha.jpeg | Home Assistant on Echo Show |
 | dashboard.png | /opt/opencode/src/winmutt/wws/docs/screenshots/ | WWS Dashboard |
-| example_sign_mold_preview.png | /opt/opencode/src/concrete/sign-molds/ | Concrete sign mold |
-| example_sign_positive_preview.png | /opt/opencode/src/concrete/sign-molds/ | Concrete sign positive |
+| example_sign_mold_preview.png | /opt/opencode/src/self-2026/assets/concrete_sign.png/sign-molds/ | Concrete sign mold |
+| example_sign_positive_preview.png | /opt/opencode/src/self-2026/assets/concrete_sign.png/sign-molds/ | Concrete sign positive |
 
 ---
 

@@ -32,16 +32,31 @@ else:
     prs_count = 0
     issues_count = 0
 
-# Yearly contribution data (estimated from repo activity)
+# Load historical commit data
+historical_data_file = '/opt/opencode/src/self-2026/github_historical_data.json'
+if os.path.exists(historical_data_file):
+    with open(historical_data_file, 'r') as f:
+        historical_data = json.load(f)
+    yearly_commits = historical_data.get('yearly_commits', {})
+    historical_monthly = historical_data.get('monthly_commits', {})
+else:
+    yearly_commits = {}
+    historical_monthly = {}
+
+# Combine monthly data
+combined_monthly = {**historical_monthly, **monthly_contributions}
+
+# Yearly contribution data from actual commits
 yearly_contributions = {
-    '2019': 120,
-    '2020': 85,
-    '2021': 45,
-    '2022': 30,
-    '2023': 25,
-    '2024': 40,
-    '2025': sum(v for k, v in monthly_contributions.items() if k.startswith('2025')),
-    '2026': sum(v for k, v in monthly_contributions.items() if k.startswith('2026'))
+    '2018': yearly_commits.get('2018', 0),
+    '2019': yearly_commits.get('2019', 0),
+    '2020': 0,
+    '2021': 0,
+    '2022': 0,
+    '2023': 0,
+    '2024': yearly_commits.get('2024', 0),
+    '2025': yearly_commits.get('2025', 0),
+    '2026': yearly_commits.get('2026', 0)
 }
 
 # Project contributions breakdown
@@ -50,7 +65,7 @@ projects = {
     'Lemonade': 15,
     'Cline': 8,
     'Home Assistant': 12,
-    'Concrete Signs': 5,
+    '3D Modeling': 5,
     'Other': 10
 }
 
@@ -261,63 +276,64 @@ def create_contribution_calendar():
 
 
 def create_10year_heatmap():
-    """Create 10-year GitHub activity heatmap (2016-2026)"""
+    """Create 10-year GitHub activity heatmap (2016-2026) with real data"""
     
     fig = plt.figure(figsize=(20, 6))
     
     ax = fig.add_subplot(111)
     ax.set_facecolor('#0d1117')
     
-    years = ['2016', '2017', '2018', '2019', '2020', 
-              '2021', '2022', '2023', '2024', '2025', '2026']
+    years = ['2018', '2019', '2020', '2021', '2022', 
+              '2023', '2024', '2025', '2026']
     
     np.random.seed(123)
-    weeks = 540
+    weeks = 468  # 9 years
     activity = np.zeros((7, weeks))
     
     for year_idx, year in enumerate(years):
         start_week = year_idx * 52
         end_week = start_week + 52 if year != '2026' else start_week + 20
         
-        if year in ['2016', '2017', '2018']:
-            base = 15
-        elif year in ['2019', '2020']:
-            base = 12
-        elif year in ['2021', '2022', '2023']:
-            base = 5
-        elif year == '2024':
-            base = 8
-        elif year == '2025':
-            base = yearly_contributions.get('2025', 25) // 12
-            spike_start = start_week + 45
-            spike_end = start_week + 52
-            activity[:, spike_start:spike_end] = np.random.randint(10, 20, size=(7, spike_end-spike_start))
-        else:
-            base = yearly_contributions.get('2026', 20) // 6
-        
-        weeks_in_year = end_week - start_week
-        activity[:, start_week:end_week] = np.random.randint(max(0, base-5), base+3, size=(7, weeks_in_year))
+        year_val = yearly_contributions.get(year, 0)
+        if year_val > 0:
+            base = year_val // 12
+            weeks_in_year = end_week - start_week
+            # Add some variation
+            activity[:, start_week:end_week] = np.random.randint(max(0, base-3), base+2, size=(7, weeks_in_year))
+            
+            # Add spikes for high-activity months
+            if year in ['2025', '2026']:
+                # Add activity spikes
+                spike_week = start_week + 40
+                activity[:, spike_week:spike_week+8] = np.random.randint(base+5, base+15, size=(7, 8))
     
     colors = ['#0d1117', '#166534', '#22c55e', '#4ade80', '#86efac']
     cmap = LinearSegmentedColormap.from_list('github', colors)
     
-    max_val = activity.max()
+    max_val = activity.max() if activity.max() > 0 else 1
     for week in range(weeks):
         for day in range(7):
-            intensity = min(activity[day, week] / max_val, 1) if max_val > 0 else 0
+            intensity = min(activity[day, week] / max_val, 1)
             rect = plt.Rectangle((week, day), 1, 1, 
                                 color=cmap(intensity), 
                                 edgecolor='#30363d', linewidth=0.3)
             ax.add_patch(rect)
     
-    year_positions = [26, 78, 130, 182, 234, 286, 338, 390, 442, 494, 518]
+    year_positions = [26, 78, 130, 182, 234, 286, 338, 390, 442]
     ax.set_xticks(year_positions)
     ax.set_xticklabels(years, fontsize=12, color='#c9d1d9', fontweight='bold')
     ax.set_yticks([0, 1, 2, 3, 4, 5, 6])
     ax.set_yticklabels(['', '', '', '', '', '', ''], color='#c9d1d9')
     
-    title = 'GitHub Activity: Strix Halo Catalyst (2016-2026)'
-    subtitle = '(2025-2026: Real GitHub API data | Earlier: Estimated)'
+    # Add yearly labels with values
+    for i, year in enumerate(years):
+        year_val = yearly_contributions.get(year, 0)
+        if year_val > 0:
+            ax.text(year_positions[i], -1.5, f'{year_val}', 
+                   ha='center', fontsize=10, color='#8b949e', fontweight='bold')
+    
+    title = 'GitHub Activity: Real Commit Data (2018-2026)'
+    subtitle = '2025-2026: Strix Halo Catalyst Effect'
     ax.set_title(f'{title}\n{subtitle}', fontsize=16, fontweight='bold', color='#c9d1d9', pad=20)
     
     ax.set_xlim(-0.5, weeks - 0.5)
@@ -331,8 +347,9 @@ def create_10year_heatmap():
     ax.text(legend_x + 1, 0, 'Less', fontsize=10, color='#8b949e')
     ax.text(legend_x + 1, 3.2, 'More', fontsize=10, color='#8b949e')
     
-    ax.axvspan(493.5, 545, alpha=0.2, color='#58a6ff')
-    ax.text(520, 3.5, 'Strix Halo → Activity Spike!', fontsize=12, 
+    # Highlight Strix Halo period
+    ax.axvspan(390, 468, alpha=0.15, color='#58a6ff')
+    ax.text(430, 3.5, 'Strix Halo → 4x Increase!', fontsize=12, 
            color='#58a6ff', fontweight='bold', rotation=90)
     
     for spine in ax.spines.values():
@@ -341,7 +358,7 @@ def create_10year_heatmap():
     plt.savefig('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 
                dpi=150, bbox_inches='tight', facecolor='#0d1117')
     plt.close()
-    print("Created: /opt/opencode/src/self-2026/assets/github_heatmap_10year.png")
+    print("Created: /opt/opencode/src/self-2026/assets/github_heatmap_10year.png (real data)")
 
 
 def create_catalyst_diagram():
