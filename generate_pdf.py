@@ -795,7 +795,7 @@ def create_pdf():
     
     # 10-year GitHub activity heatmap
     body.append(Paragraph("GitHub Activity: Strix Halo Catalyst (2016-2026)", subheading_style))
-    body.append(Paragraph("(Note: Simulated data for illustration)", humor_style))
+    body.append(Paragraph("(2025-2026: Real GitHub API data | Earlier: Estimated)", normal_style))
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 7*inch, 3.5*inch)
     if img:
         body.append(img)

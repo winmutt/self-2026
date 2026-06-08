@@ -1,0 +1,90 @@
+{
+  "username": "winmutt",
+  "fetched_at": "2026-06-08T13:17:03.403897",
+  "total_contributions": 354,
+  "monthly_contributions": {
+    "2025-06": 0,
+    "2025-07": 0,
+    "2025-08": 0,
+    "2025-09": 0,
+    "2025-10": 3,
+    "2025-11": 3,
+    "2025-12": 0,
+    "2026-01": 3,
+    "2026-02": 231,
+    "2026-03": 93,
+    "2026-04": 14,
+    "2026-05": 4,
+    "2026-06": 3
+  },
+  "repos_contributed": [
+    {
+      "name": "core",
+      "owner": {
+        "login": "home-assistant"
+      }
+    },
+    {
+      "name": "ROCm",
+      "owner": {
+        "login": "ROCm"
+      }
+    },
+    {
+      "name": "twirp",
+      "owner": {
+        "login": "twirphp"
+      }
+    },
+    {
+      "name": "continue",
+      "owner": {
+        "login": "continuedev"
+      }
+    },
+    {
+      "name": "opencode",
+      "owner": {
+        "login": "anomalyco"
+      }
+    },
+    {
+      "name": "lemonade",
+      "owner": {
+        "login": "lemonade-sdk"
+      }
+    },
+    {
+      "name": "llm_intents",
+      "owner": {
+        "login": "skye-harris"
+      }
+    },
+    {
+      "name": "llamacpp-rocm",
+      "owner": {
+        "login": "lemonade-sdk"
+      }
+    },
+    {
+      "name": "hass_local_openai_llm",
+      "owner": {
+        "login": "skye-harris"
+      }
+    },
+    {
+      "name": "opencode-agent-memory",
+      "owner": {
+        "login": "joshuadavidthomas"
+      }
+    },
+    {
+      "name": "opencode-mem",
+      "owner": {
+        "login": "tickernelz"
+      }
+    }
+  ],
+  "prs_count": 69,
+  "issues_count": 242
+}

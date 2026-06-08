@@ -1,0 +1,71 @@
+{
+  "username": "winmutt",
+  "fetched_at": "2026-06-08T13:13:28.936447",
+  "repos": [
+    {
+      "name": "cline",
+      "owner": "winmutt",
+      "updated_at": "2025-11-30T21:09:15Z"
+    },
+    {
+      "name": "lemonade",
+      "owner": "winmutt",
+      "updated_at": "2026-02-14T15:24:05Z"
+    },
+    {
+      "name": "opencode-agent-memory",
+      "owner": "winmutt",
+      "updated_at": "2026-04-07T10:15:44Z"
+    },
+    {
+      "name": "self-2026",
+      "owner": "winmutt",
+      "updated_at": "2026-06-08T12:43:26Z"
+    },
+    {
+      "name": "self_2019_slow_session",
+      "owner": "winmutt",
+      "updated_at": "2023-01-13T02:11:39Z"
+    },
+    {
+      "name": "slow_log_parse",
+      "owner": "winmutt",
+      "updated_at": "2023-01-13T02:10:52Z"
+    },
+    {
+      "name": "twirp",
+      "owner": "winmutt",
+      "updated_at": "2025-10-08T22:41:05Z"
+    },
+    {
+      "name": "vscode",
+      "owner": "winmutt",
+      "updated_at": "2025-10-26T22:17:13Z"
+    },
+    {
+      "name": "wws",
+      "owner": "winmutt",
+      "updated_at": "2026-06-01T10:12:53Z"
+    }
+  ],
+  "events_summary": {
+    "total": 43,
+    "push": 37,
+    "pr": 5,
+    "issues": 0,
+    "pr_reviews": 0,
+    "comments": 0
+  },
+  "monthly_activity": {
+    "2023-01": 20,
+    "2025-10": 20,
+    "2025-11": 10,
+    "2026-02": 10,
+    "2026-04": 10,
+    "2026-05": 3,
+    "2026-06": 22
+  },
+  "total_commits": 318,
+  "total_prs": 51,
+  "total_issues": 14
+}
