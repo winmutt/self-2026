@@ -447,6 +447,45 @@ def create_pdf():
     
     body.append(PageBreak())
     
+    # ============================================
+    # DEVICE COMPATIBILITY
+    # ============================================
+    body.append(Paragraph("LineageOS Device Compatibility", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Echo Show Devices Supported", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    data = [
+        ['Device', 'Codename', 'SoC', 'XDA Thread'],
+        ['Echo Show 5 (1st Gen 2019)', 'checkers', 'MT8163', 'xdaforums.com/t/rom-unofficial-11-checkers...'],
+        ['Echo Show 5 (2nd Gen 2021)', 'cronos', 'MT8163', 'xdaforums.com/t/rom-unofficial-11-cronos...'],
+        ['Echo Show 8 (1st Gen 2019)', 'crown', 'MT8163', 'xdaforums.com/t/rom-unofficial-11-crown...'],
+    ]
+    
+    table = Table(data, colWidths=[2.2*inch, 1.2*inch, 1.2*inch, 2.4*inch])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#30363d')),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#c9d1d9')),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 9),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
+        ('TOPPADDING', (0, 0), (-1, 0), 8),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor('#0d1117')),
+        ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor('#c9d1d9')),
+        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#30363d')),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+    ]))
+    body.append(table)
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("All devices use MediaTek MT8163 SoC", normal_style))
+    body.append(Paragraph("LineageOS 18.1 (Android 11) - community builds by @R0rt1z2", normal_style))
+    
+    body.append(PageBreak())
+    
     # Echo 8 mic issue
     body.append(Paragraph("Issue #4: The Echo 8 Mic That Quit", heading_style))
     body.append(Spacer(1, 0.3*inch))
@@ -481,32 +520,24 @@ def create_pdf():
     # PART 7: WWS PROJECT
     # ============================================
     body.append(Paragraph("Project WWS: I Vibe-Coded an Entire System", heading_style))
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     
-    body.append(Paragraph("Winmutt Work Spaces", subheading_style))
-    body.append(Paragraph("github.com/winmutt/wws", normal_style))
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Winmutt Work Spaces — github.com/winmutt/wws", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
     
     body.append(Paragraph(
         '<b>May 12, 2026</b><br/>"Definitely no Athena and its taken months '
         'to get there but this is something I entirely vibe coded."', quote_style
     ))
+    body.append(Spacer(1, 0.2*inch))
     
+    body.append(Paragraph("Remote workspace provisioning with KVM/Podman isolation", normal_style))
+    body.append(Paragraph("code-server (VSCode in browser) + GitHub OAuth + RBAC", normal_style))
+    body.append(Paragraph("First commit: Feb 22, 2026 → Production: May 12, 2026", normal_style))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("What is WWS?", subheading_style))
-    body.append(Paragraph("• Remote workspace provisioning", normal_style))
-    body.append(Paragraph("• KVM/Podman isolated environments", normal_style))
-    body.append(Paragraph("• code-server (VSCode in browser)", normal_style))
-    body.append(Paragraph("• GitHub OAuth + RBAC", normal_style))
-    body.append(Paragraph("• First commit: Feb 22, 2026", normal_style))
-    
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
-    
     # WWS Dashboard screenshot
-    body.append(Paragraph("WWS Dashboard", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/dashboard.png', 7*inch, 4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/dashboard.png', 7*inch, 3.5*inch)
     if img:
         body.append(img)
     
