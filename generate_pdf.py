@@ -493,85 +493,8 @@ def create_pdf():
     
     body.append(PageBreak())
     
-    # NUMA Architecture Comparison
-    body.append(Paragraph("Traditional NUMA vs. Strix Halo APU", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Traditional NUMA Architecture:", subheading_style))
-    body.append(Paragraph(
-        '<font face="Courier">┌─────────────────────────┐  ┌─────────────────────────┐'
-        '<br/>│    NUMA Node 0        │  │    NUMA Node 1        │'
-        '<br/>│  ┌───────────────┐    │  │  ┌───────────────┐    │'
-        '<br/>│  │ 4-8 Cores     │    │  │  │ 4-8 Cores     │    │'
-        '<br/>│  │ 32MB L3 Cache │    │  │  │ 32MB L3 Cache │    │'
-        '<br/>│  └───────┬───────┘    │  │  └───────┬───────┘    │'
-        '<br/>│          │            │  │          │            │'
-        '<br/>│  ┌───────▼───────┐    │  │  ┌───────▼───────┐    │'
-        '<br/>│  │ Memory Ctrl   │    │  │  │ Memory Ctrl   │    │'
-        '<br/>│  │ (Local RAM)   │    │  │  │ (Local RAM)   │'
-        '<br/>│  └───────────────┘    │  │  └───────────────┘    │'
-        '<br/>└──────────┬────────────┘  └──────────┬────────────┘'
-        '<br/>           │                         │'
-        '<br/>           └───────────┬─────────────┘'
-        '<br/>                       │'
-        '<br/>              (High-latency interconnect)'
-        '<br/></font>',
-        normal_style
-    ))
-    body.append(Paragraph(
-        "Each node has dedicated cores, L3 cache, and memory. Process pinned to Node 0 "
-        "stays in Node 0's cache/memory domain.",
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Strix Halo APU Architecture:", subheading_style))
-    body.append(Paragraph(
-        '<font face="Courier">┌─────────────────────────────────────────────────┐'
-        '<br/>│              Single NUMA Node                     │'
-        '<br/>│                                                 │'
-        '<br/>│  ┌─────────────────────┐  ┌─────────────────────┐'
-        '<br/>│  │    CCD 0            │  │    CCD 1            │'
-        '<br/>│  │  ┌──────────────┐    │  │  ┌──────────────┐    │'
-        '<br/>│  │  │ 8 Cores      │    │  │  │ 8 Cores      │    │'
-        '<br/>│  │  │ 32MB L3 Cache│    │  │  │ 32MB L3 Cache│    │'
-        '<br/>│  │  └──────┬───────┘    │  │  └──────┬───────┘    │'
-        '<br/>│  └─────────┼────────────┘  └─────────┼────────────┘'
-        '<br/>│            │                         │'
-        '<br/>│            └───────────┬─────────────┘'
-        '<br/>│                        │'
-        '<br/>│  ┌─────────────────────▼───────────────┐'
-        '<br/>│  │    Unified Memory (128GB LPDDR5X)   │'
-        '<br/>│  │         (Shared by all cores)       │'
-        '<br/>│  └─────────────────────────────────────┘'
-        '<br/>└─────────────────────────────────────────────────┘'
-        '<br/></font>',
-        normal_style
-    ))
-    body.append(Paragraph(
-        "Single NUMA node, but 2 CCDs with separate L3 caches. Threads bounce "
-        "across CCDs → cross-CCD traffic → performance degradation.",
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("The Problem:", subheading_style))
-    body.append(Paragraph(
-        "• Traditional NUMA tools (numactl, NUMATopologyFilter) detect only 1 node"
-        '<br/>• Cannot see CCD boundaries automatically'
-        '<br/>• Manual core pinning required to keep workloads on same CCD'
-        '<br/>• Running multiple LLMs: pin each to separate CCD to avoid cache thrashing'
-        '<br/>'
-        '<b>Result:</b> Better L3 cache locality = faster inference, less latency',
-        normal_style
-    ))
-    
-    body.append(PageBreak())
-    
-    # Issue #1070 - Core affinity
-    body.append(Paragraph("Issue #1070: Core Affinity When Running Multiple Models", heading_style))
+    # Issue #1070 - NUMA Tools Don't See Dual CCD
+    body.append(Paragraph("Feat #1070: NUMA Tools Don't See Dual CCD", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("[enhancement] Core affinity when running multiple models.", subheading_style))
@@ -584,9 +507,42 @@ def create_pdf():
         normal_style
     ))
     
+    body.append(Spacer(1, 0.4*inch))
+    
+    # Architecture Comparison Diagrams
+    body.append(Paragraph("Traditional NUMA vs. Strix Halo APU", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    # Traditional NUMA diagram
+    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 7*inch, 3.5*inch)
+    if img1:
+        body.append(img1)
+    
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", subheading_style))
+    # Strix Halo diagram
+    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 7*inch, 3.5*inch)
+    if img2:
+        body.append(img2)
+    
+    body.append(Spacer(1, 0.4*inch))
+    
+    body.append(Paragraph("The Problem: NUMA Tools Can't See CCD Boundaries", subheading_style))
+    body.append(Paragraph(
+        "• Traditional NUMA tools (numactl, NUMATopologyFilter) detect only 1 node"
+        '<br/>• Cannot see CCD boundaries automatically'
+        '<br/>• Manual core pinning required to keep workloads on same CCD'
+        '<br/>• Running multiple LLMs: threads bounce across CCDs → L3 cache thrashing'
+        '<br/>'
+        '<b>Result:</b> Cross-CCD traffic → slower inference, higher latency',
+        normal_style
+    ))
+    
+    body.append(PageBreak())
+    
+    # Evidence section
+    body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", heading_style))
+    body.append(Spacer(1, 0.3*inch))
     body.append(Paragraph(
         '<font face="Courier" size="8">'
         'PS Output (last column = last CPU used):'
