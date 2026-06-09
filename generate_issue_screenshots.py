@@ -98,7 +98,7 @@ def create_lscpu_topology_screenshot():
     
     ax.plot([0.3, 10.5], [5.5, 5.5], color='#30363d', linewidth=1)
     
-    # CCD0 cores (with red box)
+    # CCD0 cores (with red box on L3 and AVG_MHZ)
     ccd0_cores = [
         (0, 0, 0, '0', 5187.0, 4937.8),
         (1, 0, 1, '0', 5187.0, 2000.0),
@@ -110,7 +110,7 @@ def create_lscpu_topology_screenshot():
         (7, 0, 7, '0', 5187.0, 4950.4),
     ]
     
-    # CCD1 cores (with red box)
+    # CCD1 cores (with red box on L3 and AVG_MHZ)
     ccd1_cores = [
         (8, 0, 8, '1', 5187.0, 2000.0),
         (9, 0, 9, '1', 5187.0, 2000.0),
@@ -137,6 +137,11 @@ def create_lscpu_topology_screenshot():
                        edgecolor='#f85149', facecolor='#f85149', alpha=0.2, linewidth=1.5)
         ax.add_patch(rect)
         
+        # Red box around AVG_MHZ showing load shifting
+        rect = Rectangle((x_pos[5] - 0.15, y_pos - 0.12), 0.3, 0.24, 
+                       edgecolor='#f85149', facecolor='#f85149', alpha=0.1, linewidth=1.5)
+        ax.add_patch(rect)
+        
         y_pos -= 0.28
     
     # Separator
@@ -158,10 +163,15 @@ def create_lscpu_topology_screenshot():
                        edgecolor='#f85149', facecolor='#f85149', alpha=0.2, linewidth=1.5)
         ax.add_patch(rect)
         
+        # Red box around AVG_MHZ showing load shifting
+        rect = Rectangle((x_pos[5] - 0.15, y_pos - 0.12), 0.3, 0.24, 
+                       edgecolor='#f85149', facecolor='#f85149', alpha=0.1, linewidth=1.5)
+        ax.add_patch(rect)
+        
         y_pos -= 0.28
     
     # Annotations
-    ax.text(5.5, 2.0, 'L3 Cache Column: Shows CCD boundary (0 or 1)', 
+    ax.text(5.5, 2.0, 'L3 Cache + AVG_MHZ: Shows load shifting across CCD boundaries', 
             fontsize=10, color='#f85149', ha='center', fontweight='bold')
     ax.text(5.5, 1.65, 'NUMA tools see: 1 node (0-31) | Reality: 2 CCDs with separate L3 caches', 
             fontsize=9, color='#8b949e', ha='center')

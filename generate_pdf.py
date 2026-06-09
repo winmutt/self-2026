@@ -215,9 +215,7 @@ def create_pdf():
     
     agenda_items = [
         "🛒 The impulse purchase that changed everything",
-        "🖥️ Hardware reality check (spoiler: it's complicated)",
-        "🐧 Linux + ROCm = Pain (but beautiful pain)",
-        "⚡ Performance: How fast can my AI think?",
+        "🖥️ The Hardware: AMD Strix Halo APU",
         "🏠 I cut the Alexa cord (and replaced it with OSS)",
         "💻 Vibe-coded an entire workspace system",
         "🧊 From digital to physical: Concrete signs?",
@@ -300,9 +298,18 @@ def create_pdf():
     body.append(Paragraph("• 16 cores (12 performance + 4 efficiency)", normal_style))
     body.append(Paragraph("• 2x Core Complex Dies (CCD) with 32MB L3 cache each", normal_style))
     body.append(Paragraph("• 768KB L1d + 512KB L1i + 16MB L2", normal_style))
-    body.append(Paragraph("• Integrated RDNA 3.5 GPU (40 CUs)", normal_style))
+    body.append(Paragraph("• Integrated RDNA 3.5 GPU (40 Compute Units)", normal_style))
     body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory (soldered)", normal_style))
     body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 teardown analysis (Chiphell, TechPowerUp)", normal_style))
+    
+    body.append(Spacer(1, 0.5*inch))
+    
+    body.append(Paragraph("AMD Radeon 680M GPU", subheading_style))
+    body.append(Paragraph("• RDNA 3.5 architecture, 40 Compute Units", normal_style))
+    body.append(Paragraph("• Peak performance: ~4.6 TFLOPS", normal_style))
+    body.append(Paragraph("• Shared memory with CPU (128GB unified)", normal_style))
+    body.append(Paragraph("• Supports ROCm for AI/ML workloads", normal_style))
+    body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 specifications", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
@@ -494,7 +501,7 @@ def create_pdf():
     body.append(PageBreak())
     
     # Issue #1070 - Core affinity
-    body.append(Paragraph("[enhancement] Core affinity when running multiple models.", heading_style))
+    body.append(Paragraph("Feat #1070: [enhancement] Core affinity when running multiple models.", heading_style))
     body.append(Spacer(1, 0.3*inch))
     body.append(Spacer(1, 0.2*inch))
     
@@ -533,52 +540,6 @@ def create_pdf():
         '<br/>• Running multiple LLMs: threads bounce across CCDs → L3 cache thrashing'
         '<br/>'
         '<b>Result:</b> Cross-CCD traffic → slower inference, higher latency',
-        normal_style
-    ))
-    
-    body.append(PageBreak())
-    
-    # Evidence: ps output with red boxes
-    body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7*inch, 4*inch)
-    if img_ps:
-        body.append(img_ps)
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    # Evidence: lscpu topology with red boxes
-    body.append(Paragraph("Hardware Topology: CCD Boundaries (lscpu)", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7*inch, 4*inch)
-    if img_lscpu:
-        body.append(img_lscpu)
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("The Problem: NUMA Tools Can't See CCD Boundaries", subheading_style))
-    body.append(Paragraph(
-        "• Traditional NUMA tools (numactl, NUMATopologyFilter) detect only 1 node"
-        '<br/>• Cannot see CCD boundaries automatically'
-        '<br/>• Manual core pinning required to keep workloads on same CCD'
-        '<br/>• Running multiple LLMs: threads bounce across CCDs → L3 cache thrashing'
-        '<br/>'
-        '<b>Result:</b> Cross-CCD traffic → slower inference, higher latency',
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Proposed Solution", subheading_style))
-    body.append(Paragraph(
-        'Pin llama-server instances to specific CCDs:'
-        '<br/>• Model 1 → CCD0 (cores 0-7, 16-23)'
-        '<br/>• Model 2 → CCD1 (cores 8-15, 24-31)'
-        '<br/>'
-        '<b>Result:</b> Each model stays in its own L3 cache domain → no cross-CCD traffic'
-        '<br/>',
         normal_style
     ))
     
@@ -732,12 +693,12 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # ROCm AND LEMONADE SERVER
+    # THE STACK: ROCm + LEMONADE
     # ============================================
-    body.append(Paragraph("ROCm: AMD's Open Compute Platform", heading_style))
+    body.append(Paragraph("The Stack: ROCm + Lemonade", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("What is ROCm?", subheading_style))
+    body.append(Paragraph("ROCm: AMD's Open Compute Platform", subheading_style))
     body.append(Paragraph(
         "ROCm (Radeon Open Compute Platform) is AMD's open source GPU computing "
         "ecosystem - their answer to NVIDIA's CUDA. Maintained by AMD engineers "
@@ -747,39 +708,7 @@ def create_pdf():
     
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("The ROCm Timeline:", subheading_style))
-    body.append(Paragraph("• November 2025: ROCm 6.3 released with Strix Halo support", normal_style))
-    body.append(Paragraph("• Nightly builds: Continuous integration, bleeding edge", normal_style))
-    body.append(Paragraph("• Issue #5926: Memory management bugs in ROCm 6.3", normal_style))
-    body.append(Paragraph("  github.com/ROCm/ROCm/issues/5926", normal_style))
-    body.append(Paragraph("• Status: Open (part of ongoing Strix Halo journey)", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("ROCm Nightly Builds", subheading_style))
-    body.append(Paragraph(
-        "Nightly builds = daily automated compilations from ROCm's main branch. "
-        "Get latest features immediately, but expect bugs. Trade-off: "
-        "2x performance gains vs occasional crashes.",
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("The Pain (and Gain)", subheading_style))
-    body.append(Paragraph("• Fresh install ('declare bankruptcy'): reformat → fresh kernel → fresh ROCm", normal_style))
-    body.append(Paragraph("• Result: GPU crashes fixed, 2x faster performance", normal_style))
-    body.append(Paragraph("• Lesson: ROCm is stable enough, but bleeding edge requires patience", normal_style))
-    
-    body.append(PageBreak())
-    
-    # ============================================
-    # LEMONADE SERVER
-    # ============================================
-    body.append(Paragraph("Lemonade Server: AMD's llama.cpp + ROCm", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("What is Lemonade?", subheading_style))
+    body.append(Paragraph("Lemonade Server: AMD's llama.cpp + ROCm", subheading_style))
     body.append(Paragraph(
         "Lemonade = llama.cpp with AMD ROCm backend optimizations. "
         "Not just a wrapper - AMD-engineered builds with GPU acceleration. "
@@ -796,6 +725,19 @@ def create_pdf():
     
     body.append(Spacer(1, 0.3*inch))
     
+    body.append(Paragraph("NPU Support: FastFlowLM + Lemonade", subheading_style))
+    body.append(Paragraph(
+        "FastFlowLM now runs LLMs on AMD XDNA 2 NPU with Linux support. "
+        "Lemonade ties everything together for a streamlined experience.",
+        normal_style
+    ))
+    body.append(Paragraph("• Over 10x more power-efficient than GPU", normal_style))
+    body.append(Paragraph("• Runs fully on NPU - no GPU or CPU load", normal_style))
+    body.append(Paragraph("• Ultra-lightweight runtime (17 MB)", normal_style))
+    body.append(Paragraph("• Context up to 256k tokens", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
     body.append(Paragraph("My Contributions:", subheading_style))
     body.append(Paragraph("• Feat #1070: Custom NUMA mapping (traditional tools fail)", normal_style))
     body.append(Paragraph("• NPU backend support for FastFlowLM integration", normal_style))
@@ -805,76 +747,9 @@ def create_pdf():
     
     body.append(Paragraph(
         '<b>Sources</b><br/>github.com/winmutt/lemonade | github.com/RadeonOpenCompute/ROCm | '
-        'github.com/ROCm/ROCm/issues/5926',
+        'github.com/ROCm/ROCm/issues/5926 | github.com/FastFlowLM/FastFlowLM',
         humor_style
     ))
-    
-    body.append(PageBreak())
-    
-    # ============================================
-    # NPU SUPPORT
-    # ============================================
-    body.append(Paragraph("NPU Support: FastFlowLM + Lemonade", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("March 11, 2026: Linux NPU Support Added", subheading_style))
-    body.append(Paragraph(
-        "FastFlowLM now runs LLMs on AMD XDNA 2 NPU with Linux support. "
-        "Lemonade ties everything together for a streamlined experience.",
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Power Efficiency", subheading_style))
-    body.append(Paragraph("• Over 10x more power-efficient than GPU", normal_style))
-    body.append(Paragraph("• Runs fully on NPU - no GPU or CPU load", normal_style))
-    body.append(Paragraph("• Ultra-lightweight runtime (17 MB)", normal_style))
-    body.append(Paragraph("• Installs within 20 seconds", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Supported Processors", subheading_style))
-    body.append(Paragraph("• Strix Halo (Ryzen AI Max+ 395)", normal_style))
-    body.append(Paragraph("• Strix Point, Kraken Point (300-series)", normal_style))
-    body.append(Paragraph("• Gorgon Point (400-series)", normal_style))
-    body.append(Paragraph("• Z2 Extreme (handheld devices)", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Key Features", subheading_style))
-    body.append(Paragraph("• Context up to 256k tokens", normal_style))
-    body.append(Paragraph("• Vision, Audio, Embedding, MoE support", normal_style))
-    body.append(Paragraph("• OpenAI-compatible API", normal_style))
-    body.append(Paragraph("• Just like Ollama - but NPU-optimized", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph(
-        '<b>Sources</b><br/>github.com/FastFlowLM/FastFlowLM | lemonade-server.ai/flm_npu_linux.html',
-        humor_style
-    ))
-    
-    body.append(PageBreak())
-    
-    # ============================================
-    # FUTURE WORK
-    # ============================================
-    body.append(Paragraph("What's Next (Probably)", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Immediate", subheading_style))
-    body.append(Paragraph("• NPU support (still waiting)", normal_style))
-    body.append(Paragraph("• Memory addressing (32GB, come back)", normal_style))
-    body.append(Paragraph("• llama.cpp PRs (because why not)", normal_style))
-    
-    body.append(Spacer(1, 0.5*inch))
-    
-    body.append(Paragraph("Long-term", subheading_style))
-    body.append(Paragraph("• Multi-GPU/NPU (more toys)", normal_style))
-    body.append(Paragraph("• Ollama observability (I need logs)", normal_style))
-    body.append(Paragraph("• Custom wake word (goodbye Alexa)", normal_style))
-    body.append(Paragraph("• WWS Phase 3 (cloud? maybe)", normal_style))
     
     body.append(PageBreak())
     
@@ -945,8 +820,14 @@ def create_pdf():
     body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("Opencode Web UI", subheading_style))
-    body.append(Paragraph("Most usable, portable, and stable. Best agentic coding experience.", normal_style))
+    body.append(Paragraph("Opencode", subheading_style))
+    body.append(Paragraph(
+        "Most usable, portable, and stable. Best agentic coding experience. "
+        "Runs as a web server (http://localhost:3000) allowing remote access "
+        "with a localized agent running for autonomous development. "
+        "github.com/anomalyco/opencode",
+        normal_style
+    ))
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("Cline", subheading_style))
