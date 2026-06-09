@@ -2,71 +2,137 @@
 ## Slide Deck Index and References
 
 **Talk Duration**: 45 minutes  
-**Date**: May 2026  
+**Date**: June 2026  
 **Author**: winmutt
 
 ---
 
 ## Slide Deck Files
 
-### Main Presentation
-- **File**: `AMD_STRIX_TALK_SLIDES.md`
-- **Format**: Markdown slides (can be converted to reveal.js, PowerPoint, etc.)
-- **Slides**: ~60 slides across 8 parts
+### Main Presentation (PDF)
+- **File**: `assets/AMD_Strix_Halo_Talk.pdf`
+- **Format**: PDF (dark theme, black background)
+- **Slides**: 22 slides across 3 sections
 
-### Context Document
-- **File**: `AMD_STRIX_TALK_README.md`
-- **Purpose**: Background information for AI assistants working on this project
+### Generation Scripts
+- `generate_pdf.py` - PDF generation script
+- `generate_heatmap.py` - GitHub heatmap generation
+- `generate_numa_diagrams.py` - NUMA/CCD diagram generation
+- `generate_issue_screenshots.py` - Issue #1070 annotated screenshots
+- `fetch_github_graphql.py` - GitHub GraphQL API data fetcher
 
 ---
 
 ## Slide Structure
 
-### Part 1: The Decision (5 min)
-- Why AMD Strix Halo?
-- Hardware specifications
-- The NVIDIA to AMD transition
+### Section 1: The Hardware Stack (Slides 1-9)
 
-### Part 2: Hardware Reality (7 min)
-- Strix Halo architecture
-- Memory challenges (128GB → 96GB)
-- VRAM vs GTT issues
+**Slide 1: Title**
+- "Six Months with AMD Strix Halo: Local AI, Open Source, and Hardware Reality"
+- winmutt | June 2026
 
-### Part 3: Software Stack Evolution (8 min)
-- Lemonade vs Ollama comparison
-- ROCm + llama.cpp backend
-- The "Resurgens" reinstall moment
-- AMD GPU library updates
+**Slide 2: Agenda**
+- Section 1: The Hardware Stack (4 topics)
+- Section 2: Projects & Applications (4 topics)
+- Section 3: Open Source Journey (4 topics)
 
-### Part 4: Performance Deep Dive (7 min)
-- TPS benchmarks at various context sizes
-- Memory placement problems
-- Prompt caching breakthrough
-- Core affinity optimization
+**Slide 3: Power Reality**
+- Corsair 300 (~300W) vs RTX 5090 (~800-1000W) vs Commercial Server (~1500-3000W)
+- 3x more efficient, single APU vs discrete CPU+GPU
 
-### Part 5: Project WWS (6 min)
-- Workspace provisioning system
-- Autonomous development setup
-- Tech stack and architecture
-- "Vibe coded" achievement
+**Slide 4: The Hardware - APU Die**
+- 16 cores (12 perf + 4 efficiency)
+- 2x CCD with 32MB L3 cache each
+- 128GB LPDDR5X-8000 soldered
+- APU die diagram
 
-### Part 6: Home Assistant (5 min)
-- Echo device repurposing
-- Wake word implementation
-- HA OS vs Docker container discovery
-- Timeline from Dec 6 to Jan 29
+**Slide 5: The Hardware - GPU + NPU**
+- AMD Radeon 680M GPU: RDNA 3.5, 40 CUs, ~4.6 TFLOPS
+- AMD XDNA 2 NPU: Neural Processing Unit, FastFlowLM support
+- Performance stats: Coming soon (logs being processed)
 
-### Part 7: Concrete Signs (3 min)
-- From AI design to physical objects
-- OpenSCAD + 3D printing workflow
-- Etsy potential
-- "Concrete not abstract" motivation
+**Slide 6: The Stack - ROCm + Lemonade**
+- ROCm: AMD's open compute platform
+- Lemonade: llama.cpp + ROCm builds
+- NPU Support: FastFlowLM (10x more efficient, 17MB runtime)
+- Contributions: Issue #1070, NPU backend
 
-### Part 8: Lessons Learned (4 min)
-- What worked / What didn't
-- Performance reality vs marketing
-- Future work and NPU potential
-- Terminator warning (AI safety)
+**Slide 7: Issue #1070 - Title**
+- "Feat #1070: [enhancement] Core affinity when running multiple models."
+- Filed: February 8, 2026
+- Repository: github.com/lemonade-sdk/lemonade/issues/1070
+
+**Slide 8: Issue #1070 - Diagrams**
+- Traditional NUMA vs Strix Halo diagrams
+- Problem: NUMA tools can't see CCD boundaries
+
+**Slide 9: Issue #1070 - Evidence**
+- ps output with L3 + AVG_MHZ highlighting
+- lscpu topology showing load shifting across CCDs
+
+### Section 2: Projects & Applications (Slides 10-16)
+
+**Slide 10: Home Assistant - Process**
+- LineageOS on Echo: amonet → TWRP → LineageOS 18.1 → ViewAssist
+- Philosophy: "Basically anything with a USB port..."
+
+**Slide 11: Home Assistant - Timeline**
+- Dec 6 → Feb 2026 timeline
+- Issue #4: Echo 8 mic dies after 24h
+
+**Slide 12: Home Assistant - Screenshot**
+- HA on Echo Show (full width)
+
+**Slide 13: Device Compatibility**
+- Echo Show 5 (1st/2nd gen), Echo Show 8
+- MT8163 SoC, LineageOS 18.1 by @R0rt1z2
+
+**Slide 14: 3D Modeling**
+- Concrete sign mold design
+- Blender + OpenSCAD workflow
+- AI → STL → 3D print → silicone mold → concrete
+
+**Slide 15: AI Coding Editors**
+- Opencode: Web server (localhost:3000), remote access, autonomous dev
+- Cline: Good TUI but regressions
+- Also use: Koo Roo, Aider
+
+**Slide 16: Project WWS**
+- Winmutt Work Spaces (github.com/winmutt/wws)
+- Quote: "Definitely no Athena and its taken months..."
+- KVM/Podman isolation, code-server, GitHub OAuth + RBAC
+
+### Section 3: Open Source Journey (Slides 17-22)
+
+**Slide 17: Lessons Learned**
+- What Worked: Cline + Qwen3-Coder, Prompt Caching, AMD GPU libs 2x faster
+- What Didn't: Memory (32GB reserved), Ollama crashes, NPU (still waiting)
+
+**Slide 18: Key Insights**
+- 8 takeaways: Hardware hype ≠ reality, bleeding edge = bleeding fingers,
+  context is king, AI coding > IDEs, AI → physical objects,
+  Echo → HA = OSS win, autonomous dev possible, buying hardware got me back in OSS
+
+**Slide 19: 26 Years of Open Source**
+- From LKML 2000 to Strix Halo
+- LKML 2000 email (HighPoint IDE RAID, kernel 2.2.14)
+- GitHub heatmap 2018-2026
+- 2018-2024: Ghost town, 2025: Strix Halo arrives
+- AI + local hardware reinvigorated my love for open source
+
+**Slide 20: OSS Contributions**
+- Catalyst Effect: 3.5x increase
+- 2026 contribution calendar
+- Project breakdown: WWS 38%, Lemonade 15%, ROCm 8%, HA 12%, Cline 8%, Concrete 5%
+
+**Slide 21: References**
+- Power sources (Reddit, NVIDIA, Tom's Hardware)
+- Software (Lemonade, Ollama, ROCm, WWS, HA)
+- Communities (r/LocalLLaMA, XDA Forums)
+
+**Slide 22: Q&A**
+- 5 discussion questions
+- github.com/winmutt
 
 ---
 
@@ -77,179 +143,51 @@
 **Local Path**: `/opt/opencode/src/winmutt/wws/`
 
 **Key Files**:
-- `README.md` - Full project documentation (333 lines)
-- `TODO.md` - Detailed task breakdown (300 lines, 274 tasks)
+- `README.md` - Full project documentation
+- `TODO.md` - Detailed task breakdown (274 tasks)
 - `docs/screenshots/dashboard.png` - Dashboard screenshot
-- `api/` - Go backend (99 Go files)
-- `web/` - React frontend (14 TSX files)
 
 **GitHub Activity**:
 - Phase 1: Core Foundation ✅ Complete
 - Phase 2: Team Features ✅ Complete (27 PRs tracked)
 - Phase 3: Advanced Features 🔄 In Progress
 
-**Key PRs**:
-- PR #3 - Project initialization
-- PR #214-223 - Authentication & Organization
-- PR #224-232 - Workspace Provisioning
-- PR #248 - Protocol Buffers Migration
-- PR #250-259 - Security Features
-- PR #260-271 - Team Collaboration
-- PR #272-274 - Documentation
-
 ### 2. Concrete Sign Molds
 **Local Path**: `/opt/opencode/src/concrete/sign-molds/`
 
 **Key Files**:
 - `example_sign_mold.scad` - Mold for "example" sign
-- `example_sign_positive.scad` - Positive model for mold creation
 - `use_case_sign_mold.scad` - Mold for "use case" sign
-- `models.scad` - Shared OpenSCAD definitions
 - `generate.py` - Automated STL export script
-- `example_sign_mold_preview.png` - Preview image (420.7KB)
-- `example_sign_positive_preview.png` - Preview image (523.9KB)
-
-**Related Chat**:
-```
-Dec 1: "Wow that's cool. I am going to use it to create a 
-3d printed cast for a silicone mold so I can some desktop 
-signs out of concrete. One will read 'example' and the 
-other 'use case'. It's for my PE, she's always belaboring 
-the need to get concrete and not speak in abstract."
-```
 
 ### 3. Home Assistant on Echo
-**Screenshot**: `/tmp/ha.jpeg` (65.6KB, 600x450)
+**Screenshot**: `/tmp/ha.jpeg`
 
 **External References**:
 - XDA Forums: https://xdaforums.com/f/amazon-echo.6148/
-- Hey Jarvis Wake Words: https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en
+- Hey Jarvis Wake Words: https://github.com/fwartner/home-assistant-wakewords-collection
 
 **Timeline**:
 - Dec 6: Started exploring Echo hacking
 - Jan 19: HA setup on Echo Show Gen 2
-- Jan 21: Working except wake word
-- Jan 25: Wake word sorted with Hey Jarvis
 - Jan 29: End-to-end complete
 
 ### 4. AI/LLM Stack
-**Backends Tested**:
-- Lemonade (llama.cpp + ROCm) - Nov 28 to Dec 7
-- Ollama - Dec 7 onwards (with issues)
+**Backends**: Lemonade (llama.cpp + ROCm), Ollama
 
-**Models Used**:
-- Qwen3-Coder - Primary coding model
-- Qwen 3.5 9B - Sub-agents
-
-**Performance Metrics**:
-- <100k tokens: ~40 TPS
-- 100k-200k: ~14 TPS
-- >200k: ~8 TPS
-- Dec 14 benchmark: 284.73 tokens/sec prompt, 46.27 tokens/sec generation
+**Models**: Qwen3-Coder, Qwen 3.5 9B (sub-agents)
 
 **GitHub Forks**:
 - https://github.com/winmutt/lemonade
 - https://github.com/winmutt/cline
-- https://github.com/winmutt/vscode
 
----
+### 5. Opencode
+**URL**: https://github.com/anomalyco/opencode
 
-## Chat Snippet References
-
-All chat snippets from conversations with friend, Nov 2025 - May 2026:
-
-### November 2025
-```
-Nov 22: "BTW I have a corsair 300 AMD 395 max+ enroute. 
-Sold my 4060 rig today."
-
-Nov 28: "Using lemonade instead of ollama. There is a patch 
-for ollama that will make it work with the APU, but I've 
-been working to get the NPUS working as well."
-
-Nov 29: "Why not use the mcp. I guess its repeatable with 
-python. That's something I've been focused on lately."
-
-Nov 29: "I've really been liking Cline lately. Cline+qwen3-coder 
-is making some really good results."
-
-Nov 29: "I've got a 400k context window with the new Ai 
-workstation. Still need to work on tuning it."
-
-Nov 29: "Its 128g total but I've only been able to get it 
-to address 96."
-
-Nov 29: "No but it lpddr5x-8000 and soldered to the apu 
-board. Its basically the fastest nom vram out there."
-```
-
-### December 2025
-```
-Dec 1: "Wow that's cool. I am going to use it to create a 
-3d printed cast for a silicone mold..."
-
-Dec 5: "Lol I've been talking about terminator all week long..."
-
-Dec 6: "Basically anything with a USB port. If there is a 
-port, there is a way."
-
-Dec 7: "Went back to using ollama. lemonade-server, for 
-whatever reason, was not behaving properly"
-
-Dec 7: https://www.reddit.com/r/LocalLLaMA/comments/1pdh0sm/8_local_llms_on_a_single_strix_halo_debating/
-
-Dec 9: "The TPS goes down pretty sharply >64k context."
-
-Dec 14: "I think thats the only backend I can run. Upgraded 
-OS and ollama last night and sad things happened."
-```
-
-### January 2026
-```
-Jan 19: "Got linkages and home assistant setup on a echo 
-show gen 2. Still haven't figure out voice assistant yet"
-
-Jan 21: "Fully working everything but wake word. I dont 
-know why but HA companion app doesn't support it"
-
-Jan 25: "I got the wake word sorted and now have a fully 
-functioning * echo"
-
-Jan 29: "I got the new amd GPU libraries working on my 
-strix halo and stable and its 2x faster than before."
-```
-
-### February 2026
-```
-Feb 3: "6 days out of return policy i am having strix remorse. 
-Its gotten better but there is a linear performance regression 
-in token processing."
-
-Feb 8: "Ive been using it with various degrees of success 
-with open code. Tools, especially editing, failed a few times."
-
-Feb 8: "It's putting together a pr for llamacpp to manage 
-core affinity on the strix. Its one apu but 2 core dies and 
-2x64mb l3 caches."
-
-Feb 8: "Getting 24tps now on a single thread."
-```
-
-### March 2026
-```
-Mar 11: "I think I got into full autonomous mode this morning. 
-The newest llamacpp fixed prompts caching finally and things 
-are really humming now."
-
-Mar 11: "I have sub agents running on qwen 3.5 9b. And NPU 
-support is working in dev now."
-```
-
-### May 2026
-```
-May 12: "Definitely no Athena and its taken months to get 
-there but this is something I entirely vibe coded."
-```
+**Features**:
+- Web server mode (http://localhost:3000)
+- Remote access with localized agent
+- Autonomous development support
 
 ---
 
@@ -257,26 +195,21 @@ there but this is something I entirely vibe coded."
 
 ### December 14, 2025 Benchmark
 ```
-prompt eval time =    2823.77 ms /   804 tokens (    3.51 ms per token,   284.73 tokens per second)
-eval time =    5964.43 ms /   276 tokens (   21.61 ms per token,    46.27 tokens per second)
-total time =    8788.20 ms /  1080 tokens
+prompt eval time =    2823.77 ms /   804 tokens (284.73 tokens/sec)
+eval time =    5964.43 ms /   276 tokens (46.27 tokens/sec)
 ```
 
 ### Performance Timeline
 | Date | TPS | Context | Notes |
 |------|-----|---------|-------|
 | Nov 29 | 45 | 400k | Initial setup |
-| Nov 29 | 14 | 200k | After tuning |
-| Dec 9 | N/A | >64k | Sharp decline |
-| Dec 14 | 46 | 804 | Prompt eval |
 | Feb 8 | 24 | Single | Single thread |
-| Mar 11 | ? | ? | "Really humming" |
+| Mar 11 | ? | ? | "Really humming" (prompt caching) |
 
 ### Memory Usage
 - Total: 128GB LPDDR5X-8000
 - Addressable: 96GB (initially)
-- Qwen3-Coder + 400k window: ~59GB
-- 2 cached prompts: ~8GB
+- 32GB reserved for Lemonade/llama.cpp/opencode
 
 ---
 
@@ -286,110 +219,45 @@ total time =    8788.20 ms /  1080 tokens
 - **Total Repos**: 8
 - **Followers**: 4
 - **Following**: 4
-- **Stars Given**: 5
 
-### Repositories
-1. **slow_log_parse** (Go) - 2 stars, 1 fork
-   - Slow MySQL query and session analysis in ELK
-
-2. **self_2019_slow_session** (Shell) - 2 stars
-   - Slow MySQL query and session analysis in ELK
-
-3. **twirp** (PHP) - Fork from twirphp/twirp
-   - PHP port of Twitch's Twirp RPC framework
-
-4. **vscode** (TypeScript) - Fork from microsoft/vscode
-   - Visual Studio Code
-
-5. **cline** (TypeScript) - Fork from cline/cline
-   - Autonomous coding agent in IDE
-
-6. **lemonade** (C++) - Fork from lemonade-sdk/lemonade
-   - Local LLM serving with GPU/NPU support
-
-7. **wws** (Go/React) - Main project
-   - Workspace provisioning system
-
-8. **concrete** - Local project
-   - 3D printable molds for concrete signs
+### Key Repositories
+1. **wws** (Go/React) - Workspace provisioning system
+2. **lemonade** (C++) - Fork with NPU backend work
+3. **cline** (TypeScript) - Fork with TUI fixes
+4. **vscode** (TypeScript) - Fork
+5. **concrete** - 3D printable molds
 
 ---
 
 ## Asset Inventory
 
 ### Images
-1. `/tmp/ha.jpeg` - Home Assistant on Echo Show (65.6KB, 600x450)
-2. `/opt/opencode/src/concrete/sign-molds/example_sign_mold_preview.png` (420.7KB)
-3. `/opt/opencode/src/concrete/sign-molds/example_sign_positive_preview.png` (523.9KB)
-4. `/opt/opencode/src/winmutt/wws/docs/screenshots/dashboard.png` (302.8KB)
+1. `assets/apu_die_diagram.png` - APU die architecture
+2. `assets/numa_traditional.png` - Traditional NUMA diagram
+3. `assets/strix_halo_numa.png` - Strix Halo NUMA diagram
+4. `assets/issue_1070_ps_output.png` - Annotated ps output
+5. `assets/issue_1070_lscpu.png` - Annotated lscpu topology
+6. `assets/concrete_sign.png` - Concrete sign mold design
+7. `assets/ha.jpeg` - Home Assistant on Echo Show
+8. `assets/dashboard.png` - WWS Dashboard
+9. `assets/editor_collage.png` - AI coding editors collage
+10. `assets/contribution_calendar_2026.png` - 2026 GitHub activity
+11. `assets/project_breakdown.png` - Contribution pie chart
+12. `assets/github_heatmap_10year.png` - 2018-2026 GitHub heatmap
 
 ### Documents
-1. `/opt/opencode/src/self-2026/AMD_STRIX_TALK_README.md` - Context document
-2. `/opt/opencode/src/self-2026/AMD_STRIX_TALK_SLIDES.md` - Main slide deck
-3. `/opt/opencode/src/winmutt/wws/README.md` - WWS documentation
-4. `/opt/opencode/src/winmutt/wws/TODO.md` - Task breakdown
-5. `/opt/opencode/src/concrete/sign-molds/README.md` - Concrete sign documentation
-
-### Source Code
-1. `/opt/opencode/src/winmutt/wws/` - WWS project (172 files, 56 days)
-2. `/opt/opencode/src/concrete/sign-molds/` - Concrete sign molds (14 files)
-
----
-
-## Conversion Instructions
-
-### To Reveal.js (HTML Slides)
-```bash
-# Install reveal.js
-npm install reveal.js
-
-# Create index.html
-cat > index.html << 'EOF'
-<!doctype html>
-<html>
-<head>
-  <link rel="stylesheet" href="node_modules/reveal.js/css/reveal.css">
-  <link rel="stylesheet" href="node_modules/reveal.js/css/theme/black.css">
-</head>
-<body>
-  <div class="reveal">
-    <div class="slides">
-      <!-- Paste slides here -->
-    </div>
-  </div>
-  <script src="node_modules/reveal.js/js/reveal.js"></script>
-  <script>Reveal.initialize();</script>
-</body>
-</html>
-EOF
-
-# Serve
-npx serve .
-```
-
-### To PowerPoint
-1. Export markdown to HTML
-2. Import HTML into PowerPoint
-3. Or use pandoc:
-```bash
-pandoc AMD_STRIX_TALK_SLIDES.md -o AMD_STRIX_TALK.pptx
-```
-
-### To PDF
-```bash
-pandoc AMD_STRIX_TALK_SLIDES.md -o AMD_STRIX_TALK.pdf
-```
+1. `generate_pdf.py` - PDF generation script
+2. `HOME_ASSISTANT_SETUP.md` - HA setup guide
+3. `LINEAGEOS_INSTALLATION_GUIDE.md` - LineageOS installation
 
 ---
 
 ## Next Steps
 
-1. **Review slides** - Check accuracy of all claims and metrics
-2. **Add screenshots** - Insert actual images into slide deck
-3. **Practice timing** - Ensure 45-minute delivery (35 min talk + 10 min Q&A)
-4. **Prepare demo** - Show WWS dashboard or Home Assistant in action
-5. **Gather testimonials** - Get quotes from friend about Cline/Qwen3-Coder
-6. **Update references** - Verify all GitHub links and URLs
+1. **NPU Performance Stats** - Add logs when provided
+2. **OpenSCAD k-baffle Screenshot** - Add when provided
+3. **Practice Timing** - Ensure 45-minute delivery
+4. **Prepare Demo** - Show WWS dashboard or Home Assistant
 
 ---
 
@@ -397,7 +265,7 @@ pandoc AMD_STRIX_TALK_SLIDES.md -o AMD_STRIX_TALK.pdf
 
 **Author**: winmutt  
 **GitHub**: https://github.com/winmutt  
-**Date**: May 2026  
+**Date**: June 2026  
 
 **Special Thanks**:
 - AMD for Strix Halo APU
@@ -406,4 +274,3 @@ pandoc AMD_STRIX_TALK_SLIDES.md -o AMD_STRIX_TALK.pdf
 - Qwen team
 - Home Assistant community
 - FWartner (Hey Jarvis wake words)
-- Friend for chat conversations and feedback
