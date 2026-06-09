@@ -332,6 +332,15 @@ def create_pdf():
     body.append(Paragraph("• Supports ROCm for AI/ML workloads", normal_style))
     body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 specifications", normal_style))
     
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("AMD XDNA 2 NPU", subheading_style))
+    body.append(Paragraph("• Neural Processing Unit for AI workloads", normal_style))
+    body.append(Paragraph("• Integrated into Ryzen AI Max+ 395 APU", normal_style))
+    body.append(Paragraph("• Supports FastFlowLM for efficient inference", normal_style))
+    body.append(Paragraph("• Power-efficient alternative to GPU processing", normal_style))
+    body.append(Paragraph("• Performance stats: Coming soon (logs being processed)", normal_style))
+    
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
@@ -668,6 +677,68 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
+    # 26 YEARS OF OPEN SOURCE
+    # ============================================
+    body.append(Paragraph("26 Years of Open Source (2000-2026)", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("From LKML to Strix Halo: How Hardware Bought My Time", normal_style))
+    body.append(Spacer(1, 0.5*inch))
+    
+    # The Story
+    body.append(Paragraph("The Long Detour", subheading_style))
+    body.append(Paragraph(
+        'For 20+ years I built corporate SaaS products. Cloud disconnected me from the metal. '
+        'Linux became something I deployed to, not something I touched daily. '
+        'The kernel, the drivers, the hardware—left that world behind. '
+        'Then Strix Halo arrived and changed everything.',
+        normal_style
+    ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    # LKML 2000 email text
+    body.append(Paragraph("June 9, 2000: Asking on LKML", subheading_style))
+    body.append(Paragraph(
+        '<font face="Courier" size="8">'
+        'From: Rolf Martin-Hoster (winmutt@hotmail.com)'
+        '<br/>Date: Thu Jun 08 2000 - 19:24:59 EST'
+        '<br/>Subject: HighPoint IDE RAID (kernel 2.2.14)'
+        '<br/>'
+        '<br/>Does anyone know where I can find developer info about the driver for this'
+        '<br/>chipset?'
+        '<br/>'
+        '<br/>-Rolf'
+        '</font>',
+        normal_style
+    ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph(
+        'Back then: Hands-on with kernel 2.2.14, digging into IDE RAID drivers, '
+        'asking questions on linux-kernel mailing list.',
+        humor_style
+    ))
+    body.append(Spacer(1, 0.5*inch))
+    
+    # 10-year GitHub activity heatmap
+    body.append(Paragraph("The Return: GitHub Activity (2018-2026)", subheading_style))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 7*inch, 3.5*inch)
+    if img:
+        body.append(img)
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph(
+        '2018-2024: Ghost town. 2025: Strix Halo arrives. '
+        'November 2025: Back on the metal, every single day. '
+        'AI + local hardware reinvigorated my love for open source.',
+        normal_style
+    ))
+    body.append(Paragraph(
+        'Moral: Sometimes the best way back in is to buy new toys.',
+        humor_style
+    ))
+    body.append(PageBreak())
+    
+    # ============================================
     # OSS CONTRIBUTION GROWTH
     # ============================================
     body.append(Paragraph("How Buying Hardware Got Me Back in Open Source", heading_style))
@@ -714,67 +785,6 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # THE STACK: ROCm + LEMONADE
-    # ============================================
-    body.append(Paragraph("The Stack: ROCm + Lemonade", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("ROCm: AMD's Open Compute Platform", subheading_style))
-    body.append(Paragraph(
-        "ROCm (Radeon Open Compute Platform) is AMD's open source GPU computing "
-        "ecosystem - their answer to NVIDIA's CUDA. Maintained by AMD engineers "
-        "on GitHub (github.com/RadeonOpenCompute/ROCm).",
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Lemonade Server: AMD's llama.cpp + ROCm", subheading_style))
-    body.append(Paragraph(
-        "Lemonade = llama.cpp with AMD ROCm backend optimizations. "
-        "Not just a wrapper - AMD-engineered builds with GPU acceleration. "
-        "github.com/winmutt/lemonade | github.com/RadeonOpenCompute/ROCm",
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Lemonade vs Ollama", subheading_style))
-    body.append(Paragraph("• Ollama: Community llama.cpp wrapper (proprietary blend)", normal_style))
-    body.append(Paragraph("• Lemonade: AMD-maintained llama.cpp + ROCm builds", normal_style))
-    body.append(Paragraph("• Backend: AMD engineers maintain both Lemonade and ROCm", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("NPU Support: FastFlowLM + Lemonade", subheading_style))
-    body.append(Paragraph(
-        "FastFlowLM now runs LLMs on AMD XDNA 2 NPU with Linux support. "
-        "Lemonade ties everything together for a streamlined experience.",
-        normal_style
-    ))
-    body.append(Paragraph("• Over 10x more power-efficient than GPU", normal_style))
-    body.append(Paragraph("• Runs fully on NPU - no GPU or CPU load", normal_style))
-    body.append(Paragraph("• Ultra-lightweight runtime (17 MB)", normal_style))
-    body.append(Paragraph("• Context up to 256k tokens", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("My Contributions:", subheading_style))
-    body.append(Paragraph("• Feat #1070: Custom NUMA mapping (traditional tools fail)", normal_style))
-    body.append(Paragraph("• NPU backend support for FastFlowLM integration", normal_style))
-    body.append(Paragraph("• Core affinity optimization for multi-model setups", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph(
-        '<b>Sources</b><br/>github.com/winmutt/lemonade | github.com/RadeonOpenCompute/ROCm | '
-        'github.com/ROCm/ROCm/issues/5926 | github.com/FastFlowLM/FastFlowLM',
-        humor_style
-    ))
-    
-    body.append(PageBreak())
-    
-    # ============================================
     # AI CODING EDITORS
     # ============================================
     body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
@@ -801,67 +811,6 @@ def create_pdf():
     if img:
         body.append(img)
     
-    body.append(PageBreak())
-    
-    # ============================================
-    # 10-YEAR GITHUB GLOW-UP (Summary)
-    # ============================================
-    body.append(Paragraph("26 Years of Open Source (2000-2026)", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph("From LKML to Strix Halo: How Hardware Bought My Time", normal_style))
-    body.append(Spacer(1, 0.5*inch))
-    
-    # The Story
-    body.append(Paragraph("The Long Detour", subheading_style))
-    body.append(Paragraph(
-        'For 20+ years I built corporate SaaS products. Cloud disconnected me from the metal. '
-        'Linux became something I deployed to, not something I touched daily. '
-        'The kernel, the drivers, the hardware—left that world behind.',
-        normal_style
-    ))
-    body.append(Spacer(1, 0.3*inch))
-    
-    # LKML 2000 email text
-    body.append(Paragraph("June 9, 2000: Asking on LKML", subheading_style))
-    body.append(Paragraph(
-        '<font face="Courier" size="8">'
-        'From: Rolf Martin-Hoster (winmutt@hotmail.com)'
-        '<br/>Date: Thu Jun 08 2000 - 19:24:59 EST'
-        '<br/>Subject: HighPoint IDE RAID (kernel 2.2.14)'
-        '<br/>'
-        '<br/>Does anyone know where I can find developer info about the driver for this'
-        '<br/>chipset?'
-        '<br/>'
-        '<br/>-Rolf'
-        '</font>',
-        normal_style
-    ))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph(
-        'Back then: Hands-on with kernel 2.2.14, digging into IDE RAID drivers, '
-        'asking questions on linux-kernel mailing list.',
-        humor_style
-    ))
-    body.append(Spacer(1, 0.5*inch))
-    
-    # 10-year GitHub activity heatmap
-    body.append(Paragraph("The Return: GitHub Activity (2018-2026)", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 7*inch, 3.5*inch)
-    if img:
-        body.append(img)
-    
-    body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph(
-        '2018-2024: Ghost town. 2025: Strix Halo arrives. '
-        'November 2025: Back on the metal, every single day.',
-        normal_style
-    ))
-    body.append(Paragraph(
-        'Result: 3.5x increase in open source contributions. '
-        'Moral: Sometimes the best way back in is to buy new toys.',
-        humor_style
-    ))
     body.append(PageBreak())
     
     # ============================================
