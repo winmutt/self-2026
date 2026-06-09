@@ -344,48 +344,91 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
-    # NUMA/CPU pinning issue
-    body.append(Paragraph("Feat #1070: NUMA Tools Don't See Dual CCD", heading_style))
+    # ============================================
+    # ISSUE #1070: NUMA/CCD CORE AFFINITY
+    # ============================================
+    body.append(Paragraph("Feat #1070: [enhancement] Core affinity when running multiple models.", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph(
-        '<b>Feature Request</b><br/>Traditional NUMA tools detect only 1 node. '
-        "numactl core pinning doesn't work. Need custom core affinity for dual CCD.",
+        '<b>Filed</b><br/>February 8, 2026<br/>'
+        '<b>Repository</b><br/>github.com/lemonade-sdk/lemonade/issues/1070<br/>'
+        '<b>Status</b><br/>Open',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.4*inch))
+    
+    body.append(Paragraph("Hardware Reality", subheading_style))
+    body.append(Paragraph("• One processor, but 2x core dies (CCDs) with separate 32MB L3 caches", normal_style))
+    body.append(Paragraph("• Traditional NUMA: 2 nodes, each with own cores + L3 cache", normal_style))
+    body.append(Paragraph("• Strix Halo: Single node, but 2 CCDs with separate L3 caches", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    # Architecture Comparison Diagrams
+    body.append(Paragraph("Traditional NUMA vs. Strix Halo APU", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    # Traditional NUMA diagram
+    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 7*inch, 3.5*inch)
+    if img1:
+        body.append(img1)
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    # Strix Halo diagram
+    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 7*inch, 3.5*inch)
+    if img2:
+        body.append(img2)
+    
+    body.append(Spacer(1, 0.4*inch))
+    
+    body.append(Paragraph("The Problem: NUMA Tools Can't See CCD Boundaries", subheading_style))
+    body.append(Paragraph(
+        "• Traditional NUMA tools (numactl, NUMATopologyFilter) detect only 1 node"
+        '<br/>• Cannot see CCD boundaries automatically'
+        '<br/>• Manual core pinning required to keep workloads on same CCD'
+        '<br/>• Running multiple LLMs: threads bounce across CCDs → L3 cache thrashing'
+        '<br/>'
+        '<b>Result:</b> Cross-CCD traffic → slower inference, higher latency',
         normal_style
     ))
     
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("Hardware Reality", subheading_style))
-    body.append(Paragraph("• One processor, but 2x core dies with separate 32MB L3 caches", normal_style))
-    body.append(Spacer(1, 0.2*inch))
-    body.append(Paragraph("NUMA Challenge:", subheading_style))
-    body.append(Paragraph("• Traditional NUMA: 2 nodes, each with own cores + L3 cache", normal_style))
-    body.append(Paragraph("• Strix Halo: Single node, but 2 CCDs with separate L3 caches", normal_style))
-    body.append(Paragraph("• Problem: Process/thread pinning needed to keep workloads on same CCD", normal_style))
-    body.append(Paragraph("• Solution: Manual core pinning to maximize L3 cache locality", normal_style))
-    body.append(Paragraph("• Traditional NUMA tools detect only 1 node (not 2 CCDs)", normal_style))
-    body.append(Paragraph("• numactl, NUMATopologyFilter can't see CCD boundaries", normal_style))
-    body.append(Paragraph("• llama-server threads not pinned to specific cores", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
     body.append(Paragraph("The Solution (Proposed)", subheading_style))
-    body.append(Paragraph("• Manual core pinning (like Red Hat's vcpu_pin_set approach)", normal_style))
-    body.append(Paragraph("• Reserve cores per CCD, pin llama-server accordingly", normal_style))
-    body.append(Paragraph("• Pin based on:", normal_style))
-    body.append(Paragraph("  - Number of models loaded", normal_style))
-    body.append(Paragraph("  - CCD boundaries (manual NUMA mapping)", normal_style))
-    body.append(Paragraph("• Prevent cache-crossing penalties", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
     body.append(Paragraph(
-        '<b>GitHub Feature Request</b><br/>github.com/lemonade-sdk/lemonade/issues/1070<br/>'
-        '<b>Status</b><br/>Open (custom NUMA mapping needed)',
-        humor_style
+        'Manual core pinning (like Red Hat\'s vcpu_pin_set approach):'
+        '<br/>• Reserve cores per CCD, pin llama-server accordingly'
+        '<br/>• Pin based on number of models loaded and CCD boundaries'
+        '<br/>• Prevent cache-crossing penalties'
+        '<br/>'
+        '<b>Result:</b> Each model stays in its own L3 cache domain → no cross-CCD traffic',
+        normal_style
     ))
     
+    body.append(PageBreak())
+    
+    # Evidence: ps output with red boxes
+    body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7*inch, 4*inch)
+    if img_ps:
+        body.append(img_ps)
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    # Evidence: lscpu topology with red boxes
+    body.append(Paragraph("Hardware Topology: CCD Boundaries (lscpu)", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7*inch, 4*inch)
+    if img_lscpu:
+        body.append(img_lscpu)
+    
+    body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
     # ============================================
@@ -527,51 +570,6 @@ def create_pdf():
     
     body.append(Paragraph("All devices use MediaTek MT8163 SoC", normal_style))
     body.append(Paragraph("LineageOS 18.1 (Android 11) - community builds by @R0rt1z2", normal_style))
-    
-    body.append(PageBreak())
-    
-    # Issue #1070 - Core affinity
-    body.append(Paragraph("Feat #1070: [enhancement] Core affinity when running multiple models.", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    body.append(Spacer(1, 0.2*inch))
-    
-    body.append(Paragraph(
-        '<b>Filed</b><br/>February 8, 2026<br/>'
-        '<b>Repository</b><br/>github.com/lemonade-sdk/lemonade/issues/1070<br/>'
-        '<b>Status</b><br/>Open',
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.4*inch))
-    
-    # Architecture Comparison Diagrams
-    body.append(Paragraph("Traditional NUMA vs. Strix Halo APU", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    # Traditional NUMA diagram
-    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 7*inch, 3.5*inch)
-    if img1:
-        body.append(img1)
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    # Strix Halo diagram
-    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 7*inch, 3.5*inch)
-    if img2:
-        body.append(img2)
-    
-    body.append(Spacer(1, 0.4*inch))
-    
-    body.append(Paragraph("The Problem: NUMA Tools Can't See CCD Boundaries", subheading_style))
-    body.append(Paragraph(
-        "• Traditional NUMA tools (numactl, NUMATopologyFilter) detect only 1 node"
-        '<br/>• Cannot see CCD boundaries automatically'
-        '<br/>• Manual core pinning required to keep workloads on same CCD'
-        '<br/>• Running multiple LLMs: threads bounce across CCDs → L3 cache thrashing'
-        '<br/>'
-        '<b>Result:</b> Cross-CCD traffic → slower inference, higher latency',
-        normal_style
-    ))
     
     body.append(PageBreak())
     
