@@ -432,38 +432,6 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # PART 5B: 3D MODELING WITH STRIX HALO
-    # ============================================
-    body.append(Paragraph("3D Modeling with Strix Halo", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("AI-Assisted Physical Design", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    body.append(Paragraph("Blender + OpenSCAD workflow for creating physical objects", normal_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    # Concrete sign image
-    body.append(Paragraph("Concrete Sign Mold Design", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 5.5*inch, 3.5*inch)
-    if img:
-        body.append(img)
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("The Process", subheading_style))
-    body.append(Paragraph("1. AI generates OpenSCAD/Blender design", normal_style))
-    body.append(Paragraph("2. Export to STL", normal_style))
-    body.append(Paragraph("3. 3D print mold", normal_style))
-    body.append(Paragraph("4. Create silicone mold", normal_style))
-    body.append(Paragraph("5. Cast concrete", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph("December 1, 2025 — More physical projects coming soon", humor_style))
-    
-    body.append(PageBreak())
-    
-    # ============================================
     # PART 6: HOME ASSISTANT
     # ============================================
     body.append(Paragraph("Cutting the Alexa Cord", heading_style))
@@ -600,6 +568,38 @@ def create_pdf():
         '<b>TL;DR</b><br/>I participate in open source bugs now. You\'re welcome.',
         humor_style
     ))
+    
+    body.append(PageBreak())
+    
+    # ============================================
+    # PART 5B: 3D MODELING WITH STRIX HALO
+    # ============================================
+    body.append(Paragraph("3D Modeling with Strix Halo", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("AI-Assisted Physical Design", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph("Blender + OpenSCAD workflow for creating physical objects", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    # Concrete sign image
+    body.append(Paragraph("Concrete Sign Mold Design", subheading_style))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 5.5*inch, 3.5*inch)
+    if img:
+        body.append(img)
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("The Process", subheading_style))
+    body.append(Paragraph("1. AI generates OpenSCAD/Blender design", normal_style))
+    body.append(Paragraph("2. Export to STL", normal_style))
+    body.append(Paragraph("3. 3D print mold", normal_style))
+    body.append(Paragraph("4. Create silicone mold", normal_style))
+    body.append(Paragraph("5. Cast concrete", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("December 1, 2025 — More physical projects coming soon", humor_style))
     
     body.append(PageBreak())
     
