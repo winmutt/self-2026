@@ -213,16 +213,37 @@ def create_pdf():
     body.append(Paragraph("What We're Covering", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
+    body.append(Paragraph("Section 1: The Hardware Stack", subheading_style))
     agenda_items = [
-        "🛒 The impulse purchase that changed everything",
-        "🖥️ The Hardware: AMD Strix Halo APU",
-        "🏠 I cut the Alexa cord (and replaced it with OSS)",
-        "💻 Vibe-coded an entire workspace system",
-        "🧊 From digital to physical: Concrete signs?",
-        "📈 How buying hardware got me back in open source",
-        "🤔 What I'd do differently (and what I'd do again)"
+        "• Power Consumption: Corsair 300 vs RTX 5090 vs Cloud",
+        "• The Hardware: AMD Ryzen AI Max+ 395 APU",
+        "• The Stack: ROCm + Lemonade Server",
+        "• Issue #1070: Core affinity across dual CCDs"
     ]
+    for item in agenda_items:
+        body.append(Paragraph(f"  {item}", normal_style))
     
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Section 2: Projects & Applications", subheading_style))
+    agenda_items = [
+        "• Home Assistant: Cutting the Alexa cord",
+        "• 3D Modeling: AI to concrete signs",
+        "• AI Coding Editors: Opencode, Cline, Aider",
+        "• Project WWS: Remote workspace provisioning"
+    ]
+    for item in agenda_items:
+        body.append(Paragraph(f"  {item}", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Section 3: Open Source Journey", subheading_style))
+    agenda_items = [
+        "• Lessons Learned: What worked, what didn't",
+        "• Key Insights: 8 takeaways from 6 months",
+        "• OSS Contributions: 3.5x increase",
+        "• 26 Years: From LKML 2000 to Strix Halo"
+    ]
     for item in agenda_items:
         body.append(Paragraph(f"  {item}", normal_style))
     
@@ -754,6 +775,35 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
+    # AI CODING EDITORS
+    # ============================================
+    body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Opencode", subheading_style))
+    body.append(Paragraph(
+        "Most usable, portable, and stable. Best agentic coding experience. "
+        "Runs as a web server (http://localhost:3000) allowing remote access "
+        "with a localized agent running for autonomous development. "
+        "github.com/anomalyco/opencode",
+        normal_style
+    ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Cline", subheading_style))
+    body.append(Paragraph("Good TUI but many regressions over time.", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Also Use: Koo Roo, Aider", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/editor_collage.png', 7*inch, 5*inch)
+    if img:
+        body.append(img)
+    
+    body.append(PageBreak())
+    
+    # ============================================
     # 10-YEAR GITHUB GLOW-UP (Summary)
     # ============================================
     body.append(Paragraph("26 Years of Open Source (2000-2026)", heading_style))
@@ -812,35 +862,6 @@ def create_pdf():
         'Moral: Sometimes the best way back in is to buy new toys.',
         humor_style
     ))
-    body.append(PageBreak())
-    
-    # ============================================
-    # AI CODING EDITORS
-    # ============================================
-    body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Opencode", subheading_style))
-    body.append(Paragraph(
-        "Most usable, portable, and stable. Best agentic coding experience. "
-        "Runs as a web server (http://localhost:3000) allowing remote access "
-        "with a localized agent running for autonomous development. "
-        "github.com/anomalyco/opencode",
-        normal_style
-    ))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Cline", subheading_style))
-    body.append(Paragraph("Good TUI but many regressions over time.", normal_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Also Use: Koo Roo, Aider", normal_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/editor_collage.png', 7*inch, 5*inch)
-    if img:
-        body.append(img)
-    
     body.append(PageBreak())
     
     # ============================================
