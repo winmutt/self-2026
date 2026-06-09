@@ -12,7 +12,7 @@
 ### Main Presentation (PDF)
 - **File**: `assets/AMD_Strix_Halo_Talk.pdf`
 - **Format**: PDF (dark theme, black background)
-- **Slides**: 22 slides across 3 sections
+- **Slides**: 18 slides across 3 sections
 
 ### Generation Scripts
 - `generate_pdf.py` - PDF generation script
@@ -25,14 +25,14 @@
 
 ## Slide Structure
 
-### Section 1: The Hardware Stack (Slides 1-9)
+### Section 1: The Hardware Stack (Slides 1-6)
 
 **Slide 1: Title**
 - "Six Months with AMD Strix Halo: Local AI, Open Source, and Hardware Reality"
 - winmutt | June 2026
 
 **Slide 2: Agenda**
-- Section 1: The Hardware Stack (4 topics)
+- Section 1: The Hardware Stack (3 topics)
 - Section 2: Projects & Applications (4 topics)
 - Section 3: Open Source Journey (4 topics)
 
@@ -40,97 +40,85 @@
 - Corsair 300 (~300W) vs RTX 5090 (~800-1000W) vs Commercial Server (~1500-3000W)
 - 3x more efficient, single APU vs discrete CPU+GPU
 
-**Slide 4: The Hardware - APU Die**
+**Slide 4: The Hardware - APU Die + GPU + NPU**
 - 16 cores (12 perf + 4 efficiency)
 - 2x CCD with 32MB L3 cache each
 - 128GB LPDDR5X-8000 soldered
-- APU die diagram
-
-**Slide 5: The Hardware - GPU + NPU**
 - AMD Radeon 680M GPU: RDNA 3.5, 40 CUs, ~4.6 TFLOPS
 - AMD XDNA 2 NPU: Neural Processing Unit, FastFlowLM support
 - Performance stats: Coming soon (logs being processed)
 
-**Slide 6: The Stack - ROCm + Lemonade**
-- ROCm: AMD's open compute platform
-- Lemonade: llama.cpp + ROCm builds
-- NPU Support: FastFlowLM (10x more efficient, 17MB runtime)
-- Contributions: Issue #1070, NPU backend
-
-**Slide 7: Issue #1070 - Title**
+**Slide 5: Issue #1070 - Problem & Solution**
 - "Feat #1070: [enhancement] Core affinity when running multiple models."
-- Filed: February 8, 2026
-- Repository: github.com/lemonade-sdk/lemonade/issues/1070
+- Filed: February 8, 2026 | Repository: github.com/lemonade-sdk/lemonade/issues/1070
+- Hardware Reality: 2 CCDs with separate 32MB L3 caches
+- Problem: NUMA tools can't see CCD boundaries → threads bounce → L3 thrashing
+- Solution: Manual core pinning per CCD
 
-**Slide 8: Issue #1070 - Diagrams**
+**Slide 6: Issue #1070 - Evidence**
 - Traditional NUMA vs Strix Halo diagrams
-- Problem: NUMA tools can't see CCD boundaries
-
-**Slide 9: Issue #1070 - Evidence**
 - ps output with L3 + AVG_MHZ highlighting
 - lscpu topology showing load shifting across CCDs
 
-### Section 2: Projects & Applications (Slides 10-16)
+### Section 2: Projects & Applications (Slides 7-12)
 
-**Slide 10: Home Assistant - Process**
+**Slide 7: Home Assistant - Process**
 - LineageOS on Echo: amonet → TWRP → LineageOS 18.1 → ViewAssist
 - Philosophy: "Basically anything with a USB port..."
 
-**Slide 11: Home Assistant - Timeline**
+**Slide 8: Home Assistant - Timeline**
 - Dec 6 → Feb 2026 timeline
 - Issue #4: Echo 8 mic dies after 24h
 
-**Slide 12: Home Assistant - Screenshot**
+**Slide 9: Home Assistant - Screenshot + Compatibility**
 - HA on Echo Show (full width)
-
-**Slide 13: Device Compatibility**
 - Echo Show 5 (1st/2nd gen), Echo Show 8
 - MT8163 SoC, LineageOS 18.1 by @R0rt1z2
 
-**Slide 14: 3D Modeling**
+**Slide 10: 3D Modeling**
 - Concrete sign mold design
 - Blender + OpenSCAD workflow
 - AI → STL → 3D print → silicone mold → concrete
 
-**Slide 15: AI Coding Editors**
+**Slide 11: AI Coding Editors**
 - Opencode: Web server (localhost:3000), remote access, autonomous dev
 - Cline: Good TUI but regressions
 - Also use: Koo Roo, Aider
 
-**Slide 16: Project WWS**
+**Slide 12: Project WWS**
 - Winmutt Work Spaces (github.com/winmutt/wws)
 - Quote: "Definitely no Athena and its taken months..."
 - KVM/Podman isolation, code-server, GitHub OAuth + RBAC
 
-### Section 3: Open Source Journey (Slides 17-22)
+### Section 3: Open Source Journey (Slides 13-18)
 
-**Slide 17: Lessons Learned**
+**Slide 13: Lessons Learned**
 - What Worked: Cline + Qwen3-Coder, Prompt Caching, AMD GPU libs 2x faster
 - What Didn't: Memory (32GB reserved), Ollama crashes, NPU (still waiting)
 
-**Slide 18: Key Insights**
+**Slide 14: Key Insights**
 - 8 takeaways: Hardware hype ≠ reality, bleeding edge = bleeding fingers,
   context is king, AI coding > IDEs, AI → physical objects,
   Echo → HA = OSS win, autonomous dev possible, buying hardware got me back in OSS
 
-**Slide 19: 26 Years of Open Source**
+**Slide 15: 26 Years of Open Source**
 - From LKML 2000 to Strix Halo
 - LKML 2000 email (HighPoint IDE RAID, kernel 2.2.14)
 - GitHub heatmap 2018-2026
 - 2018-2024: Ghost town, 2025: Strix Halo arrives
 - AI + local hardware reinvigorated my love for open source
 
-**Slide 20: OSS Contributions**
+**Slide 16: OSS Contributions**
 - Catalyst Effect: 3.5x increase
 - 2026 contribution calendar
 - Project breakdown: WWS 38%, Lemonade 15%, ROCm 8%, HA 12%, Cline 8%, Concrete 5%
 
-**Slide 21: References**
+**Slide 17: References**
 - Power sources (Reddit, NVIDIA, Tom's Hardware)
 - Software (Lemonade, Ollama, ROCm, WWS, HA)
 - Communities (r/LocalLLaMA, XDA Forums)
 
-**Slide 22: Q&A**
+**Slide 18: Q&A**
 - 5 discussion questions
 - github.com/winmutt
 
