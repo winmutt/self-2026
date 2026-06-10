@@ -570,6 +570,81 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
+    # PART 5C: OPENS CAD COMPARISON
+    # ============================================
+    body.append(Paragraph("OpenSCAD: Where Things Work", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("wmi002 Session — Precision Engineering", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph(
+        '<b>Success Story</b><br/>'
+        '• Parametric design: Caliber-specific constants (.308 Winchester, 5.56 NATO)'
+        '<br/>• Modular architecture: include <threading.scad>, <std.scad> (BOSL2)'
+        '<br/>• Precision engineering: Thread pitches (5/8-24 UNF), bore dimensions, tolerances'
+        '<br/>• Working output: K-baffles, blast chambers, threaded end caps',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    # s1.png: K-baffle internal view
+    body.append(Paragraph("K-Baffle Assembly (Internal View)", subheading_style))
+    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 7*inch, 4*inch)
+    if img_s1:
+        body.append(img_s1)
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    # s2.png: Dimensioned parts
+    body.append(Paragraph("Dimensioned Parts View", subheading_style))
+    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7*inch, 4*inch)
+    if img_s2:
+        body.append(img_s2)
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # Comparison section
+    body.append(Paragraph("Two Approaches to Physical Design", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    comparison_data = [
+        ['OpenSCAD (wmi002)', 'Blender + AI (Concrete Signs)'],
+        ['Code-driven parametrics', 'AI-generated meshes'],
+        ['Thread tolerances: 5/8-24 UNF', 'Mold fit: "test and adjust"'],
+        ['BOSL2 library: threaded_rod()', 'AI hallucinates topology'],
+        ['$fn=100 precision', '$fn=32 vibes'],
+        ['K-baffles: 15° frustum angles', 'Text: "Dancing Script:style=Bold"'],
+        ['Stainless steel ready', 'Concrete ready'],
+        ['Documented specs in code', 'Documented by hope'],
+    ]
+    
+    table = Table(comparison_data, colWidths=[3.2*inch, 3.2*inch])
+    table.setStyle(TableStyle([
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('TOPPADDING', (0, 0), (-1, 0), 12),
+        ('BOTTOMPADDING', (0, 1), (-1, -1), 8),
+        ('TOPPADDING', (0, 1), (-1, -1), 8),
+    ]))
+    body.append(table)
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(Paragraph(
+        '<b>Lesson:</b> OpenSCAD sessions produce working parts. '
+        'Blender sessions produce concrete. '
+        'Both are valid. Only one has thread tolerances.',
+        humor_style
+    ))
+    
+    body.append(PageBreak())
+    
+    # ============================================
     # PART 7: WWS PROJECT
     # ============================================
     body.append(Paragraph("Project WWS: I Vibe-Coded an Entire System", heading_style))
