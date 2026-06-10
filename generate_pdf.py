@@ -208,6 +208,71 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
+    # POWER CONSUMPTION
+    # ============================================
+    body.append(Paragraph("Power Consumption Reality", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("System Comparison", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    power_data = [
+        ['System', 'Power Draw', 'Notes'],
+        ['AMD Strix Halo (Corsair 300)', '~300W', 'Single APU, 128GB unified memory'],
+        ['RTX 4090 Setup', '~600-800W', 'GPU (450W TDP) + CPU + system'],
+        ['RTX 5090 Setup', '~800-1000W', 'GPU (600W TDP) + CPU + system'],
+        ['Commercial AI Server', '1500-3000W', 'Multi-GPU (A100/H100: 400-700W each)'],
+    ]
+    
+    table = Table(power_data, colWidths=[2.5*inch, 2*inch, 2.5*inch])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#30363d')),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#c9d1d9')),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
+        ('TOPPADDING', (0, 0), (-1, 0), 8),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor('#0d1117')),
+        ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor('#c9d1d9')),
+        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#30363d')),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+    ]))
+    body.append(table)
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph(
+        'Strix Halo: ~300W vs RTX 5090: ~800-1000W vs Cloud Servers: 1500-3000W<br/>'
+        'Source: Corsair specs, NVIDIA TDP ratings, TechPowerUp benchmarks',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # ============================================
+    # PRICING
+    # ============================================
+    body.append(Paragraph("The Hardware Investment", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Black Friday 2025 Deal", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph(
+        '• Corsair 300 AI Workstation: <b>$1800</b> (128GB Strix Halo system)'
+        '<br/>• Sold NVIDIA RTX 3060 rig to fund the purchase'
+        '<br/>• Today\'s equivalent: ~$3000+ (RTX 4090 configurations)'
+        '<br/>'
+        '<b>The Verdict:</b> "The Strix Halo was a bargain at $1800 for what it delivers - '
+        'today you\'d pay 2x that for equivalent performance with discrete GPU"',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # ============================================
     # AGENDA
     # ============================================
     body.append(Paragraph("What We're Covering", heading_style))
