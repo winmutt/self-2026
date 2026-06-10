@@ -201,7 +201,7 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     body.append(Paragraph("A Six Month Review of a Strix Halo Rig", normal_style))
     body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph("linux | ROCm | Local AI | Home Assistant | Coding", humor_style))
+    body.append(Paragraph("AMD Strix Halo | Local AI | Home Assistant | 3D Modeling | Open Source", humor_style))
     body.append(Spacer(1, 1.5*inch))
     body.append(Paragraph("winmutt | June 2026", normal_style))
     body.append(Paragraph("github.com/winmutt", normal_style))
