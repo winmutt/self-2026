@@ -51,6 +51,75 @@ python3 generate_pdf.py
 
 The script writes `AMD_Strix_Halo_Talk.pdf` to the repository root and also copies it into `assets/` for easy access.
 
+## PDF Structure (35 slides)
+
+Extracted using PyPDF2 (`pyenv exec pip install PyPDF2`):
+
+| # | Title |
+|---|-------|
+| 1 | Six Months with AMD Strix Halo |
+| 2 | Power Consumption Reality |
+| 3 | The Hardware Investment |
+| 4 | What We're Covering (Agenda) |
+| 5 | The Hardware: AMD Ryzen AI Max+ 395 |
+| 6 | Hardware specs (128GB unified memory) |
+| 7 | Feat #1070: Core affinity when running multiple models |
+| 8 | Traditional NUMA vs. Strix Halo APU |
+| 9 | The Problem: NUMA Tools Can't See CCD Boundaries |
+| 10 | Evidence: Threads Bouncing Across CCDs |
+| 11 | Hardware Topology: CCD Boundaries (lscpu) |
+| 12 | Evidence: amdgpu_top |
+| 13 | Cutting the Alexa Cord |
+| 14 | Alexa Replacement Timeline |
+| 15 | Home Assistant Dashboard |
+| 16 | Home Assistant on Echo Show |
+| 17 | Home Assistant Setup |
+| 18 | LineageOS Device Compatibility |
+| 19 | Issue #4: The Echo 8 Mic That Quit |
+| 20 | Blender: Concrete Sign Mold Design |
+| 21 | Blender process (AI → STL → mold → concrete) |
+| 22 | OpenSCAD: Where Things Work |
+| 23 | Dimensioned Parts View |
+| 24 | Two Approaches to Physical Design |
+| 25 | Project WWS: I Vibe-Coded an Entire System |
+| 26 | Lessons Learned (Mostly) |
+| 27 | Key Insights (8 takeaways) |
+| 28 | 26 Years of Open Source (2000-2026) |
+| 29 | GitHub Activity Heatmap (2018-2024 ghost town) |
+| 30 | How Buying Hardware Got Me Back in Open Source |
+| 31 | Contribution Breakdown |
+| 32 | AI Coding Editors: My Daily Drivers |
+| 33 | References & Sources (Power, Software) |
+| 34 | References continued (Communities) |
+| 35 | github.com/winmutt (End) |
+
+### Verification
+
+Run the verification script to ensure the black fill appears on all pages:
+
+```bash
+python3 verify_pdf.py
+```
+
+Or extract slide titles with PyPDF2:
+
+```bash
+pyenv exec pip install PyPDF2
+pyenv exec python3 -c "
+import PyPDF2
+with open('assets/AMD_Strix_Halo_Talk.pdf', 'rb') as f:
+    reader = PyPDF2.PdfReader(f)
+    print(f'Total slides: {len(reader.pages)}')
+    for i, page in enumerate(reader.pages):
+        text = page.extract_text()
+        if text:
+            lines = [l.strip() for l in text.split('\n') if l.strip() and len(l.strip()) > 5]
+            print(f'{i+1}: {lines[0][:80]}')
+"
+```
+
+---
+
 ## History of attempts
 
 - **Initial attempt**: Used `onPage` with a `draw_black_background` function but only the first page got the black fill.
