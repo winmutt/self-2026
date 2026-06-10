@@ -408,7 +408,7 @@ def create_pdf():
     body.append(Paragraph("Cutting the Alexa Cord", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("LineageOS on Echo: Because I Said So", subheading_style))
+    body.append(Paragraph("LineageOS on Echo", subheading_style))
     body.append(Spacer(1, 0.2*inch))
     
     body.append(Paragraph(
@@ -533,13 +533,6 @@ def create_pdf():
     body.append(Paragraph("• Echo 8: Dies after ~24 hours", normal_style))
     body.append(Paragraph("• Root cause: Unknown (yet)", humor_style))
     
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph(
-        '<b>TL;DR</b><br/>I participate in open source bugs now. You\'re welcome.',
-        humor_style
-    ))
-    
     body.append(PageBreak())
     
     # ============================================
@@ -554,14 +547,6 @@ def create_pdf():
     body.append(Paragraph("Blender + OpenSCAD workflow for creating physical objects", normal_style))
     body.append(Spacer(1, 0.3*inch))
     
-    # Concrete sign image
-    body.append(Paragraph("Concrete Sign Mold Design", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 5.5*inch, 3.5*inch)
-    if img:
-        body.append(img)
-    
-    body.append(Spacer(1, 0.3*inch))
-    
     body.append(Paragraph("The Process", subheading_style))
     body.append(Paragraph("1. AI generates OpenSCAD/Blender design", normal_style))
     body.append(Paragraph("2. Export to STL", normal_style))
@@ -572,6 +557,19 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     body.append(Paragraph("December 1, 2025 — More physical projects coming soon", humor_style))
     
+    body.append(PageBreak())
+    
+    # ============================================
+    # CONCRETE SIGN MOLD DESIGN - SEPARATE SLIDE
+    # ============================================
+    body.append(Paragraph("Concrete Sign Mold Design", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 6*inch, 4*inch)
+    if img:
+        body.append(img)
+    
+    body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
     # ============================================
