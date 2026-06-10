@@ -251,57 +251,6 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # POWER CONSUMPTION COMPARISON
-    # ============================================
-    body.append(Paragraph("Power Reality: Corsair 300 vs Alternatives", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Max Energy Usage Comparison", subheading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    power_data = [
-        ['Solution', 'Max Power', 'Notes'],
-        ['Corsair 300 (Strix Halo)', '~300W', 'AMD Ryzen AI Max 395: 140-157W sustained'],
-        ['PC + RTX 5090', '~800-1000W', 'CPU (350W) + GPU (600W) + overhead'],
-        ['RTX 4090 Workstation', '~700-850W', 'CPU (250W) + GPU (450W) + overhead'],
-        ['Commercial AI Server', '~1500-3000W', 'Multi-GPU (A100/H100: 400-700W/GPU)'],
-        ['Cloud API (per 1M tokens)', 'N/A', 'Energy cost embedded in pricing']
-    ]
-    
-    power_table = Table(power_data, colWidths=[2.2*inch, 1.8*inch, 3*inch])
-    power_table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#2a2a2a')),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#58a6ff')),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, -1), 10),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor('#1a1a1a')),
-        ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor('#e0e0e0')),
-        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#444444')),
-    ]))
-    body.append(power_table)
-    
-    body.append(Spacer(1, 0.5*inch))
-    
-    body.append(Paragraph("The Efficiency Win", subheading_style))
-    body.append(Paragraph("• Strix Halo: ~3x more efficient than RTX 5090 setup", normal_style))
-    body.append(Paragraph("• Single APU vs discrete CPU+GPU power domains", normal_style))
-    body.append(Paragraph("• No datacenter electricity bill", normal_style))
-    body.append(Paragraph("• 128GB unified memory at desktop power envelope", normal_style))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Sources:", humor_style))
-    body.append(Paragraph("• AMD Ryzen AI Max 395: 140-157W sustained (Framework Reddit, 2025)", normal_style))
-    body.append(Paragraph("• Framework recommends 500W PSU for transient headroom", normal_style))
-    body.append(Paragraph("• RTX 5090 TDP: NVIDIA GeForce RTX 5090 Specifications (~600W)", normal_style))
-    body.append(Paragraph("• RTX 4090 TDP: NVIDIA GeForce RTX 4090 Specifications (450W)", normal_style))
-    body.append(Paragraph("• System power estimates: Tom's Hardware, TechPowerUp power reviews", normal_style))
-    
-    body.append(PageBreak())
-    
-    # ============================================
     # PART 5: THE HARDWARE
     # ============================================
     body.append(Paragraph("The Hardware: AMD Ryzen AI Max+ 395", heading_style))
@@ -339,7 +288,13 @@ def create_pdf():
     body.append(Paragraph("• Integrated into Ryzen AI Max+ 395 APU", normal_style))
     body.append(Paragraph("• Supports FastFlowLM for efficient inference", normal_style))
     body.append(Paragraph("• Power-efficient alternative to GPU processing", normal_style))
-    body.append(Paragraph("• Performance stats: Coming soon (logs being processed)", normal_style))
+    body.append(Spacer(1, 0.2*inch))
+    body.append(Paragraph("FastFlowLM Performance (June 2026):", subheading_style))
+    body.append(Paragraph("• 6784 tokens prefill in ~15 seconds", normal_style))
+    body.append(Paragraph("• ~455 tokens/sec on NPU", normal_style))
+    body.append(Paragraph("• Chunked processing: 4096 + 2688 tokens", normal_style))
+    body.append(Paragraph("• End-to-end (prefill to response): ~16.2 seconds", normal_style))
+    body.append(Paragraph("• Source: FastFlowLM logs (lemonade-server)", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
@@ -427,6 +382,17 @@ def create_pdf():
     img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7*inch, 4*inch)
     if img_lscpu:
         body.append(img_lscpu)
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # Evidence: amdgpu_top
+    body.append(Paragraph("Evidence: amdgpu_top", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7*inch, 4*inch)
+    if img_amdgpu:
+        body.append(img_amdgpu)
     
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
