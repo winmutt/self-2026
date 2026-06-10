@@ -465,9 +465,17 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
-    # Home Assistant screenshot
+    # Home Assistant screenshot - Website view
+    body.append(Paragraph("Home Assistant Dashboard", subheading_style))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/homeasssistant.png', 6*inch, 3.5*inch)
+    if img:
+        body.append(img)
+    
+    body.append(PageBreak())
+    
+    # Home Assistant install screenshot
     body.append(Paragraph("Home Assistant on Echo Show", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', page_width - 2*margin, 4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/myha.png', 6*inch, 3.5*inch)
     if img:
         body.append(img)
     
