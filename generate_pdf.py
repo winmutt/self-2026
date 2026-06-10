@@ -319,25 +319,27 @@ def create_pdf():
     body.append(Paragraph("• Traditional NUMA: 2 nodes, each with own cores + L3 cache", normal_style))
     body.append(Paragraph("• Strix Halo: Single node, but 2 CCDs with separate L3 caches", normal_style))
     
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # Architecture Comparison Diagrams - Separate Slide
+    body.append(Paragraph("Traditional NUMA vs. Strix Halo APU", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    # Architecture Comparison Diagrams
-    body.append(Paragraph("Traditional NUMA vs. Strix Halo APU", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    # Traditional NUMA diagram
-    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 7*inch, 3.5*inch)
+    # Traditional NUMA diagram (shrunk 10%)
+    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 6.3*inch, 3.15*inch)
     if img1:
         body.append(img1)
     
     body.append(Spacer(1, 0.3*inch))
     
-    # Strix Halo diagram
-    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 7*inch, 3.5*inch)
+    # Strix Halo diagram (shrunk 10%)
+    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 6.3*inch, 3.15*inch)
     if img2:
         body.append(img2)
     
-    body.append(Spacer(1, 0.4*inch))
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
     body.append(Paragraph("The Problem: NUMA Tools Can't See CCD Boundaries", subheading_style))
     body.append(Paragraph(
@@ -375,11 +377,14 @@ def create_pdf():
     
     body.append(Spacer(1, 0.3*inch))
     
-    # Evidence: lscpu topology with red boxes
-    body.append(Paragraph("Hardware Topology: CCD Boundaries (lscpu)", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
-    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7*inch, 4*inch)
+    # Hardware Topology: CCD Boundaries - Separate Slide
+    body.append(Paragraph("Hardware Topology: CCD Boundaries (lscpu)", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7*inch, 5*inch)
     if img_lscpu:
         body.append(img_lscpu)
     
