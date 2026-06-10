@@ -562,30 +562,6 @@ def create_pdf():
     
     body.append(PageBreak())
     
-    # Echo 8 mic issue
-    body.append(Paragraph("Issue #4: The Echo 8 Mic That Quit", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Audio stops working after ~24 hours", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    body.append(Paragraph(
-        '<b>Filed</b><br/>January 7, 2026<br/>'
-        '<b>Repository</b><br/>https://github.com/amazon-oss/releases/issues/4<br/>'
-        '<b>Status</b><br/>Open (still waiting, it\'s fine)',
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("The Problem", subheading_style))
-    body.append(Paragraph("• Echo 5: Stable for days", normal_style))
-    body.append(Paragraph("• Echo 8: Dies after ~24 hours", normal_style))
-    body.append(Paragraph("• Root cause: Unknown (yet)", humor_style))
-    
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
-    
     # Timeline
     body.append(Paragraph("Alexa Replacement Timeline", subheading_style))
     body.append(Spacer(1, 0.3*inch))
@@ -613,6 +589,30 @@ def create_pdf():
         ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#444444')),
     ]))
     body.append(timeline_table)
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # Echo 8 mic issue
+    body.append(Paragraph("Issue #4: The Echo 8 Mic That Quit", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Audio stops working after ~24 hours", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph(
+        '<b>Filed</b><br/>January 7, 2026<br/>'
+        '<b>Repository</b><br/>https://github.com/amazon-oss/releases/issues/4<br/>'
+        '<b>Status</b><br/>Open (still waiting, it\'s fine)',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("The Problem", subheading_style))
+    body.append(Paragraph("• Echo 5: Stable for days", normal_style))
+    body.append(Paragraph("• Echo 8: Dies after ~24 hours", normal_style))
+    body.append(Paragraph("• Root cause: Unknown (yet)", humor_style))
     
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
@@ -737,6 +737,35 @@ def create_pdf():
     
     # WWS Dashboard screenshot
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/dashboard.png', 7.5*inch, 4*inch)
+    if img:
+        body.append(img)
+    
+    body.append(PageBreak())
+    
+    # ============================================
+    # AI CODING EDITORS (moved before Lessons)
+    # ============================================
+    body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Opencode", subheading_style))
+    body.append(Paragraph(
+        "Most usable, portable, and stable. Best agentic coding experience. "
+        "Runs as a web server (http://localhost:3000) allowing remote access "
+        "with a localized agent running for autonomous development. "
+        "github.com/anomalyco/opencode",
+        normal_style
+    ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Cline", subheading_style))
+    body.append(Paragraph("Good TUI but many regressions over time.", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Also Use: Koo Roo, Aider", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 6.5*inch, 4.5*inch)
     if img:
         body.append(img)
     
@@ -884,35 +913,6 @@ def create_pdf():
     body.append(Paragraph("• Other: 10% (miscellaneous)", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
-    
-    # ============================================
-    # AI CODING EDITORS
-    # ============================================
-    body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Opencode", subheading_style))
-    body.append(Paragraph(
-        "Most usable, portable, and stable. Best agentic coding experience. "
-        "Runs as a web server (http://localhost:3000) allowing remote access "
-        "with a localized agent running for autonomous development. "
-        "github.com/anomalyco/opencode",
-        normal_style
-    ))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Cline", subheading_style))
-    body.append(Paragraph("Good TUI but many regressions over time.", normal_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Also Use: Koo Roo, Aider", normal_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 6.5*inch, 4.5*inch)
-    if img:
-        body.append(img)
-    
     body.append(PageBreak())
     
     # ============================================
