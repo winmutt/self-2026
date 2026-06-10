@@ -323,7 +323,7 @@ def create_pdf():
     
     # APU die diagram
     body.append(Paragraph("APU Die Architecture", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7*inch, 4.5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5*inch)
     if img:
         body.append(img)
     
@@ -389,21 +389,21 @@ def create_pdf():
     
     # Architecture Comparison Diagrams - Separate Slide
     body.append(Paragraph("Traditional NUMA vs. Strix Halo APU", heading_style))
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     
-    # Traditional NUMA diagram (shrunk 10%)
-    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 6.3*inch, 3.15*inch)
+    # Traditional NUMA diagram
+    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 6*inch, 3*inch)
     if img1:
         body.append(img1)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     
-    # Strix Halo diagram (shrunk 10%)
-    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 6.3*inch, 3.15*inch)
+    # Strix Halo diagram
+    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 6*inch, 3*inch)
     if img2:
         body.append(img2)
     
-    body.append(Spacer(1, 0.5*inch))
+    body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
     body.append(Paragraph("The Problem: NUMA Tools Can't See CCD Boundaries", subheading_style))
@@ -436,11 +436,9 @@ def create_pdf():
     body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", subheading_style))
     body.append(Spacer(1, 0.2*inch))
     
-    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7*inch, 4*inch)
+    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7.5*inch, 4.5*inch)
     if img_ps:
         body.append(img_ps)
-    
-    body.append(Spacer(1, 0.3*inch))
     
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
@@ -449,7 +447,7 @@ def create_pdf():
     body.append(Paragraph("Hardware Topology: CCD Boundaries (lscpu)", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7*inch, 5*inch)
+    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7.5*inch, 5.5*inch)
     if img_lscpu:
         body.append(img_lscpu)
     
@@ -460,7 +458,7 @@ def create_pdf():
     body.append(Paragraph("Evidence: amdgpu_top", subheading_style))
     body.append(Spacer(1, 0.2*inch))
     
-    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7*inch, 4*inch)
+    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7.5*inch, 4.5*inch)
     if img_amdgpu:
         body.append(img_amdgpu)
     
@@ -535,7 +533,7 @@ def create_pdf():
     body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph("The best open source project I have seen", humor_style))
     body.append(Spacer(1, 0.3*inch))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/homeasssistant.png', 6*inch, 3.5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/homeasssistant.png', 7*inch, 4*inch)
     if img:
         body.append(img)
     
@@ -543,7 +541,7 @@ def create_pdf():
     
     # Home Assistant screenshot - Echo Show
     body.append(Paragraph("Home Assistant on Echo Show", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 6*inch, 3.5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 7*inch, 4*inch)
     if img:
         body.append(img)
     
@@ -551,7 +549,7 @@ def create_pdf():
     
     # Home Assistant install screenshot
     body.append(Paragraph("Home Assistant Setup", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/myha.png', 6*inch, 3.5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/myha.png', 7*inch, 4*inch)
     if img:
         body.append(img)
     
@@ -632,7 +630,7 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     # Concrete sign image
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 6*inch, 4*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 7*inch, 4.5*inch)
     if img:
         body.append(img)
     
@@ -684,7 +682,7 @@ def create_pdf():
     if img_s2:
         body.append(img_s2)
     
-    body.append(Spacer(1, 0.5*inch))
+    body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
     # Comparison section
@@ -738,7 +736,7 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     # WWS Dashboard screenshot
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/dashboard.png', 7*inch, 3.5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/dashboard.png', 7.5*inch, 4*inch)
     if img:
         body.append(img)
     
@@ -833,7 +831,7 @@ def create_pdf():
     
     # 10-year GitHub activity heatmap
     body.append(Paragraph("The Return: GitHub Activity (2018-2026)", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 7*inch, 3.5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/github_heatmap_10year.png', 7.5*inch, 4*inch)
     if img:
         body.append(img)
     
@@ -870,7 +868,7 @@ def create_pdf():
     
     # Contribution calendar
     body.append(Paragraph("2026: The Year I Came Back", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/contribution_calendar_2026.png', 7*inch, 3*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/contribution_calendar_2026.png', 7.5*inch, 4*inch)
     if img:
         body.append(img)
     
@@ -911,7 +909,7 @@ def create_pdf():
     body.append(Paragraph("Also Use: Koo Roo, Aider", normal_style))
     body.append(Spacer(1, 0.3*inch))
     
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 7*inch, 5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 6.5*inch, 4.5*inch)
     if img:
         body.append(img)
     
