@@ -465,17 +465,20 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
-    # Home Assistant screenshot - Echo Show
-    body.append(Paragraph("Home Assistant on Echo Show", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 6*inch, 3.5*inch)
+    # Home Assistant dashboard screenshot - FIRST
+    body.append(Paragraph("Home Assistant Dashboard", heading_style))
+    body.append(Spacer(1, 0.2*inch))
+    body.append(Paragraph("The best open source project I have seen", humor_style))
+    body.append(Spacer(1, 0.3*inch))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/homeasssistant.png', 6*inch, 3.5*inch)
     if img:
         body.append(img)
     
     body.append(PageBreak())
     
-    # Home Assistant dashboard screenshot
-    body.append(Paragraph("Home Assistant Dashboard", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/homeasssistant.png', 6*inch, 3.5*inch)
+    # Home Assistant screenshot - Echo Show
+    body.append(Paragraph("Home Assistant on Echo Show", subheading_style))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 6*inch, 3.5*inch)
     if img:
         body.append(img)
     
@@ -646,14 +649,6 @@ def create_pdf():
         ('TOPPADDING', (0, 1), (-1, -1), 8),
     ]))
     body.append(table)
-    
-    body.append(Spacer(1, 0.5*inch))
-    body.append(Paragraph(
-        '<b>Lesson:</b> OpenSCAD sessions produce working parts. '
-        'Blender sessions produce concrete. '
-        'Both are valid. Only one has thread tolerances.',
-        humor_style
-    ))
     
     body.append(PageBreak())
     
