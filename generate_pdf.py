@@ -552,19 +552,26 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # PART 5B: 3D MODELING WITH STRIX HALO
+    # PART 5B: BLENDER - CONCRETE SIGNS
     # ============================================
-    body.append(Paragraph("3D Modeling with Strix Halo", heading_style))
+    body.append(Paragraph("Blender: Concrete Sign Mold Design", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("AI-Assisted Physical Design", subheading_style))
     body.append(Spacer(1, 0.2*inch))
     
-    body.append(Paragraph("Blender + OpenSCAD workflow for creating physical objects", normal_style))
+    body.append(Paragraph("Blender + AI workflow for creating physical objects", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    # Concrete sign image
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 6*inch, 4*inch)
+    if img:
+        body.append(img)
+    
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("The Process", subheading_style))
-    body.append(Paragraph("1. AI generates OpenSCAD/Blender design", normal_style))
+    body.append(Paragraph("1. AI generates Blender design", normal_style))
     body.append(Paragraph("2. Export to STL", normal_style))
     body.append(Paragraph("3. 3D print mold", normal_style))
     body.append(Paragraph("4. Create silicone mold", normal_style))
@@ -573,19 +580,6 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     body.append(Paragraph("December 1, 2025 — More physical projects coming soon", humor_style))
     
-    body.append(PageBreak())
-    
-    # ============================================
-    # CONCRETE SIGN MOLD DESIGN - SEPARATE SLIDE
-    # ============================================
-    body.append(Paragraph("Concrete Sign Mold Design", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 6*inch, 4*inch)
-    if img:
-        body.append(img)
-    
-    body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
     # ============================================
