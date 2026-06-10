@@ -811,14 +811,6 @@ def create_pdf():
     
     body.append(Spacer(1, 0.5*inch))
     
-    # Project breakdown
-    body.append(Paragraph("Projects I've Actually Contributed To", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/project_breakdown.png', 7*inch, 5*inch)
-    if img:
-        body.append(img)
-    
-    body.append(Spacer(1, 0.5*inch))
-    
     body.append(Paragraph("Contribution Breakdown", subheading_style))
     body.append(Paragraph("• WWS: 38% (remote workspace provisioning)", normal_style))
     body.append(Paragraph("• Lemonade: 15% (NPU backend, custom NUMA mapping)", normal_style))
@@ -854,7 +846,7 @@ def create_pdf():
     body.append(Paragraph("Also Use: Koo Roo, Aider", normal_style))
     body.append(Spacer(1, 0.3*inch))
     
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/editor_collage.png', 7*inch, 5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 7*inch, 5*inch)
     if img:
         body.append(img)
     
@@ -904,26 +896,12 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # Q&A
+    # END SLIDE
     # ============================================
     body.append(Spacer(1, 2*inch))
-    body.append(Paragraph("Questions? (I Have Answers, Mostly)", title_style))
-    body.append(Spacer(1, 1*inch))
-    
-    questions = [
-        "1. Is Strix Halo production-ready? (It's complicated)",
-        "2. When will NPU support mature? (Coming soon™)",
-        "3. How do we solve 128GB addressing? (We don't)",
-        "4. Best backend for multi-model? (Lemonade, but...",
-        "5. Is autonomous dev the future? (Ask my AI)"
-    ]
-    
-    for q in questions:
-        body.append(Paragraph(f"  {q}", normal_style))
-    
-    body.append(Spacer(1, 1*inch))
-    body.append(Paragraph("github.com/winmutt", subtitle_style))
-    body.append(Paragraph("Come find me after - I'll show you the rig", humor_style))
+    body.append(Paragraph("github.com/winmutt", title_style))
+    body.append(Spacer(1, 0.5*inch))
+    body.append(Paragraph("Thanks", normal_style))
     
     # Build PDF
     doc.build(body, onFirstPage=draw_black_background, onLaterPages=draw_black_background)
