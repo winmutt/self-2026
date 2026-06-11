@@ -743,6 +743,95 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
+    # WHICH MODELS - Model Comparison Chart
+    # ============================================
+    body.append(Paragraph("Which Models?", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    # Model comparison chart
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/1771330229614.jpeg', 7.5*inch, 5*inch)
+    if img:
+        body.append(img)
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
+    
+    # ============================================
+    # MODELS IN USE
+    # ============================================
+    body.append(Paragraph("Models in Use", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Qwen3-Coder (Primary Coding Model)", subheading_style))
+    body.append(Paragraph(
+        "• Context: 400k window, ~59GB memory usage"
+        '<br/>• Use Case: Autonomous coding, WWS project development'
+        '<br/>• Stability: Stable after tuning'
+        '<br/>• Quote: "Making some really good results"',
+        normal_style
+    ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Qwen 3.5 9B (Sub-agents)", subheading_style))
+    body.append(Paragraph(
+        "• Use Case: Secondary agents, parallel tasks"
+        '<br/>• Lightweight: Efficient for focused work'
+        '<br/>• Integration: Works with Opencode sub-agent architecture',
+        normal_style
+    ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("llama-3.1-8b (Home Assistant)", subheading_style))
+    body.append(Paragraph(
+        "• Use Case: Wake word processing, HA automation"
+        '<br/>• Backend: Ollama / Lemonade'
+        '<br/>• Deployment: Local inference for real-time responses',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # ============================================
+    # BACKEND EVOLUTION
+    # ============================================
+    body.append(Paragraph("Backend Evolution: Lemonade → Ollama", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    backend_data = [
+        ['Backend', 'Pros', 'Cons'],
+        ['Lemonade (llama.cpp + ROCm)', 'NPU support, AMD GPU optimized', 'Instability, NPU "coming soon"'],
+        ['Ollama', 'Stable, easy to use', 'GPU crashes after OS upgrades'],
+        ['llama.cpp (direct)', 'Prompt caching (Mar 2026), control', 'Manual setup'],
+    ]
+    
+    table = Table(backend_data, colWidths=[2.2*inch, 2.5*inch, 2.5*inch])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#30363d')),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#c9d1d9')),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 9),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
+        ('TOPPADDING', (0, 0), (-1, 0), 8),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor('#0d1117')),
+        ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor('#c9d1d9')),
+        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#30363d')),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+    ]))
+    body.append(table)
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Timeline:", subheading_style))
+    body.append(Paragraph("• Nov 28: Lemonade (NPU experimentation)", normal_style))
+    body.append(Paragraph("• Dec 7: Switched to Ollama (Lemonade instability)", normal_style))
+    body.append(Paragraph("• Dec 14: GPU crashes after OS/ollama upgrade", normal_style))
+    body.append(Paragraph("• Mar 11: llama.cpp prompt caching fixed — 'things are really humming'", normal_style))
+    
+    body.append(PageBreak())
+    
+    # ============================================
     # AI CODING EDITORS (moved before Lessons)
     # ============================================
     body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
