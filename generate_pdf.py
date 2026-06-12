@@ -737,7 +737,20 @@ def create_pdf():
     body.append(Paragraph("AI-Assisted Physical Design", subheading_style))
     body.append(Spacer(1, 0.2*inch))
     
-    body.append(Paragraph("Blender + AI workflow for creating physical objects", normal_style))
+    body.append(Paragraph("OpenSCAD + AI workflow for concrete sign molds", normal_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph("Prompts from opencode session:", normal_style))
+    body.append(Spacer(1, 0.1*inch))
+    body.append(Paragraph(
+        '• "Create OpenSCAD script for 12x2x2 inch concrete sign mold"'
+        '<br/>• "Add cursive Dancing Script font for raised text effect"'
+        '<br/>• "Create negative mold with 8mm wall thickness"'
+        '<br/>• "Generate STL export for 3D printing with PETG"'
+        '<br/>• "Add Times New Roman embossed text variant"',
+        normal_style
+    ))
+    
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
@@ -818,6 +831,18 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
+    # s2.png: Dimensioned parts
+    body.append(Paragraph("Dimensioned Parts View", heading_style))
+    body.append(Spacer(1, 0.1*inch))
+    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7*inch, 5*inch)
+    if img_s2:
+        body.append(img_s2)
+    body.append(Spacer(1, 0.15*inch))
+    body.append(Paragraph("Precision tolerances for .308 Winchester and 5.56 NATO", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
+    
     # K-baffle print photo
     body.append(Paragraph("K-Baffle in Production", heading_style))
     body.append(Spacer(1, 0.1*inch))
@@ -828,17 +853,6 @@ def create_pdf():
     body.append(Paragraph("OpenSCAD design being 3D printed — from CAD to physical part", normal_style))
     
     body.append(Spacer(1, 0.3*inch))
-    body.append(PageBreak())
-    
-    # s2.png: Dimensioned parts
-    body.append(Paragraph("Dimensioned Parts View", heading_style))
-    body.append(Spacer(1, 0.1*inch))
-    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7*inch, 5*inch)
-    if img_s2:
-        body.append(img_s2)
-    body.append(Spacer(1, 0.15*inch))
-    body.append(Paragraph("Precision tolerances for .308 Winchester and 5.56 NATO", normal_style))
-    
     body.append(PageBreak())
     
     # ============================================

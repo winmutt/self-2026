@@ -61,7 +61,7 @@ pyenv exec python3 render_slides.py
 
 This renders all slides to `assets/slides/` as PNG files at 2x zoom (~192 DPI).
 
-## PDF Structure (42 slides)
+## PDF Structure (43 slides)
 
 Extracted using PyPDF2 (`pyenv exec pip install PyPDF2`):
 
@@ -93,7 +93,7 @@ Extracted using PyPDF2 (`pyenv exec pip install PyPDF2`):
 | 24 | OpenSCAD: Where Things Work |
 | 25 | K-Baffle Assembly (Internal View) |
 | 26 | Dimensioned Parts View |
-| 27 | Georgia Land Scout: Finding Rural Property |
+| 27 | K-Baffle in Production |
 | 28 | Coverage: 50 Counties, 471 ZIP Codes (map) |
 | 29 | What Worked vs What Didn't (RentCast API, Redfin) |
 | 30 | Blocked: Anti-Bot Protections (LandWatch, Zillow, etc.) |
