@@ -450,30 +450,30 @@ def create_pdf():
     
     # Traditional NUMA diagram (separate slide)
     body.append(Paragraph("Traditional NUMA Architecture", heading_style))
-    body.append(Spacer(1, 0.15*inch))
+    body.append(Spacer(1, 0.1*inch))
     
-    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 7.5*inch, 5.5*inch)
+    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 7.5*inch, 6*inch)
     if img1:
         body.append(img1)
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("Two separate nodes, each with own cores + L3 cache", normal_style))
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # Strix Halo diagram (separate slide)
     body.append(Paragraph("Strix Halo APU Architecture", heading_style))
-    body.append(Spacer(1, 0.15*inch))
+    body.append(Spacer(1, 0.1*inch))
     
-    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 7.5*inch, 5.5*inch)
+    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 7.5*inch, 6*inch)
     if img2:
         body.append(img2)
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("Single node, but 2 CCDs with separate L3 caches", normal_style))
     
-    body.append(Spacer(1, 0.5*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # The Problem slide (text only)
@@ -494,44 +494,44 @@ def create_pdf():
     
     # Evidence: Threads Bouncing (ps output)
     body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", heading_style))
-    body.append(Spacer(1, 0.15*inch))
+    body.append(Spacer(1, 0.1*inch))
     
-    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7.5*inch, 5.5*inch)
+    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7.5*inch, 6*inch)
     if img_ps:
         body.append(img_ps)
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("ps output shows threads with varying CPU affinities", normal_style))
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # Evidence: Hardware Topology (lscpu)
     body.append(Paragraph("Evidence: Hardware Topology", heading_style))
-    body.append(Spacer(1, 0.15*inch))
+    body.append(Spacer(1, 0.1*inch))
     
-    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7.5*inch, 5*inch)
+    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7.5*inch, 5.5*inch)
     if img_lscpu:
         body.append(img_lscpu)
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("lscpu shows 2 CCDs but NUMA tools detect only 1 node", normal_style))
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # Evidence: amdgpu_top
     body.append(Paragraph("Evidence: GPU Utilization", heading_style))
-    body.append(Spacer(1, 0.15*inch))
+    body.append(Spacer(1, 0.1*inch))
     
-    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7.5*inch, 5*inch)
+    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7.5*inch, 5.5*inch)
     if img_amdgpu:
         body.append(img_amdgpu)
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("amdgpu_top showing RDNA 3.5 GPU utilization", normal_style))
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # ============================================
@@ -600,37 +600,40 @@ def create_pdf():
     
     # Home Assistant dashboard screenshot
     body.append(Paragraph("Home Assistant Dashboard", heading_style))
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.1*inch))
     body.append(Paragraph("The best open source project I have seen", humor_style))
-    body.append(Spacer(1, 0.3*inch))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/homeasssistant.png', 7*inch, 4*inch)
+    body.append(Spacer(1, 0.15*inch))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/homeasssistant.png', 7.5*inch, 6*inch)
     if img:
         body.append(img)
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("Complete home automation control from local hardware", normal_style))
     
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # Home Assistant on Echo Show
     body.append(Paragraph("Home Assistant on Echo Show", heading_style))
-    body.append(Spacer(1, 0.2*inch))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 7*inch, 4*inch)
+    body.append(Spacer(1, 0.1*inch))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 7.5*inch, 6*inch)
     if img:
         body.append(img)
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("LineageOS + ViewAssist on repurposed Echo Show", normal_style))
     
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # Home Assistant Setup
     body.append(Paragraph("Home Assistant Setup", heading_style))
-    body.append(Spacer(1, 0.2*inch))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/myha.png', 7*inch, 4*inch)
+    body.append(Spacer(1, 0.1*inch))
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/myha.png', 7.5*inch, 6*inch)
     if img:
         body.append(img)
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("Complete dashboard with lights, climate, and automation", normal_style))
     
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # Device Compatibility
