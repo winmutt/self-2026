@@ -388,6 +388,15 @@ def create_pdf():
         '<br/>• Stability: Stable after tuning',
         normal_style
     ))
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph("Qwen3 3.5 122B MTP (Large Context Work)", subheading_style))
+    body.append(Paragraph(
+        "• Context: 400k window, MTP support"
+        '<br/>• Use Case: Complex reasoning, large context analysis'
+        '<br/>• Note: Heavier inference, reserved for demanding tasks',
+        normal_style
+    ))
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("Backend Evolution: Lemonade → Ollama → llama.cpp", subheading_style))
