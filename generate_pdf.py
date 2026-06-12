@@ -256,18 +256,18 @@ def create_pdf():
     body.append(Spacer(1, 0.1*inch))
     
     body.append(Paragraph("Corsair AI Workstation 300", subheading_style))
-    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 07-42-36.png', 7.5*inch, 4*inch)
+    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 07-42-36.png', 7.5*inch, 4.5*inch)
     if img_corsair:
         body.append(img_corsair)
     
-    body.append(Spacer(1, 0.1*inch))
+    body.append(Spacer(1, 0.08*inch))
     
     body.append(Paragraph("System Internals", subheading_style))
-    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 4*inch)
+    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 4.5*inch)
     if img_internals:
         body.append(img_internals)
     
-    body.append(Spacer(1, 0.1*inch))
+    body.append(Spacer(1, 0.08*inch))
     
     body.append(Paragraph("Black Friday 2025 Deal", subheading_style))
     body.append(Paragraph(
@@ -352,14 +352,14 @@ def create_pdf():
     body.append(Spacer(1, 0.2*inch))
     
     # Model comparison chart
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/1771330229614.jpeg', 7.5*inch, 5.5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/1771330229614.jpeg', 7.5*inch, 6*inch)
     if img:
         body.append(img)
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("Qwen3-Coder, Qwen 3.5, and Llama models for different use cases", normal_style))
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(PageBreak())
     
     body.append(Paragraph("Models in Use", heading_style))
@@ -439,13 +439,13 @@ def create_pdf():
     body.append(Paragraph("• Traditional NUMA: 2 nodes, each with own cores + L3 cache", normal_style))
     body.append(Paragraph("• Strix Halo: Single node, but 2 CCDs with separate L3 caches", normal_style))
     
-    body.append(Spacer(1, 0.15*inch))
+    body.append(Spacer(1, 0.1*inch))
     
-    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5*inch)
+    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5.5*inch)
     if img_die:
         body.append(img_die)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # Traditional NUMA diagram (separate slide)
@@ -603,7 +603,7 @@ def create_pdf():
     body.append(Spacer(1, 0.1*inch))
     body.append(Paragraph("The best open source project I have seen", humor_style))
     body.append(Spacer(1, 0.15*inch))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/homeasssistant.png', 7.5*inch, 6*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/homeasssistant.png', 7.5*inch, 7*inch)
     if img:
         body.append(img)
     body.append(Spacer(1, 0.15*inch))
@@ -615,7 +615,7 @@ def create_pdf():
     # Home Assistant on Echo Show
     body.append(Paragraph("Home Assistant on Echo Show", heading_style))
     body.append(Spacer(1, 0.1*inch))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 7.5*inch, 6*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 7.5*inch, 7*inch)
     if img:
         body.append(img)
     body.append(Spacer(1, 0.15*inch))
@@ -627,7 +627,7 @@ def create_pdf():
     # Home Assistant Setup
     body.append(Paragraph("Home Assistant Setup", heading_style))
     body.append(Spacer(1, 0.1*inch))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/myha.png', 7.5*inch, 6*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/myha.png', 7.5*inch, 7*inch)
     if img:
         body.append(img)
     body.append(Spacer(1, 0.15*inch))
@@ -711,7 +711,7 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     # Concrete sign image
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 7*inch, 4.5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 7.5*inch, 6.5*inch)
     if img:
         body.append(img)
     
@@ -751,23 +751,23 @@ def create_pdf():
     
     # s1.png: K-baffle internal view
     body.append(Paragraph("K-Baffle Assembly (Internal View)", heading_style))
-    body.append(Spacer(1, 0.15*inch))
-    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 7.5*inch, 6*inch)
+    body.append(Spacer(1, 0.1*inch))
+    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 7.5*inch, 6.5*inch)
     if img_s1:
         body.append(img_s1)
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("Internal frustum design for optimal acoustic performance", normal_style))
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(PageBreak())
     
     # s2.png: Dimensioned parts
     body.append(Paragraph("Dimensioned Parts View", heading_style))
-    body.append(Spacer(1, 0.15*inch))
-    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7.5*inch, 6*inch)
+    body.append(Spacer(1, 0.1*inch))
+    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7.5*inch, 6.5*inch)
     if img_s2:
         body.append(img_s2)
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("Precision tolerances for .308 Winchester and 5.56 NATO", normal_style))
     
     body.append(PageBreak())
@@ -818,7 +818,7 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     # Opencode screenshot (cropped to remove address bar)
-    img_editor = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot_cropped.png', 7.5*inch, 6*inch)
+    img_editor = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot_cropped.png', 7.5*inch, 7*inch)
     if img_editor:
         body.append(img_editor)
     
