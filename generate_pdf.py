@@ -352,7 +352,7 @@ def create_pdf():
     body.append(Spacer(1, 0.2*inch))
     
     # Model comparison chart
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/1771330229614.jpeg', 7.5*inch, 6*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/1771330229614.jpeg', 8*inch, 6.5*inch)
     if img:
         body.append(img)
     
@@ -752,13 +752,27 @@ def create_pdf():
     # s1.png: K-baffle internal view
     body.append(Paragraph("K-Baffle Assembly (Internal View)", heading_style))
     body.append(Spacer(1, 0.1*inch))
-    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 7.5*inch, 6.5*inch)
+    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 6*inch, 4*inch)
     if img_s1:
         body.append(img_s1)
     body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("Internal frustum design for optimal acoustic performance", normal_style))
     
     body.append(Spacer(1, 0.15*inch))
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
+    
+    # K-baffle print photo
+    body.append(Paragraph("K-Baffle in Production", heading_style))
+    body.append(Spacer(1, 0.1*inch))
+    img_print = get_scaled_image('/opt/opencode/src/self-2026/assets/IMG_20260612_111956.jpg', 4.5*inch, 6*inch)
+    if img_print:
+        body.append(img_print)
+    body.append(Spacer(1, 0.15*inch))
+    body.append(Paragraph("OpenSCAD design being 3D printed — from CAD to physical part", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
     # s2.png: Dimensioned parts

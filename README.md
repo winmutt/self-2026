@@ -51,6 +51,16 @@ python3 generate_pdf.py
 
 The script writes `AMD_Strix_Halo_Talk.pdf` to the repository root and also copies it into `assets/` for easy access.
 
+## Render slides as images
+
+To render PDF slides as images for review (requires PyMuPDF):
+
+```bash
+pyenv exec python3 render_slides.py
+```
+
+This renders all slides to `assets/slides/` as PNG files at 2x zoom (~192 DPI).
+
 ## PDF Structure (37 slides)
 
 Extracted using PyPDF2 (`pyenv exec pip install PyPDF2`):
