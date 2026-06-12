@@ -215,8 +215,8 @@ def create_pdf():
     
     body.append(Paragraph("Section 1: The Hardware Stack", subheading_style))
     agenda_items = [
-        "• Power Consumption: Corsair 300 vs RTX 5090 vs Cloud",
         "• The Hardware: AMD Ryzen AI Max+ 395 APU",
+        "• Power Consumption: Corsair 300 vs RTX 5090 vs Cloud",
         "• The Stack: ROCm + Lemonade Server",
         "• Issue #1070: Core affinity across dual CCDs"
     ]
@@ -228,7 +228,9 @@ def create_pdf():
     body.append(Paragraph("Section 2: Projects & Applications", subheading_style))
     agenda_items = [
         "• Home Assistant: Cutting the Alexa cord",
+        "• Issue #4: Echo 8 mic that quit",
         "• 3D Modeling: AI to concrete signs",
+        "• OpenSCAD: K-baffle precision engineering",
         "• Project WWS: Remote workspace provisioning"
     ]
     for item in agenda_items:
@@ -238,10 +240,10 @@ def create_pdf():
     
     body.append(Paragraph("Section 3: Open Source Journey", subheading_style))
     agenda_items = [
-        "• Lessons Learned: What worked, what didn't",
+        "• AI Coding Editors: My daily drivers",
         "• Key Insights: 8 takeaways from 6 months",
-        "• OSS Contributions: 3.5x increase",
-        "• 26 Years: From LKML 2000 to Strix Halo"
+        "• 26 Years: From LKML 2000 to Strix Halo",
+        "• OSS Contributions: 3.5x increase"
     ]
     for item in agenda_items:
         body.append(Paragraph(f"  {item}", normal_style))
