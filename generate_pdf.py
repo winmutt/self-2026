@@ -280,25 +280,6 @@ def create_pdf():
     body.append(Spacer(1, 0.15*inch))
     body.append(PageBreak())
     
-    # APU Die Architecture (moved here from earlier)
-    body.append(Paragraph("APU Die Architecture", heading_style))
-    body.append(Spacer(1, 0.1*inch))
-    
-    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5*inch)
-    if img_die:
-        body.append(img_die)
-    body.append(Spacer(1, 0.15*inch))
-    
-    body.append(Paragraph("Component Breakdown", subheading_style))
-    body.append(Paragraph("• AMD Radeon 680M GPU: RDNA 3.5, 40 CUs, ~4.6 TFLOPS", normal_style))
-    body.append(Paragraph("• AMD XDNA 2 NPU: 50 TOPS AI acceleration", normal_style))
-    body.append(Paragraph("• 2x CCDs with separate 32MB L3 caches", normal_style))
-    body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory", normal_style))
-    body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 specifications", normal_style))
-    
-    body.append(Spacer(1, 0.2*inch))
-    body.append(PageBreak())
-    
     # ============================================
     # POWER CONSUMPTION & PERFORMANCE
     # ============================================
@@ -447,20 +428,24 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph(
-        '<b>Filed</b><br/>February 8, 2026<br/>'
-        '<b>Repository</b><br/>github.com/lemonade-sdk/lemonade/issues/1070<br/>'
-        '<b>Status</b><br/>Open',
+        '<b>Filed:</b> February 8, 2026 | <b>Repository:</b> github.com/lemonade-sdk/lemonade/issues/1070 | <b>Status:</b> Open',
         normal_style
     ))
     
-    body.append(Spacer(1, 0.4*inch))
+    body.append(Spacer(1, 0.3*inch))
     
     body.append(Paragraph("Hardware Reality", subheading_style))
     body.append(Paragraph("• One processor, but 2x core dies (CCDs) with separate 32MB L3 caches", normal_style))
     body.append(Paragraph("• Traditional NUMA: 2 nodes, each with own cores + L3 cache", normal_style))
     body.append(Paragraph("• Strix Halo: Single node, but 2 CCDs with separate L3 caches", normal_style))
     
-    body.append(Spacer(1, 0.5*inch))
+    body.append(Spacer(1, 0.15*inch))
+    
+    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5*inch)
+    if img_die:
+        body.append(img_die)
+    
+    body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
     # Traditional NUMA diagram (separate slide)
