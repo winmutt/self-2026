@@ -256,7 +256,7 @@ def create_pdf():
     body.append(Spacer(1, 0.2*inch))
     
     body.append(Paragraph("Corsair AI Workstation 300", subheading_style))
-    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/corsair_pricing.png', 7.5*inch, 4*inch)
+    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 07-42-36.png', 7.5*inch, 4*inch)
     if img_corsair:
         body.append(img_corsair)
     
