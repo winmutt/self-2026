@@ -706,7 +706,15 @@ def create_pdf():
     body.append(Paragraph("• Echo 8: Dies after ~24 hours", normal_style))
     body.append(Paragraph("• Root cause: Unknown (yet)", humor_style))
     
-    body.append(Spacer(1, 0.5*inch))
+    body.append(Spacer(1, 0.3*inch))
+    
+    # GitHub Issue #4 screenshot
+    body.append(Paragraph("GitHub Issue #4", subheading_style))
+    img_issue = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 13-25-59.png', 7.5*inch, 5*inch)
+    if img_issue:
+        body.append(img_issue)
+    
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # ============================================
