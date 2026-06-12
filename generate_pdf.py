@@ -385,8 +385,8 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
-    # Architecture Comparison Diagrams - Separate Slide
-    body.append(Paragraph("Traditional NUMA vs. Strix Halo APU", heading_style))
+    # Architecture Comparison + Problem/Solution (combined)
+    body.append(Paragraph("NUMA vs. Strix Halo: The CCD Problem", heading_style))
     body.append(Spacer(1, 0.2*inch))
     
     # Traditional NUMA diagram
@@ -402,61 +402,37 @@ def create_pdf():
         body.append(img2)
     
     body.append(Spacer(1, 0.3*inch))
-    body.append(PageBreak())
     
     body.append(Paragraph("The Problem: NUMA Tools Can't See CCD Boundaries", subheading_style))
     body.append(Paragraph(
-        "• Traditional NUMA tools (numactl, NUMATopologyFilter) detect only 1 node"
-        '<br/>• Cannot see CCD boundaries automatically'
-        '<br/>• Manual core pinning required to keep workloads on same CCD'
-        '<br/>• Running multiple LLMs: threads bounce across CCDs → L3 cache thrashing'
+        "• Traditional NUMA tools detect only 1 node, not 2 CCDs"
+        '<br/>• Manual core pinning required'
+        '<br/>• Threads bounce across CCDs → L3 cache thrashing'
         '<br/>'
-        '<b>Result:</b> Cross-CCD traffic → slower inference, higher latency',
+        '<b>Solution:</b> Manual core pinning per CCD → no cross-CCD traffic',
         normal_style
     ))
     
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("The Solution (Proposed)", subheading_style))
-    body.append(Paragraph(
-        'Manual core pinning (like Red Hat\'s vcpu_pin_set approach):'
-        '<br/>• Reserve cores per CCD, pin llama-server accordingly'
-        '<br/>• Pin based on number of models loaded and CCD boundaries'
-        '<br/>• Prevent cache-crossing penalties'
-        '<br/>'
-        '<b>Result:</b> Each model stays in its own L3 cache domain → no cross-CCD traffic',
-        normal_style
-    ))
-    
+    body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
-    # Evidence: ps output with red boxes
-    body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", subheading_style))
+    # Evidence (combined)
+    body.append(Paragraph("Evidence: Threads Bouncing + Hardware Topology", heading_style))
     body.append(Spacer(1, 0.2*inch))
     
     img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7.5*inch, 4.5*inch)
     if img_ps:
         body.append(img_ps)
     
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
-    
-    # Hardware Topology: CCD Boundaries - Separate Slide
-    body.append(Paragraph("Hardware Topology: CCD Boundaries (lscpu)", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7.5*inch, 5.5*inch)
+    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7.5*inch, 3*inch)
     if img_lscpu:
         body.append(img_lscpu)
     
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
+    body.append(Spacer(1, 0.3*inch))
     
-    # Evidence: amdgpu_top
-    body.append(Paragraph("Evidence: amdgpu_top", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7.5*inch, 4.5*inch)
+    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7.5*inch, 3*inch)
     if img_amdgpu:
         body.append(img_amdgpu)
     
@@ -496,7 +472,38 @@ def create_pdf():
     
     body.append(PageBreak())
     
-    # Home Assistant dashboard screenshot - FIRST
+    # Timeline (moved BEFORE screenshots for context)
+    body.append(Paragraph("Alexa Replacement Timeline", subheading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    timeline_data = [
+        ['Dec 6', 'Started exploring XDA forums'],
+        ['Dec 7', 'HA running on Echo devices'],
+        ['Jan 19', 'HA setup on Echo Show Gen 2'],
+        ['Jan 21', 'Everything works (except wake word)'],
+        ['Jan 25', 'Hey Jarvis to the rescue'],
+        ['Jan 29', 'End-to-end complete'],
+        ['Jan 7, 2026', 'Issue #4: Echo 8 mic dies after 24h'],
+        ['Feb 2026', 'Still debugging (it\'s fine)']
+    ]
+    
+    timeline_table = Table(timeline_data, colWidths=[1.5*inch, 5.5*inch])
+    timeline_table.setStyle(TableStyle([
+        ('ALIGN', (0, 0), (0, -1), 'LEFT'),
+        ('ALIGN', (1, 0), (1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (0, -1), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+        ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor('#1a1a1a')),
+        ('TEXTCOLOR', (0, 0), (-1, -1), colors.HexColor('#e0e0e0')),
+        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#444444')),
+    ]))
+    body.append(timeline_table)
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # Home Assistant dashboard screenshot
     body.append(Paragraph("Home Assistant Dashboard", heading_style))
     body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph("The best open source project I have seen", humor_style))
@@ -507,7 +514,7 @@ def create_pdf():
     
     body.append(PageBreak())
     
-    # Home Assistant screenshot - Echo Show
+    # Home Assistant on Echo Show
     body.append(Paragraph("Home Assistant on Echo Show", subheading_style))
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 7*inch, 4*inch)
     if img:
@@ -515,7 +522,7 @@ def create_pdf():
     
     body.append(PageBreak())
     
-    # Home Assistant install screenshot
+    # Home Assistant Setup
     body.append(Paragraph("Home Assistant Setup", subheading_style))
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/myha.png', 7*inch, 4*inch)
     if img:
@@ -523,9 +530,7 @@ def create_pdf():
     
     body.append(PageBreak())
     
-    # ============================================
-    # DEVICE COMPATIBILITY
-    # ============================================
+    # Device Compatibility
     body.append(Paragraph("LineageOS Device Compatibility", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
@@ -562,38 +567,7 @@ def create_pdf():
     
     body.append(PageBreak())
     
-    # Timeline
-    body.append(Paragraph("Alexa Replacement Timeline", subheading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    timeline_data = [
-        ['Dec 6', 'Started exploring XDA forums'],
-        ['Dec 7', 'HA running on Echo devices'],
-        ['Jan 19', 'HA setup on Echo Show Gen 2'],
-        ['Jan 21', 'Everything works (except wake word)'],
-        ['Jan 25', 'Hey Jarvis to the rescue'],
-        ['Jan 29', 'End-to-end complete'],
-        ['Jan 7, 2026', 'Issue #4: Echo 8 mic dies after 24h'],
-        ['Feb 2026', 'Still debugging (it\'s fine)']
-    ]
-    
-    timeline_table = Table(timeline_data, colWidths=[1.5*inch, 5.5*inch])
-    timeline_table.setStyle(TableStyle([
-        ('ALIGN', (0, 0), (0, -1), 'LEFT'),
-        ('ALIGN', (1, 0), (1, -1), 'LEFT'),
-        ('FONTNAME', (0, 0), (0, -1), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, -1), 10),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
-        ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor('#1a1a1a')),
-        ('TEXTCOLOR', (0, 0), (-1, -1), colors.HexColor('#e0e0e0')),
-        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#444444')),
-    ]))
-    body.append(timeline_table)
-    
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
-    
-    # Echo 8 mic issue
+    # Issue #4 (Echo 8 mic problem)
     body.append(Paragraph("Issue #4: The Echo 8 Mic That Quit", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
@@ -743,7 +717,7 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
-    # WHICH MODELS - Model Comparison Chart
+    # WHICH MODELS - Consolidated Section
     # ============================================
     body.append(Paragraph("Which Models?", heading_style))
     body.append(Spacer(1, 0.3*inch))
@@ -756,9 +730,6 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
-    # ============================================
-    # MODELS IN USE
-    # ============================================
     body.append(Paragraph("Models in Use", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
@@ -772,31 +743,8 @@ def create_pdf():
     ))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("Qwen 3.5 9B (Sub-agents)", subheading_style))
-    body.append(Paragraph(
-        "• Use Case: Secondary agents, parallel tasks"
-        '<br/>• Lightweight: Efficient for focused work'
-        '<br/>• Integration: Works with Opencode sub-agent architecture',
-        normal_style
-    ))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("llama-3.1-8b (Home Assistant)", subheading_style))
-    body.append(Paragraph(
-        "• Use Case: Wake word processing, HA automation"
-        '<br/>• Backend: Ollama / Lemonade'
-        '<br/>• Deployment: Local inference for real-time responses',
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
-    
-    # ============================================
-    # BACKEND EVOLUTION
-    # ============================================
-    body.append(Paragraph("Backend Evolution: Lemonade → Ollama", heading_style))
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Backend Evolution: Lemonade → Ollama", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
     
     backend_data = [
         ['Backend', 'Pros', 'Cons'],
@@ -822,42 +770,12 @@ def create_pdf():
     body.append(table)
     
     body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Timeline:", subheading_style))
-    body.append(Paragraph("• Nov 28: Lemonade (NPU experimentation)", normal_style))
-    body.append(Paragraph("• Dec 7: Switched to Ollama (Lemonade instability)", normal_style))
-    body.append(Paragraph("• Dec 14: GPU crashes after OS/ollama upgrade", normal_style))
-    body.append(Paragraph("• Mar 11: llama.cpp prompt caching fixed — 'things are really humming'", normal_style))
-    
-    body.append(PageBreak())
-    
-    # ============================================
-    # AI CODING EDITORS (moved before Lessons)
-    # ============================================
-    body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Opencode", subheading_style))
     body.append(Paragraph(
-        "Most usable, portable, and stable. Best agentic coding experience. "
-        "Runs as a web server (http://localhost:3000) allowing remote access "
-        "with a localized agent running for autonomous development. "
-        "github.com/anomalyco/opencode",
-        normal_style
+        'Nov 28: Lemonade → Dec 7: Ollama → Dec 14: GPU crashes → Mar 11: "Things really humming"',
+        humor_style
     ))
-    body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("Cline", subheading_style))
-    body.append(Paragraph("Good TUI but many regressions over time.", normal_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Also Use: Koo Roo, Aider", normal_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 6.5*inch, 4.5*inch)
-    if img:
-        body.append(img)
-    
+    body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
     # ============================================
