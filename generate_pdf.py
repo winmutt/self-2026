@@ -256,18 +256,18 @@ def create_pdf():
     body.append(Spacer(1, 0.2*inch))
     
     body.append(Paragraph("Corsair AI Workstation 300", subheading_style))
-    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 07-42-36.png', 7.5*inch, 4*inch)
+    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 07-42-36.png', 7.5*inch, 3.5*inch)
     if img_corsair:
         body.append(img_corsair)
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     
     body.append(Paragraph("System Internals", subheading_style))
-    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 4*inch)
+    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 3.5*inch)
     if img_internals:
         body.append(img_internals)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     
     body.append(Paragraph("Physical Layout", subheading_style))
     body.append(Paragraph("• 16 cores (12 performance + 4 efficiency)", normal_style))
@@ -277,11 +277,16 @@ def create_pdf():
     body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory (soldered)", normal_style))
     body.append(Paragraph("• Source: Corsair AI Workstation 300, AMD Ryzen AI Max+ 395 teardown (Chiphell)", normal_style))
     
-    body.append(Spacer(1, 0.5*inch))
+    body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
     # APU Die Architecture (moved here from earlier)
     body.append(Paragraph("APU Die Architecture", heading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 3.5*inch)
+    if img_die:
+        body.append(img_die)
     body.append(Spacer(1, 0.2*inch))
     
     body.append(Paragraph("Component Breakdown", subheading_style))
@@ -290,13 +295,8 @@ def create_pdf():
     body.append(Paragraph("• 2x CCDs with separate 32MB L3 caches", normal_style))
     body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory", normal_style))
     body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 specifications", normal_style))
+    
     body.append(Spacer(1, 0.3*inch))
-    
-    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 4*inch)
-    if img_die:
-        body.append(img_die)
-    
-    body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
     # ============================================
@@ -332,47 +332,35 @@ def create_pdf():
     ]))
     body.append(table)
     
-    body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph(
-        'Strix Halo: ~300W vs RTX 5090: ~800-1000W vs Cloud Servers: 1500-3000W<br/>'
-        'Source: Corsair specs, NVIDIA TDP ratings, TechPowerUp benchmarks',
-        normal_style
-    ))
+    body.append(Spacer(1, 0.4*inch))
+    body.append(Paragraph("Strix Halo: ~300W vs RTX 5090: ~800-1000W vs Cloud: 1500-3000W", normal_style))
+    body.append(Spacer(1, 0.4*inch))
     
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
-    
-    # FastFlowLM Performance
-    body.append(Paragraph("FastFlowLM NPU Performance", heading_style))
-    body.append(Spacer(1, 0.3*inch))
+    # FastFlowLM + Query Performance on same slide
+    body.append(Paragraph("FastFlowLM NPU Performance", subheading_style))
     body.append(Paragraph(
         '• 6784 tokens prefill in ~15 seconds (~455 tokens/sec)'
         '<br/>• Chunked processing: 4096 + 2688 tokens'
-        '<br/>• End-to-end (prefill to response): ~16.2 seconds'
-        '<br/>• Source: FastFlowLM logs (lemonade-server, June 2026)',
+        '<br/>• End-to-end (prefill to response): ~16.2 seconds',
         normal_style
     ))
-    
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
-    
-    # Query Performance Timeline
-    body.append(Paragraph("Query Performance Timeline", heading_style))
     body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Query Performance Timeline", subheading_style))
     body.append(Paragraph(
-        '• Nov 2025: 45 TPS (400k context, initial) → 14 TPS (200k, tuned)'
-        '<br/>• Dec 2025: 284 TPS prompt eval, 46 TPS generation'
-        '<br/>• Jan 2026: 2x faster after AMD GPU library update'
+        '• Nov 2025: 45 TPS (400k) → 14 TPS (200k)'
+        '<br/>• Dec 2025: 284 TPS prompt, 46 TPS generation'
+        '<br/>• Jan 2026: 2x faster after AMD GPU libraries'
         '<br/>• Feb 2026: 24 TPS single-threaded'
-        '<br/>• May 2026: 18.65 TPS @ ~200k context (37.8 min TTFT)'
-        '<br/>• Source: PERFORMANCE_DATA.md, lemonade telemetry',
+        '<br/>• May 2026: 18.65 TPS @ ~200k (37.8 min TTFT)',
         normal_style
     ))
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Source: PERFORMANCE_DATA.md, FastFlowLM logs, lemonade telemetry", humor_style))
     
-    body.append(Spacer(1, 0.5*inch))
-    body.append(PageBreak())
+    body.append(Spacer(1, 0.3*inch))
     
-    # Pricing
+    # Pricing - continue on same page if space allows
     body.append(Paragraph("The Hardware Investment", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
@@ -603,6 +591,7 @@ def create_pdf():
     
     body.append(Paragraph("Echo Show Devices Supported", subheading_style))
     body.append(Spacer(1, 0.2*inch))
+    body.append(Paragraph("lineageos.org - Open source Android operating system", normal_style))
     
     data = [
         ['Device', 'Codename', 'SoC', 'XDA Thread'],
@@ -712,7 +701,7 @@ def create_pdf():
     # s1.png: K-baffle internal view
     body.append(Paragraph("K-Baffle Assembly (Internal View)", heading_style))
     body.append(Spacer(1, 0.2*inch))
-    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 7*inch, 4*inch)
+    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 7.5*inch, 5.5*inch)
     if img_s1:
         body.append(img_s1)
     body.append(Spacer(1, 0.3*inch))
@@ -723,7 +712,7 @@ def create_pdf():
     # s2.png: Dimensioned parts
     body.append(Paragraph("Dimensioned Parts View", heading_style))
     body.append(Spacer(1, 0.2*inch))
-    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7*inch, 4*inch)
+    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7.5*inch, 5.5*inch)
     if img_s2:
         body.append(img_s2)
     body.append(Spacer(1, 0.3*inch))
@@ -731,38 +720,7 @@ def create_pdf():
     
     body.append(PageBreak())
     
-    # Comparison section
-    body.append(Paragraph("Two Approaches to Physical Design", heading_style))
-    body.append(Spacer(1, 0.3*inch))
     
-    comparison_data = [
-        ['OpenSCAD (wmi002)', 'Blender + AI (Concrete Signs)'],
-        ['Code-driven parametrics', 'AI-generated meshes'],
-        ['Thread tolerances: 5/8-24 UNF', 'Mold fit: "test and adjust"'],
-        ['BOSL2 library: threaded_rod()', 'AI hallucinates topology'],
-        ['$fn=100 precision', '$fn=32 vibes'],
-        ['K-baffles: 15° frustum angles', 'Text: "Dancing Script:style=Bold"'],
-        ['Stainless steel ready', 'Concrete ready'],
-        ['Documented specs in code', 'Documented by hope'],
-    ]
-    
-    table = Table(comparison_data, colWidths=[3.2*inch, 3.2*inch])
-    table.setStyle(TableStyle([
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, -1), 10),
-        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('TOPPADDING', (0, 0), (-1, 0), 12),
-        ('BOTTOMPADDING', (0, 1), (-1, -1), 8),
-        ('TOPPADDING', (0, 1), (-1, -1), 8),
-    ]))
-    body.append(table)
-    
-    body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph("OpenSCAD: Precise, documented, working. Blender: Vibe-based, hopeful.", humor_style))
-    
-    body.append(PageBreak())
     
     # ============================================
     # PART 7: WWS PROJECT
@@ -807,8 +765,8 @@ def create_pdf():
     ))
     body.append(Spacer(1, 0.3*inch))
     
-    # Opencode screenshot
-    img_editor = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 7.5*inch, 4.5*inch)
+    # Opencode screenshot (cropped to remove address bar)
+    img_editor = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot_cropped.png', 7.5*inch, 5.5*inch)
     if img_editor:
         body.append(img_editor)
     
@@ -836,24 +794,35 @@ def create_pdf():
     body.append(Paragraph("Models in Use", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("Qwen3-Coder (Primary Coding Model)", subheading_style))
+    body.append(Paragraph("Qwen3.6 35B-A3B-MTP (Current Go-To)", subheading_style))
     body.append(Paragraph(
-        "• Context: 400k window, ~59GB memory usage"
-        '<br/>• Use Case: Autonomous coding, WWS project development'
-        '<br/>• Stability: Stable after tuning'
-        '<br/>• Quote: "Making some really good results"',
+        "• Context: 400k window, MTP-GGUF format"
+        '<br/>• Use Case: Primary coding model, autonomous development'
+        '<br/>• MTP: Multi-Token Prediction (lemonade 10.5.1+)'
+        '<br/>• Predicts multiple tokens per forward pass'
+        '<br/>• Significantly improves decode throughput'
+        '<br/>• Source: github.com/amd/gaia/issues/1140',
         normal_style
     ))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("Backend Evolution: Lemonade → Ollama", subheading_style))
+    body.append(Paragraph("Qwen3-Coder (Previous Primary)", subheading_style))
+    body.append(Paragraph(
+        "• Context: 400k window, ~59GB memory usage"
+        '<br/>• Use Case: WWS project development'
+        '<br/>• Stability: Stable after tuning',
+        normal_style
+    ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Backend Evolution: Lemonade → Ollama → llama.cpp", subheading_style))
     body.append(Spacer(1, 0.2*inch))
     
     backend_data = [
         ['Backend', 'Pros', 'Cons'],
-        ['Lemonade (llama.cpp + ROCm)', 'NPU support, AMD GPU optimized', 'Instability, NPU "coming soon"'],
+        ['Lemonade (llama.cpp + ROCm)', 'NPU support, AMD GPU optimized, MTP support', 'Instability after OS upgrade'],
         ['Ollama', 'Stable, easy to use', 'GPU crashes after OS upgrades'],
-        ['llama.cpp (direct)', 'Prompt caching (Mar 2026), control', 'Manual setup'],
+        ['llama.cpp (direct)', 'Prompt caching, MTP support', 'Manual setup'],
     ]
     
     table = Table(backend_data, colWidths=[2.2*inch, 2.5*inch, 2.5*inch])
@@ -881,28 +850,7 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
-    # ============================================
-    # PART 8: LESSONS LEARNED
-    # ============================================
-    body.append(Paragraph("Lessons Learned (Mostly)", heading_style))
-    body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("What Worked ✓", subheading_style))
-    body.append(Paragraph("• Cline + Qwen3-Coder: Actually produces code", normal_style))
-    body.append(Paragraph("• Prompt Caching: Things hum now", normal_style))
-    body.append(Paragraph("• AMD GPU Libraries: 2x faster (worth the pain)", normal_style))
-    body.append(Paragraph("• WWS Project: Vibe-coded from Feb 22 (first commit) to May 12", normal_style))
-    body.append(Paragraph("• Home Assistant: Alexa is dead, long live OSS", normal_style))
-    
-    body.append(Spacer(1, 0.5*inch))
-    
-    body.append(Paragraph("What Didn't ✗", subheading_style))
-    body.append(Paragraph("• Memory: 32GB reserved for Lemonade/llama.cpp/opencode", normal_style))
-    body.append(Paragraph("• Ollama: Still crashes after updates", normal_style))
-    body.append(Paragraph("• NPU: Coming soon™ (always)", normal_style))
-    body.append(Paragraph("• Context >64k: TPS drops like a stone", normal_style))
-    
-    body.append(PageBreak())
     
     # ============================================
     # KEY INSIGHTS
