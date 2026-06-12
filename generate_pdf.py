@@ -253,51 +253,41 @@ def create_pdf():
     # PART 5: THE HARDWARE
     # ============================================
     body.append(Paragraph("The Hardware: AMD Ryzen AI Max+ 395", heading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    body.append(Paragraph("Black Friday 2025 Deal", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    body.append(Paragraph(
-        '• Corsair 300 AI Workstation: <b>$1800</b> (128GB Strix Halo system)'
-        '<br/>• Sold NVIDIA RTX 3060 rig to fund the purchase'
-        '<br/>• Today\'s equivalent: ~$3000+ (RTX 4090 configurations)',
-        normal_style
-    ))
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.1*inch))
     
     body.append(Paragraph("Corsair AI Workstation 300", subheading_style))
-    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 07-42-36.png', 7.5*inch, 3*inch)
+    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 07-42-36.png', 7.5*inch, 4*inch)
     if img_corsair:
         body.append(img_corsair)
     
     body.append(Spacer(1, 0.1*inch))
     
     body.append(Paragraph("System Internals", subheading_style))
-    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 3*inch)
+    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 4*inch)
     if img_internals:
         body.append(img_internals)
     
+    body.append(Spacer(1, 0.1*inch))
+    
+    body.append(Paragraph("Black Friday 2025 Deal", subheading_style))
+    body.append(Paragraph(
+        '• Corsair 300 AI Workstation: <b>$1800</b> (128GB Strix Halo system)'
+        '<br/>• Sold NVIDIA RTX 3060 rig to fund the purchase'
+        '<br/>• Today\'s equivalent: ~$3000+ (RTX 4090 configurations)',
+        normal_style
+    ))
+    
     body.append(Spacer(1, 0.15*inch))
-    
-    body.append(Paragraph("Physical Layout", subheading_style))
-    body.append(Paragraph("• 16 cores (12 performance + 4 efficiency)", normal_style))
-    body.append(Paragraph("• 2x Core Complex Dies (CCD) with 32MB L3 cache each", normal_style))
-    body.append(Paragraph("• 768KB L1d + 512KB L1i + 16MB L2", normal_style))
-    body.append(Paragraph("• Integrated RDNA 3.5 GPU (40 Compute Units)", normal_style))
-    body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory (soldered)", normal_style))
-    body.append(Paragraph("• Source: Corsair AI Workstation 300, AMD Ryzen AI Max+ 395 teardown (Chiphell)", normal_style))
-    
-    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # APU Die Architecture (moved here from earlier)
     body.append(Paragraph("APU Die Architecture", heading_style))
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.1*inch))
     
-    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 3.5*inch)
+    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5*inch)
     if img_die:
         body.append(img_die)
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     
     body.append(Paragraph("Component Breakdown", subheading_style))
     body.append(Paragraph("• AMD Radeon 680M GPU: RDNA 3.5, 40 CUs, ~4.6 TFLOPS", normal_style))
@@ -306,7 +296,7 @@ def create_pdf():
     body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory", normal_style))
     body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 specifications", normal_style))
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # ============================================
@@ -381,13 +371,14 @@ def create_pdf():
     body.append(Spacer(1, 0.2*inch))
     
     # Model comparison chart
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/1771330229614.jpeg', 7.5*inch, 5*inch)
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/1771330229614.jpeg', 7.5*inch, 5.5*inch)
     if img:
         body.append(img)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph("Qwen3-Coder, Qwen 3.5, and Llama models for different use cases", normal_style))
     
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     body.append(Paragraph("Models in Use", heading_style))
@@ -474,27 +465,27 @@ def create_pdf():
     
     # Traditional NUMA diagram (separate slide)
     body.append(Paragraph("Traditional NUMA Architecture", heading_style))
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.15*inch))
     
-    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 7.5*inch, 5*inch)
+    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 7.5*inch, 5.5*inch)
     if img1:
         body.append(img1)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph("Two separate nodes, each with own cores + L3 cache", normal_style))
     
-    body.append(Spacer(1, 0.5*inch))
+    body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
     # Strix Halo diagram (separate slide)
     body.append(Paragraph("Strix Halo APU Architecture", heading_style))
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.15*inch))
     
-    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 7.5*inch, 5*inch)
+    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 7.5*inch, 5.5*inch)
     if img2:
         body.append(img2)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph("Single node, but 2 CCDs with separate L3 caches", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
@@ -518,41 +509,44 @@ def create_pdf():
     
     # Evidence: Threads Bouncing (ps output)
     body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", heading_style))
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     
-    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7.5*inch, 4.5*inch)
+    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7.5*inch, 5.5*inch)
     if img_ps:
         body.append(img_ps)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph("ps output shows threads with varying CPU affinities", normal_style))
     
+    body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
     # Evidence: Hardware Topology (lscpu)
     body.append(Paragraph("Evidence: Hardware Topology", heading_style))
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     
-    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7.5*inch, 4*inch)
+    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7.5*inch, 5*inch)
     if img_lscpu:
         body.append(img_lscpu)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph("lscpu shows 2 CCDs but NUMA tools detect only 1 node", normal_style))
     
+    body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
     # Evidence: amdgpu_top
     body.append(Paragraph("Evidence: GPU Utilization", heading_style))
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     
-    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7.5*inch, 4*inch)
+    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7.5*inch, 5*inch)
     if img_amdgpu:
         body.append(img_amdgpu)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph("amdgpu_top showing RDNA 3.5 GPU utilization", normal_style))
     
+    body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
     
     # ============================================
@@ -769,22 +763,23 @@ def create_pdf():
     
     # s1.png: K-baffle internal view
     body.append(Paragraph("K-Baffle Assembly (Internal View)", heading_style))
-    body.append(Spacer(1, 0.2*inch))
-    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 7.5*inch, 5.5*inch)
+    body.append(Spacer(1, 0.15*inch))
+    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 7.5*inch, 6*inch)
     if img_s1:
         body.append(img_s1)
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph("Internal frustum design for optimal acoustic performance", normal_style))
     
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # s2.png: Dimensioned parts
     body.append(Paragraph("Dimensioned Parts View", heading_style))
-    body.append(Spacer(1, 0.2*inch))
-    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7.5*inch, 5.5*inch)
+    body.append(Spacer(1, 0.15*inch))
+    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7.5*inch, 6*inch)
     if img_s2:
         body.append(img_s2)
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph("Precision tolerances for .308 Winchester and 5.56 NATO", normal_style))
     
     body.append(PageBreak())
@@ -835,11 +830,11 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     # Opencode screenshot (cropped to remove address bar)
-    img_editor = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot_cropped.png', 7.5*inch, 5.5*inch)
+    img_editor = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot_cropped.png', 7.5*inch, 6*inch)
     if img_editor:
         body.append(img_editor)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     
