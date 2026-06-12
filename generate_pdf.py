@@ -769,9 +769,12 @@ def create_pdf():
         normal_style
     ))
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
     
-    body.append(Paragraph("Why OpenSCAD Works", subheading_style))
+    # Why OpenSCAD Works (separate slide)
+    body.append(Paragraph("Why OpenSCAD Works", heading_style))
+    body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph(
         '• Code-based CAD: Everything is a script — version control friendly'
         '<br/>• Declarative syntax: Define what you want, not how to draw it'
@@ -783,7 +786,7 @@ def create_pdf():
         normal_style
     ))
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.3*inch))
     body.append(Paragraph(
         '"The most straightforward way to create 3D models programmatically. '
         'No mouse required."', humor_style
@@ -819,7 +822,7 @@ def create_pdf():
     # s2.png: Dimensioned parts
     body.append(Paragraph("Dimensioned Parts View", heading_style))
     body.append(Spacer(1, 0.1*inch))
-    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7.5*inch, 6.5*inch)
+    img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7*inch, 5*inch)
     if img_s2:
         body.append(img_s2)
     body.append(Spacer(1, 0.15*inch))
