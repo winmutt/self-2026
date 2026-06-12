@@ -412,13 +412,22 @@ def create_pdf():
     ]))
     body.append(table)
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(Paragraph(
         'Nov 28: Lemonade → Dec 7: Ollama → Dec 14: GPU crashes → Mar 11: "Things really humming"',
         humor_style
     ))
     
-    body.append(Spacer(1, 0.5*inch))
+    body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
+    
+    # Lemonade Server screenshot
+    body.append(Paragraph("Lemonade Server", heading_style))
+    body.append(Spacer(1, 0.2*inch))
+    img_lemonade = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 12-16-48.png', 7.5*inch, 5*inch)
+    if img_lemonade:
+        body.append(img_lemonade)
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # ============================================
