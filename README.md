@@ -58,37 +58,37 @@ Extracted using PyPDF2 (`pyenv exec pip install PyPDF2`):
 | # | Title |
 |---|-------|
 | 1 | Six Months with AMD Strix Halo |
-| 2 | Power Consumption Reality |
-| 3 | The Hardware Investment |
-| 4 | What We're Covering (Agenda) |
-| 5 | The Hardware: AMD Ryzen AI Max+ 395 |
-| 6 | Hardware specs (128GB unified memory) |
+| 2 | What We're Covering (Agenda) |
+| 3 | The Hardware: AMD Ryzen AI Max+ 395 |
+| 4 | Hardware specs (128GB unified memory) |
+| 5 | Power Consumption Reality |
+| 6 | The Hardware Investment |
 | 7 | Feat #1070: Core affinity when running multiple models |
-| 8 | Traditional NUMA vs. Strix Halo APU |
+| 8 | NUMA vs. Strix Halo: The CCD Problem |
 | 9 | The Problem: NUMA Tools Can't See CCD Boundaries |
-| 10 | Evidence: Threads Bouncing Across CCDs |
-| 11 | Hardware Topology: CCD Boundaries (lscpu) |
-| 12 | Evidence: amdgpu_top |
-| 13 | Cutting the Alexa Cord |
-| 14 | Alexa Replacement Timeline |
-| 15 | Home Assistant Dashboard |
-| 16 | Home Assistant on Echo Show |
-| 17 | Home Assistant Setup |
-| 18 | LineageOS Device Compatibility |
-| 19 | Issue #4: The Echo 8 Mic That Quit |
-| 20 | Blender: Concrete Sign Mold Design |
-| 21 | Blender process (AI → STL → mold → concrete) |
-| 22 | OpenSCAD: Where Things Work |
-| 23 | Dimensioned Parts View |
-| 24 | Two Approaches to Physical Design |
-| 25 | Project WWS: I Vibe-Coded an Entire System |
-| 26 | Lessons Learned (Mostly) |
-| 27 | Key Insights (8 takeaways) |
-| 28 | 26 Years of Open Source (2000-2026) |
-| 29 | GitHub Activity Heatmap (2018-2024 ghost town) |
-| 30 | How Buying Hardware Got Me Back in Open Source |
-| 31 | Contribution Breakdown |
-| 32 | AI Coding Editors: My Daily Drivers |
+| 10 | Evidence: Threads Bouncing + Hardware Topology |
+| 11 | WWS Dashboard |
+| 12 | Cutting the Alexa Cord |
+| 13 | Alexa Replacement Timeline |
+| 14 | Home Assistant Dashboard |
+| 15 | Home Assistant on Echo Show |
+| 16 | Home Assistant Setup |
+| 17 | LineageOS Device Compatibility |
+| 18 | Issue #4: The Echo 8 Mic That Quit |
+| 19 | Blender: Concrete Sign Mold Design |
+| 20 | Blender process (AI → STL → mold → concrete) |
+| 21 | OpenSCAD: Where Things Work |
+| 22 | Dimensioned Parts View |
+| 23 | Two Approaches to Physical Design |
+| 24 | Project WWS: I Vibe-Coded an Entire System |
+| 25 | Which Models? |
+| 26 | Models in Use |
+| 27 | Lessons Learned (Mostly) |
+| 28 | Key Insights (8 takeaways) |
+| 29 | 26 Years of Open Source (2000-2026) |
+| 30 | GitHub Activity Heatmap (2018-2024 ghost town) |
+| 31 | How Buying Hardware Got Me Back in Open Source |
+| 32 | Contribution Breakdown |
 | 33 | References & Sources (Power, Software) |
 | 34 | References continued (Communities) |
 | 35 | github.com/winmutt (End) |
