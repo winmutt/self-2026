@@ -719,15 +719,18 @@ def create_pdf():
     body.append(Spacer(1, 0.2*inch))
     
     body.append(Paragraph("Blender + AI workflow for creating physical objects", normal_style))
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
-    # Concrete sign image
+    # Concrete sign image (separate slide)
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/concrete_sign.png', 7.5*inch, 6.5*inch)
     if img:
         body.append(img)
     
     body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
     
+    # The Process (separate slide)
     body.append(Paragraph("The Process", subheading_style))
     body.append(Paragraph("1. AI generates Blender design", normal_style))
     body.append(Paragraph("2. Export to STL", normal_style))
@@ -735,7 +738,7 @@ def create_pdf():
     body.append(Paragraph("4. Create silicone mold", normal_style))
     body.append(Paragraph("5. Cast concrete", normal_style))
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.5*inch))
     body.append(Paragraph("December 1, 2025 — More physical projects coming soon", humor_style))
     
     body.append(PageBreak())
