@@ -441,7 +441,7 @@ def create_pdf():
     
     body.append(Spacer(1, 0.1*inch))
     
-    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5.5*inch)
+    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 8*inch, 5*inch)
     if img_die:
         body.append(img_die)
     
@@ -452,7 +452,7 @@ def create_pdf():
     body.append(Paragraph("Traditional NUMA Architecture", heading_style))
     body.append(Spacer(1, 0.1*inch))
     
-    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 7.5*inch, 6*inch)
+    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 8.5*inch, 6*inch)
     if img1:
         body.append(img1)
     
@@ -466,7 +466,7 @@ def create_pdf():
     body.append(Paragraph("Strix Halo APU Architecture", heading_style))
     body.append(Spacer(1, 0.1*inch))
     
-    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 7.5*inch, 6*inch)
+    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 8.5*inch, 6*inch)
     if img2:
         body.append(img2)
     
@@ -496,7 +496,7 @@ def create_pdf():
     body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", heading_style))
     body.append(Spacer(1, 0.1*inch))
     
-    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7.5*inch, 6*inch)
+    img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 8.5*inch, 6*inch)
     if img_ps:
         body.append(img_ps)
     
@@ -510,7 +510,7 @@ def create_pdf():
     body.append(Paragraph("Evidence: Hardware Topology", heading_style))
     body.append(Spacer(1, 0.1*inch))
     
-    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7.5*inch, 5.5*inch)
+    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 8.5*inch, 5.5*inch)
     if img_lscpu:
         body.append(img_lscpu)
     
@@ -524,7 +524,7 @@ def create_pdf():
     body.append(Paragraph("Evidence: GPU Utilization", heading_style))
     body.append(Spacer(1, 0.1*inch))
     
-    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7.5*inch, 5.5*inch)
+    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 8.5*inch, 5.5*inch)
     if img_amdgpu:
         body.append(img_amdgpu)
     
