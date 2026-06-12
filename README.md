@@ -51,7 +51,7 @@ python3 generate_pdf.py
 
 The script writes `AMD_Strix_Halo_Talk.pdf` to the repository root and also copies it into `assets/` for easy access.
 
-## PDF Structure (39 slides)
+## PDF Structure (41 slides)
 
 Extracted using PyPDF2 (`pyenv exec pip install PyPDF2`):
 
@@ -62,40 +62,39 @@ Extracted using PyPDF2 (`pyenv exec pip install PyPDF2`):
 | 3 | The Hardware: AMD Ryzen AI Max+ 395 (Corsair system + internals) |
 | 4 | Physical Layout (specs) |
 | 5 | APU Die Architecture |
-| 6 | Component Breakdown (GPU/NPU) |
-| 7 | Power Consumption & Performance (system comparison) |
-| 8 | FastFlowLM + Query Performance Timeline |
+| 6 | Power Consumption & Performance (system comparison) |
+| 7 | FastFlowLM NPU Performance |
+| 8 | Query Performance Timeline |
 | 9 | The Hardware Investment |
 | 10 | Feat #1070: Core affinity when running multiple models |
-| 11 | NUMA vs. Strix Halo: The CCD Problem |
-| 12 | The Problem: NUMA Tools Can't See CCD Boundaries |
-| 13 | Evidence: Threads Bouncing + Hardware Topology (part 1) |
-| 14 | Evidence continued (amdgpu_top) |
-| 15 | Cutting the Alexa Cord |
-| 16 | Alexa Replacement Timeline |
-| 17 | Home Assistant Dashboard |
-| 18 | Home Assistant on Echo Show |
-| 19 | Home Assistant Setup |
-| 20 | LineageOS Device Compatibility |
-| 21 | Issue #4: The Echo 8 Mic That Quit |
-| 22 | Blender: Concrete Sign Mold Design |
-| 23 | Blender process steps |
-| 24 | OpenSCAD: Where Things Work |
-| 25 | Dimensioned Parts View |
-| 26 | Two Approaches to Physical Design |
-| 27 | Project WWS: I Vibe-Coded an Entire System |
-| 28 | AI Coding Editors: My Daily Drivers |
-| 29 | Which Models? (chart) |
-| 30 | Models in Use |
-| 31 | Lessons Learned (Mostly) |
-| 32 | Key Insights (8 takeaways) |
-| 33 | 26 Years of Open Source (2000-2026) |
-| 34 | GitHub Activity Heatmap (2018-2024 ghost town) |
-| 35 | How Buying Hardware Got Me Back in Open Source |
-| 36 | Contribution Breakdown |
-| 37 | References & Sources (Power, Software) |
-| 38 | References continued (Communities) |
-| 39 | github.com/winmutt (End) |
+| 11 | Traditional NUMA Architecture |
+| 12 | Strix Halo APU Architecture |
+| 13 | The Problem: NUMA Tools Can't See CCD Boundaries |
+| 14 | Evidence: Threads Bouncing Across CCDs |
+| 15 | Evidence: Hardware Topology |
+| 16 | Evidence: GPU Utilization |
+| 17 | Cutting the Alexa Cord |
+| 18 | Alexa Replacement Timeline |
+| 19 | Home Assistant Dashboard |
+| 20 | Home Assistant on Echo Show |
+| 24 | Blender: Concrete Sign Mold Design |
+| 25 | Blender process steps |
+| 26 | OpenSCAD: Where Things Work |
+| 27 | K-Baffle Assembly (Internal View) |
+| 28 | Dimensioned Parts View |
+| 29 | Two Approaches to Physical Design |
+| 30 | Project WWS: I Vibe-Coded an Entire System |
+| 31 | AI Coding Editors: My Daily Drivers |
+| 32 | Which Models? (chart) |
+| 33 | Models in Use |
+| 34 | Lessons Learned (Mostly) |
+| 35 | Key Insights (8 takeaways) |
+| 36 | 26 Years of Open Source (2000-2026) |
+| 37 | GitHub Activity Heatmap (2018-2024 ghost town) |
+| 38 | How Buying Hardware Got Me Back in Open Source |
+| 39 | Contribution Breakdown |
+| 40 | References & Sources (Power, Software) |
+| 41 | References continued (Communities) + End |
 
 ### Verification
 

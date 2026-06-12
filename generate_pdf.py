@@ -255,14 +255,14 @@ def create_pdf():
     body.append(Paragraph("The Hardware: AMD Ryzen AI Max+ 395", heading_style))
     body.append(Spacer(1, 0.2*inch))
     
-    # Corsair system image
+    body.append(Paragraph("Corsair AI Workstation 300", subheading_style))
     img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/corsair_pricing.png', 7.5*inch, 4*inch)
     if img_corsair:
         body.append(img_corsair)
     
     body.append(Spacer(1, 0.2*inch))
     
-    # System internals
+    body.append(Paragraph("System Internals", subheading_style))
     img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 4*inch)
     if img_internals:
         body.append(img_internals)
@@ -282,13 +282,7 @@ def create_pdf():
     
     # APU Die Architecture (moved here from earlier)
     body.append(Paragraph("APU Die Architecture", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5*inch)
-    if img_die:
-        body.append(img_die)
-    
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     
     body.append(Paragraph("Component Breakdown", subheading_style))
     body.append(Paragraph("• AMD Radeon 680M GPU: RDNA 3.5, 40 CUs, ~4.6 TFLOPS", normal_style))
@@ -296,6 +290,11 @@ def create_pdf():
     body.append(Paragraph("• 2x CCDs with separate 32MB L3 caches", normal_style))
     body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory", normal_style))
     body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 specifications", normal_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 4*inch)
+    if img_die:
+        body.append(img_die)
     
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
@@ -304,7 +303,7 @@ def create_pdf():
     # POWER CONSUMPTION & PERFORMANCE
     # ============================================
     body.append(Paragraph("Power Consumption & Performance", heading_style))
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     
     body.append(Paragraph("System Power Comparison", subheading_style))
     body.append(Spacer(1, 0.2*inch))
@@ -340,8 +339,12 @@ def create_pdf():
         normal_style
     ))
     
-    body.append(Spacer(1, 0.4*inch))
-    body.append(Paragraph("FastFlowLM NPU Performance", subheading_style))
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # FastFlowLM Performance
+    body.append(Paragraph("FastFlowLM NPU Performance", heading_style))
+    body.append(Spacer(1, 0.3*inch))
     body.append(Paragraph(
         '• 6784 tokens prefill in ~15 seconds (~455 tokens/sec)'
         '<br/>• Chunked processing: 4096 + 2688 tokens'
@@ -350,8 +353,12 @@ def create_pdf():
         normal_style
     ))
     
-    body.append(Spacer(1, 0.4*inch))
-    body.append(Paragraph("Query Performance Timeline", subheading_style))
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # Query Performance Timeline
+    body.append(Paragraph("Query Performance Timeline", heading_style))
+    body.append(Spacer(1, 0.3*inch))
     body.append(Paragraph(
         '• Nov 2025: 45 TPS (400k context, initial) → 14 TPS (200k, tuned)'
         '<br/>• Dec 2025: 284 TPS prompt eval, 46 TPS generation'
@@ -408,25 +415,38 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
-    # Architecture Comparison + Problem/Solution (combined)
-    body.append(Paragraph("NUMA vs. Strix Halo: The CCD Problem", heading_style))
-    body.append(Spacer(1, 0.2*inch))
+    # Traditional NUMA diagram (separate slide)
+    body.append(Paragraph("Traditional NUMA Architecture", heading_style))
+    body.append(Spacer(1, 0.3*inch))
     
-    # Traditional NUMA diagram
-    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 6*inch, 3*inch)
+    img1 = get_scaled_image('/opt/opencode/src/self-2026/assets/numa_traditional.png', 7.5*inch, 5*inch)
     if img1:
         body.append(img1)
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Two separate nodes, each with own cores + L3 cache", normal_style))
     
-    # Strix Halo diagram
-    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 6*inch, 3*inch)
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # Strix Halo diagram (separate slide)
+    body.append(Paragraph("Strix Halo APU Architecture", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    img2 = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_numa.png', 7.5*inch, 5*inch)
     if img2:
         body.append(img2)
     
     body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Single node, but 2 CCDs with separate L3 caches", normal_style))
     
-    body.append(Paragraph("The Problem: NUMA Tools Can't See CCD Boundaries", subheading_style))
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # The Problem slide (text only)
+    body.append(Paragraph("The Problem: NUMA Tools Can't See CCD Boundaries", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
     body.append(Paragraph(
         "• Traditional NUMA tools detect only 1 node, not 2 CCDs"
         '<br/>• Manual core pinning required'
@@ -439,8 +459,8 @@ def create_pdf():
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
-    # Evidence (combined)
-    body.append(Paragraph("Evidence: Threads Bouncing + Hardware Topology", heading_style))
+    # Evidence: Threads Bouncing (ps output)
+    body.append(Paragraph("Evidence: Threads Bouncing Across CCDs", heading_style))
     body.append(Spacer(1, 0.2*inch))
     
     img_ps = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_ps_output.png', 7.5*inch, 4.5*inch)
@@ -448,18 +468,34 @@ def create_pdf():
         body.append(img_ps)
     
     body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("ps output shows threads with varying CPU affinities", normal_style))
     
-    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7.5*inch, 3*inch)
+    body.append(PageBreak())
+    
+    # Evidence: Hardware Topology (lscpu)
+    body.append(Paragraph("Evidence: Hardware Topology", heading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    img_lscpu = get_scaled_image('/opt/opencode/src/self-2026/assets/issue_1070_lscpu.png', 7.5*inch, 4*inch)
     if img_lscpu:
         body.append(img_lscpu)
     
     body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("lscpu shows 2 CCDs but NUMA tools detect only 1 node", normal_style))
     
-    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7.5*inch, 3*inch)
+    body.append(PageBreak())
+    
+    # Evidence: amdgpu_top
+    body.append(Paragraph("Evidence: GPU Utilization", heading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    img_amdgpu = get_scaled_image('/opt/opencode/src/self-2026/assets/amdgpu_top.png', 7.5*inch, 4*inch)
     if img_amdgpu:
         body.append(img_amdgpu)
     
-    body.append(Spacer(1, 0.5*inch))
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("amdgpu_top showing RDNA 3.5 GPU utilization", normal_style))
+    
     body.append(PageBreak())
     
     # ============================================
@@ -534,22 +570,30 @@ def create_pdf():
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/homeasssistant.png', 7*inch, 4*inch)
     if img:
         body.append(img)
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Complete home automation control from local hardware", normal_style))
     
     body.append(PageBreak())
     
     # Home Assistant on Echo Show
-    body.append(Paragraph("Home Assistant on Echo Show", subheading_style))
+    body.append(Paragraph("Home Assistant on Echo Show", heading_style))
+    body.append(Spacer(1, 0.2*inch))
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/ha.jpeg', 7*inch, 4*inch)
     if img:
         body.append(img)
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("LineageOS + ViewAssist on repurposed Echo Show", normal_style))
     
     body.append(PageBreak())
     
     # Home Assistant Setup
-    body.append(Paragraph("Home Assistant Setup", subheading_style))
+    body.append(Paragraph("Home Assistant Setup", heading_style))
+    body.append(Spacer(1, 0.2*inch))
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/myha.png', 7*inch, 4*inch)
     if img:
         body.append(img)
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Complete dashboard with lights, climate, and automation", normal_style))
     
     body.append(PageBreak())
     
@@ -666,20 +710,25 @@ def create_pdf():
     body.append(Spacer(1, 0.3*inch))
     
     # s1.png: K-baffle internal view
-    body.append(Paragraph("K-Baffle Assembly (Internal View)", subheading_style))
+    body.append(Paragraph("K-Baffle Assembly (Internal View)", heading_style))
+    body.append(Spacer(1, 0.2*inch))
     img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 7*inch, 4*inch)
     if img_s1:
         body.append(img_s1)
-    
     body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Internal frustum design for optimal acoustic performance", normal_style))
+    
+    body.append(PageBreak())
     
     # s2.png: Dimensioned parts
-    body.append(Paragraph("Dimensioned Parts View", subheading_style))
+    body.append(Paragraph("Dimensioned Parts View", heading_style))
+    body.append(Spacer(1, 0.2*inch))
     img_s2 = get_scaled_image('/opt/opencode/src/self-2026/assets/s2.png', 7*inch, 4*inch)
     if img_s2:
         body.append(img_s2)
-    
     body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Precision tolerances for .308 Winchester and 5.56 NATO", normal_style))
+    
     body.append(PageBreak())
     
     # Comparison section
@@ -748,13 +797,6 @@ def create_pdf():
     body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    # Opencode screenshot
-    img_editor = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 7.5*inch, 4.5*inch)
-    if img_editor:
-        body.append(img_editor)
-    
-    body.append(Spacer(1, 0.3*inch))
-    
     body.append(Paragraph("Editor Comparison", subheading_style))
     body.append(Paragraph(
         '• Opencode: TUI, subagents, fast iteration'
@@ -763,6 +805,12 @@ def create_pdf():
         '<br/>• Source: Personal workflow (2026)',
         normal_style
     ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    # Opencode screenshot
+    img_editor = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 7.5*inch, 4.5*inch)
+    if img_editor:
+        body.append(img_editor)
     
     body.append(PageBreak())
     
@@ -770,7 +818,10 @@ def create_pdf():
     # WHICH MODELS - Consolidated Section
     # ============================================
     body.append(Paragraph("Which Models?", heading_style))
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph("Model Comparison Chart", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
     
     # Model comparison chart
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/1771330229614.jpeg', 7.5*inch, 5*inch)
@@ -778,6 +829,8 @@ def create_pdf():
         body.append(img)
     
     body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Qwen3-Coder, Qwen 3.5, and Llama models for different use cases", normal_style))
+    
     body.append(PageBreak())
     
     body.append(Paragraph("Models in Use", heading_style))
@@ -1012,8 +1065,6 @@ def create_pdf():
     body.append(Paragraph("• Reddit r/LocalLLaMA: 8 Local LLMs on Strix Halo", normal_style))
     body.append(Paragraph("• XDA Forums: Amazon Echo development", normal_style))
     body.append(Paragraph("• GitHub: winmutt (8 repos, forks of lemonade, cline, vscode)", normal_style))
-    
-    body.append(PageBreak())
     
     # ============================================
     # END SLIDE
