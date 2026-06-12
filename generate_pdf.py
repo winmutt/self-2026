@@ -262,13 +262,6 @@ def create_pdf():
     
     body.append(Spacer(1, 0.08*inch))
     
-    body.append(Paragraph("System Internals", subheading_style))
-    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 4.5*inch)
-    if img_internals:
-        body.append(img_internals)
-    
-    body.append(Spacer(1, 0.08*inch))
-    
     body.append(Paragraph("Black Friday 2025 Deal", subheading_style))
     body.append(Paragraph(
         '• Corsair 300 AI Workstation: <b>$1800</b> (128GB Strix Halo system)'
@@ -278,6 +271,15 @@ def create_pdf():
     ))
     
     body.append(Spacer(1, 0.15*inch))
+    body.append(PageBreak())
+    
+    # System Internals (separate slide)
+    body.append(Paragraph("System Internals", subheading_style))
+    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 5.5*inch)
+    if img_internals:
+        body.append(img_internals)
+    
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # ============================================
@@ -756,18 +758,37 @@ def create_pdf():
         normal_style
     ))
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     
-    # s1.png: K-baffle internal view
+    body.append(Paragraph("Why OpenSCAD Works", subheading_style))
+    body.append(Paragraph(
+        '• Code-based CAD: Everything is a script — version control friendly'
+        '<br/>• Declarative syntax: Define what you want, not how to draw it'
+        '<br/>• CSG primitives: cube(), sphere(), cylinder() as building blocks'
+        '<br/>• Boolean operations: union(), difference(), intersection()'
+        '<br/>• Transformations: translate(), rotate(), scale() — intuitive'
+        '<br/>• Modules & functions: Reusable components, DRY principle'
+        '<br/>• No hidden state: What you write is exactly what you get',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.2*inch))
+    body.append(Paragraph(
+        '"The most straightforward way to create 3D models programmatically. '
+        'No mouse required."', humor_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
+    
+    # s1.png: K-baffle internal view (separate slide)
     body.append(Paragraph("K-Baffle Assembly (Internal View)", heading_style))
     body.append(Spacer(1, 0.1*inch))
-    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 6*inch, 4*inch)
+    img_s1 = get_scaled_image('/opt/opencode/src/self-2026/assets/s1.png', 7.5*inch, 5.5*inch)
     if img_s1:
         body.append(img_s1)
     body.append(Spacer(1, 0.15*inch))
     body.append(Paragraph("Internal frustum design for optimal acoustic performance", normal_style))
-    
-    body.append(Spacer(1, 0.15*inch))
     
     body.append(Spacer(1, 0.3*inch))
     body.append(PageBreak())
