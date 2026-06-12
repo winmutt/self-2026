@@ -229,7 +229,6 @@ def create_pdf():
     agenda_items = [
         "• Home Assistant: Cutting the Alexa cord",
         "• 3D Modeling: AI to concrete signs",
-        "• AI Coding Editors: Opencode, Cline, Aider",
         "• Project WWS: Remote workspace provisioning"
     ]
     for item in agenda_items:
@@ -254,13 +253,19 @@ def create_pdf():
     # PART 5: THE HARDWARE
     # ============================================
     body.append(Paragraph("The Hardware: AMD Ryzen AI Max+ 395", heading_style))
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     
-    # APU die diagram
-    body.append(Paragraph("APU Die Architecture", subheading_style))
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5*inch)
-    if img:
-        body.append(img)
+    # Corsair system image
+    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/corsair_pricing.png', 7.5*inch, 4*inch)
+    if img_corsair:
+        body.append(img_corsair)
+    
+    body.append(Spacer(1, 0.2*inch))
+    
+    # System internals
+    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 4*inch)
+    if img_internals:
+        body.append(img_internals)
     
     body.append(Spacer(1, 0.3*inch))
     
@@ -270,42 +275,38 @@ def create_pdf():
     body.append(Paragraph("• 768KB L1d + 512KB L1i + 16MB L2", normal_style))
     body.append(Paragraph("• Integrated RDNA 3.5 GPU (40 Compute Units)", normal_style))
     body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory (soldered)", normal_style))
-    body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 teardown analysis (Chiphell, TechPowerUp)", normal_style))
+    body.append(Paragraph("• Source: Corsair AI Workstation 300, AMD Ryzen AI Max+ 395 teardown (Chiphell)", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
     
-    body.append(Paragraph("AMD Radeon 680M GPU", subheading_style))
-    body.append(Paragraph("• RDNA 3.5 architecture, 40 Compute Units", normal_style))
-    body.append(Paragraph("• Peak performance: ~4.6 TFLOPS", normal_style))
-    body.append(Paragraph("• Shared memory with CPU (128GB unified)", normal_style))
-    body.append(Paragraph("• Supports ROCm for AI/ML workloads", normal_style))
-    body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 specifications", normal_style))
+    # APU Die Architecture (moved here from earlier)
+    body.append(Paragraph("APU Die Architecture", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    img_die = get_scaled_image('/opt/opencode/src/self-2026/assets/apu_die_diagram.png', 7.5*inch, 5*inch)
+    if img_die:
+        body.append(img_die)
     
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("AMD XDNA 2 NPU", subheading_style))
-    body.append(Paragraph("• Neural Processing Unit for AI workloads", normal_style))
-    body.append(Paragraph("• Integrated into Ryzen AI Max+ 395 APU", normal_style))
-    body.append(Paragraph("• Supports FastFlowLM for efficient inference", normal_style))
-    body.append(Paragraph("• Power-efficient alternative to GPU processing", normal_style))
-    body.append(Spacer(1, 0.2*inch))
-    body.append(Paragraph("FastFlowLM Performance (June 2026):", subheading_style))
-    body.append(Paragraph("• 6784 tokens prefill in ~15 seconds", normal_style))
-    body.append(Paragraph("• ~455 tokens/sec on NPU", normal_style))
-    body.append(Paragraph("• Chunked processing: 4096 + 2688 tokens", normal_style))
-    body.append(Paragraph("• End-to-end (prefill to response): ~16.2 seconds", normal_style))
-    body.append(Paragraph("• Source: FastFlowLM logs (lemonade-server)", normal_style))
+    body.append(Paragraph("Component Breakdown", subheading_style))
+    body.append(Paragraph("• AMD Radeon 680M GPU: RDNA 3.5, 40 CUs, ~4.6 TFLOPS", normal_style))
+    body.append(Paragraph("• AMD XDNA 2 NPU: 50 TOPS AI acceleration", normal_style))
+    body.append(Paragraph("• 2x CCDs with separate 32MB L3 caches", normal_style))
+    body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory", normal_style))
+    body.append(Paragraph("• Source: AMD Ryzen AI Max+ 395 specifications", normal_style))
     
     body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
     # ============================================
-    # POWER CONSUMPTION & PRICING
+    # POWER CONSUMPTION & PERFORMANCE
     # ============================================
-    body.append(Paragraph("Power Consumption Reality", heading_style))
+    body.append(Paragraph("Power Consumption & Performance", heading_style))
     body.append(Spacer(1, 0.3*inch))
     
-    body.append(Paragraph("System Comparison", subheading_style))
+    body.append(Paragraph("System Power Comparison", subheading_style))
     body.append(Spacer(1, 0.2*inch))
     
     power_data = [
@@ -336,6 +337,28 @@ def create_pdf():
     body.append(Paragraph(
         'Strix Halo: ~300W vs RTX 5090: ~800-1000W vs Cloud Servers: 1500-3000W<br/>'
         'Source: Corsair specs, NVIDIA TDP ratings, TechPowerUp benchmarks',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.4*inch))
+    body.append(Paragraph("FastFlowLM NPU Performance", subheading_style))
+    body.append(Paragraph(
+        '• 6784 tokens prefill in ~15 seconds (~455 tokens/sec)'
+        '<br/>• Chunked processing: 4096 + 2688 tokens'
+        '<br/>• End-to-end (prefill to response): ~16.2 seconds'
+        '<br/>• Source: FastFlowLM logs (lemonade-server, June 2026)',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.4*inch))
+    body.append(Paragraph("Query Performance Timeline", subheading_style))
+    body.append(Paragraph(
+        '• Nov 2025: 45 TPS (400k context, initial) → 14 TPS (200k, tuned)'
+        '<br/>• Dec 2025: 284 TPS prompt eval, 46 TPS generation'
+        '<br/>• Jan 2026: 2x faster after AMD GPU library update'
+        '<br/>• Feb 2026: 24 TPS single-threaded'
+        '<br/>• May 2026: 18.65 TPS @ ~200k context (37.8 min TTFT)'
+        '<br/>• Source: PERFORMANCE_DATA.md, lemonade telemetry',
         normal_style
     ))
     
@@ -687,6 +710,9 @@ def create_pdf():
     ]))
     body.append(table)
     
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("OpenSCAD: Precise, documented, working. Blender: Vibe-based, hopeful.", humor_style))
+    
     body.append(PageBreak())
     
     # ============================================
@@ -713,6 +739,30 @@ def create_pdf():
     img = get_scaled_image('/opt/opencode/src/self-2026/assets/dashboard.png', 7.5*inch, 4*inch)
     if img:
         body.append(img)
+    
+    body.append(PageBreak())
+    
+    # ============================================
+    # AI CODING EDITORS
+    # ============================================
+    body.append(Paragraph("AI Coding Editors: My Daily Drivers", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    # Opencode screenshot
+    img_editor = get_scaled_image('/opt/opencode/src/self-2026/assets/opencode_screenshot.png', 7.5*inch, 4.5*inch)
+    if img_editor:
+        body.append(img_editor)
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Editor Comparison", subheading_style))
+    body.append(Paragraph(
+        '• Opencode: TUI, subagents, fast iteration'
+        '<br/>• Cline: VSCode extension, autonomous workflows'
+        '<br/>• Aider: CLI, git-integrated'
+        '<br/>• Source: Personal workflow (2026)',
+        normal_style
+    ))
     
     body.append(PageBreak())
     
