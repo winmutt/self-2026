@@ -841,7 +841,136 @@ def create_pdf():
     
     body.append(PageBreak())
     
+    # ============================================
+    # REAL ESTATE SEARCH PROJECT
+    # ============================================
+    body.append(Paragraph("Georgia Land Scout: Finding Rural Property", heading_style))
+    body.append(Spacer(1, 0.2*inch))
     
+    body.append(Paragraph("Search Criteria", subheading_style))
+    body.append(Paragraph(
+        '• <b>Size:</b> >20 acres (871,200+ sq ft)'
+        '<br/>• <b>Price:</b> Under $200,000'
+        '<br/>• <b>Location:</b> Within 250 miles of Atlanta'
+        '<br/>• <b>Density:</b> <50 people per square mile'
+        '<br/>• <b>Boundary:</b> North of the Gnat Line (Fall Line)',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph("Coverage: 50 Counties, 471 ZIP Codes", subheading_style))
+    body.append(Paragraph(
+        '• Tennessee: 18 counties, 140 ZIP codes'
+        '<br/>• North Carolina: 11 counties, 105 ZIP codes'
+        '<br/>• Kentucky: 5 counties, 86 ZIP codes'
+        '<br/>• South Carolina: 5 counties, 62 ZIP codes'
+        '<br/>• Alabama: 5 counties, 49 ZIP codes'
+        '<br/>• Georgia: 6 counties, 29 ZIP codes',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.2*inch))
+    
+    # ZIP code map
+    img_map = get_scaled_image('/opt/opencode/src/self-2026/assets/zipcode_map.png', 7.5*inch, 5*inch)
+    if img_map:
+        body.append(img_map)
+    body.append(Spacer(1, 0.15*inch))
+    body.append(Paragraph("Target ZIP codes across 6 states", normal_style))
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
+    
+    # ============================================
+    # WHAT WORKED vs WHAT DIDN'T
+    # ============================================
+    body.append(Paragraph("What Worked vs What Didn't", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("✅ Working Solutions", subheading_style))
+    body.append(Paragraph(
+        '<b>RentCast API</b> (Recommended)'
+        '<br/>• Official API, no blocking'
+        '<br/>• Direct land filtering, price/acre filters'
+        '<br/>• 50 free calls/month, $74/mo for 1,000'
+        '<br/>• Fast, reliable, structured data',
+        normal_style
+    ))
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph(
+        '<b>Redfin Scraper</b>'
+        '<br/>• Parses land listings from target ZIP codes'
+        '<br/>• Found 1 property: 60ac @ $200k in Shiloh, GA'
+        '<br/>• Requires Selenium/Chrome',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
+    
+    body.append(Paragraph("❌ Blocked: Anti-Bot Protections", subheading_style))
+    body.append(Paragraph(
+        '<b>LandWatch</b> — Cloudflare/Imperva bot detection, captcha challenges'
+        '<br/><b>Realtor.com</b> — Rate limiting (HTTP 429), empty pages'
+        '<br/><b>Zillow</b> — Bot detection, fingerprinting, captcha'
+        '<br/><b>LandAndCountry</b> — Connection timeouts'
+        '<br/><b>Craigslist</b> — No land listings in target areas',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Architecture", subheading_style))
+    body.append(Paragraph(
+        '• Containerized Flask app (Podman/Docker)'
+        '<br/>• SQLite database with SHA-256 deduplication'
+        '<br/>• Web UI: Dashboard, search, import/export'
+        '<br/>• CLI: stats, new, list, search commands'
+        '<br/>• 43 tests, all passing',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
+    
+    # ============================================
+    # LESSONS LEARNED
+    # ============================================
+    body.append(Paragraph("Lessons Learned", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("1. Official APIs Beat Scraping", subheading_style))
+    body.append(Paragraph(
+        '• RentCast API: 100% uptime, structured data'
+        '<br/>• Web scrapers: Constantly blocked, high maintenance'
+        '<br/>• Cost: $74/mo vs hours of anti-bot circumvention',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("2. Inventory is Extremely Limited", subheading_style))
+    body.append(Paragraph(
+        '• Only 1 property found matching criteria in months of scraping'
+        '<br/>• 60ac @ $200k in Shiloh, GA (Redfin)'
+        '<br/>• Consider expanding criteria: $300k budget or 10-15ac minimum',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("3. Manual Import Workflow", subheading_style))
+    body.append(Paragraph(
+        '• System handles deduplication automatically'
+        '<br/>• Web UI import for manually found listings'
+        '<br/>• JSON export/import for data portability',
+        normal_style
+    ))
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(PageBreak())
     
     # ============================================
     # PART 7: WWS PROJECT

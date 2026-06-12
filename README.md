@@ -61,7 +61,7 @@ pyenv exec python3 render_slides.py
 
 This renders all slides to `assets/slides/` as PNG files at 2x zoom (~192 DPI).
 
-## PDF Structure (37 slides)
+## PDF Structure (42 slides)
 
 Extracted using PyPDF2 (`pyenv exec pip install PyPDF2`):
 
@@ -93,17 +93,22 @@ Extracted using PyPDF2 (`pyenv exec pip install PyPDF2`):
 | 24 | OpenSCAD: Where Things Work |
 | 25 | K-Baffle Assembly (Internal View) |
 | 26 | Dimensioned Parts View |
-| 27 | Project WWS: I Vibe-Coded an Entire System |
-| 28 | AI Coding Editors: My Daily Drivers |
-| 29 | Which Models? (chart) |
-| 30 | Models in Use (Qwen3.6 MTP) |
-| 31 | Key Insights (8 takeaways) |
-| 32 | 26 Years of Open Source (2000-2026) |
-| 33 | GitHub Activity Heatmap (2018-2024 ghost town) |
-| 34 | How Buying Hardware Got Me Back in Open Source |
-| 35 | Contribution Breakdown |
-| 36 | References & Sources (Power, Software) |
-| 37 | References continued (Communities) + End |
+| 27 | Georgia Land Scout: Finding Rural Property |
+| 28 | Coverage: 50 Counties, 471 ZIP Codes (map) |
+| 29 | What Worked vs What Didn't (RentCast API, Redfin) |
+| 30 | Blocked: Anti-Bot Protections (LandWatch, Zillow, etc.) |
+| 31 | Lessons Learned (APIs vs Scraping, Limited Inventory) |
+| 32 | Project WWS: I Vibe-Coded an Entire System |
+| 33 | AI Coding Editors: My Daily Drivers |
+| 34 | Which Models? (chart) |
+| 35 | Models in Use (Qwen3.6 MTP) |
+| 36 | Key Insights (8 takeaways) |
+| 37 | 26 Years of Open Source (2000-2026) |
+| 38 | GitHub Activity Heatmap (2018-2024 ghost town) |
+| 39 | How Buying Hardware Got Me Back in Open Source |
+| 40 | Contribution Breakdown |
+| 41 | References & Sources (Power, Software) |
+| 42 | References continued (Communities) + End |
 
 ### Verification
 
