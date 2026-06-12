@@ -381,6 +381,84 @@ def create_pdf():
     body.append(PageBreak())
     
     # ============================================
+    # WHICH MODELS - Consolidated Section
+    # ============================================
+    body.append(Paragraph("Which Models?", heading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    body.append(Paragraph("Model Comparison Chart", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    # Model comparison chart
+    img = get_scaled_image('/opt/opencode/src/self-2026/assets/1771330229614.jpeg', 7.5*inch, 5*inch)
+    if img:
+        body.append(img)
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph("Qwen3-Coder, Qwen 3.5, and Llama models for different use cases", normal_style))
+    
+    body.append(PageBreak())
+    
+    body.append(Paragraph("Models in Use", heading_style))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Qwen3.6 35B-A3B-MTP (Current Go-To)", subheading_style))
+    body.append(Paragraph(
+        "• Context: 400k window, MTP-GGUF format"
+        '<br/>• Use Case: Primary coding model, autonomous development'
+        '<br/>• MTP: Multi-Token Prediction (lemonade 10.5.1+)'
+        '<br/>• Predicts multiple tokens per forward pass'
+        '<br/>• Significantly improves decode throughput'
+        '<br/>• Source: github.com/amd/gaia/issues/1140',
+        normal_style
+    ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Qwen3-Coder (Previous Primary)", subheading_style))
+    body.append(Paragraph(
+        "• Context: 400k window, ~59GB memory usage"
+        '<br/>• Use Case: WWS project development'
+        '<br/>• Stability: Stable after tuning',
+        normal_style
+    ))
+    body.append(Spacer(1, 0.3*inch))
+    
+    body.append(Paragraph("Backend Evolution: Lemonade → Ollama → llama.cpp", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    
+    backend_data = [
+        ['Backend', 'Pros', 'Cons'],
+        ['Lemonade (llama.cpp + ROCm)', 'NPU support, AMD GPU optimized, MTP support', 'Instability after OS upgrade'],
+        ['Ollama', 'Stable, easy to use', 'GPU crashes after OS upgrades'],
+        ['llama.cpp (direct)', 'Prompt caching, MTP support', 'Manual setup'],
+    ]
+    
+    table = Table(backend_data, colWidths=[2.2*inch, 2.5*inch, 2.5*inch])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#30363d')),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#c9d1d9')),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 9),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
+        ('TOPPADDING', (0, 0), (-1, 0), 8),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor('#0d1117')),
+        ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor('#c9d1d9')),
+        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#30363d')),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+    ]))
+    body.append(table)
+    
+    body.append(Spacer(1, 0.3*inch))
+    body.append(Paragraph(
+        'Nov 28: Lemonade → Dec 7: Ollama → Dec 14: GPU crashes → Mar 11: "Things really humming"',
+        humor_style
+    ))
+    
+    body.append(Spacer(1, 0.5*inch))
+    body.append(PageBreak())
+    
+    # ============================================
     # ISSUE #1070: NUMA/CCD CORE AFFINITY
     # ============================================
     body.append(Paragraph("Feat #1070: [enhancement] Core affinity when running multiple models.", heading_style))
@@ -770,84 +848,7 @@ def create_pdf():
     if img_editor:
         body.append(img_editor)
     
-    body.append(PageBreak())
-    
-    # ============================================
-    # WHICH MODELS - Consolidated Section
-    # ============================================
-    body.append(Paragraph("Which Models?", heading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    body.append(Paragraph("Model Comparison Chart", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    # Model comparison chart
-    img = get_scaled_image('/opt/opencode/src/self-2026/assets/1771330229614.jpeg', 7.5*inch, 5*inch)
-    if img:
-        body.append(img)
-    
     body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph("Qwen3-Coder, Qwen 3.5, and Llama models for different use cases", normal_style))
-    
-    body.append(PageBreak())
-    
-    body.append(Paragraph("Models in Use", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Qwen3.6 35B-A3B-MTP (Current Go-To)", subheading_style))
-    body.append(Paragraph(
-        "• Context: 400k window, MTP-GGUF format"
-        '<br/>• Use Case: Primary coding model, autonomous development'
-        '<br/>• MTP: Multi-Token Prediction (lemonade 10.5.1+)'
-        '<br/>• Predicts multiple tokens per forward pass'
-        '<br/>• Significantly improves decode throughput'
-        '<br/>• Source: github.com/amd/gaia/issues/1140',
-        normal_style
-    ))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Qwen3-Coder (Previous Primary)", subheading_style))
-    body.append(Paragraph(
-        "• Context: 400k window, ~59GB memory usage"
-        '<br/>• Use Case: WWS project development'
-        '<br/>• Stability: Stable after tuning',
-        normal_style
-    ))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Backend Evolution: Lemonade → Ollama → llama.cpp", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    backend_data = [
-        ['Backend', 'Pros', 'Cons'],
-        ['Lemonade (llama.cpp + ROCm)', 'NPU support, AMD GPU optimized, MTP support', 'Instability after OS upgrade'],
-        ['Ollama', 'Stable, easy to use', 'GPU crashes after OS upgrades'],
-        ['llama.cpp (direct)', 'Prompt caching, MTP support', 'Manual setup'],
-    ]
-    
-    table = Table(backend_data, colWidths=[2.2*inch, 2.5*inch, 2.5*inch])
-    table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#30363d')),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#c9d1d9')),
-        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, -1), 9),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
-        ('TOPPADDING', (0, 0), (-1, 0), 8),
-        ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor('#0d1117')),
-        ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor('#c9d1d9')),
-        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#30363d')),
-        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-    ]))
-    body.append(table)
-    
-    body.append(Spacer(1, 0.3*inch))
-    body.append(Paragraph(
-        'Nov 28: Lemonade → Dec 7: Ollama → Dec 14: GPU crashes → Mar 11: "Things really humming"',
-        humor_style
-    ))
-    
-    body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
     
