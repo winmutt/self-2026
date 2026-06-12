@@ -255,19 +255,29 @@ def create_pdf():
     body.append(Paragraph("The Hardware: AMD Ryzen AI Max+ 395", heading_style))
     body.append(Spacer(1, 0.2*inch))
     
+    body.append(Paragraph("Black Friday 2025 Deal", subheading_style))
+    body.append(Spacer(1, 0.2*inch))
+    body.append(Paragraph(
+        '• Corsair 300 AI Workstation: <b>$1800</b> (128GB Strix Halo system)'
+        '<br/>• Sold NVIDIA RTX 3060 rig to fund the purchase'
+        '<br/>• Today\'s equivalent: ~$3000+ (RTX 4090 configurations)',
+        normal_style
+    ))
+    body.append(Spacer(1, 0.2*inch))
+    
     body.append(Paragraph("Corsair AI Workstation 300", subheading_style))
-    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 07-42-36.png', 7.5*inch, 3.5*inch)
+    img_corsair = get_scaled_image('/opt/opencode/src/self-2026/assets/Screenshot from 2026-06-12 07-42-36.png', 7.5*inch, 3*inch)
     if img_corsair:
         body.append(img_corsair)
     
-    body.append(Spacer(1, 0.15*inch))
+    body.append(Spacer(1, 0.1*inch))
     
     body.append(Paragraph("System Internals", subheading_style))
-    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 3.5*inch)
+    img_internals = get_scaled_image('/opt/opencode/src/self-2026/assets/strix_halo_internals.jpg', 7.5*inch, 3*inch)
     if img_internals:
         body.append(img_internals)
     
-    body.append(Spacer(1, 0.2*inch))
+    body.append(Spacer(1, 0.15*inch))
     
     body.append(Paragraph("Physical Layout", subheading_style))
     body.append(Paragraph("• 16 cores (12 performance + 4 efficiency)", normal_style))
@@ -277,7 +287,7 @@ def create_pdf():
     body.append(Paragraph("• 128GB LPDDR5X-8000 unified memory (soldered)", normal_style))
     body.append(Paragraph("• Source: Corsair AI Workstation 300, AMD Ryzen AI Max+ 395 teardown (Chiphell)", normal_style))
     
-    body.append(Spacer(1, 0.3*inch))
+    body.append(Spacer(1, 0.2*inch))
     body.append(PageBreak())
     
     # APU Die Architecture (moved here from earlier)
@@ -359,25 +369,6 @@ def create_pdf():
     body.append(Paragraph("Source: PERFORMANCE_DATA.md, FastFlowLM logs, lemonade telemetry", humor_style))
     
     body.append(Spacer(1, 0.3*inch))
-    
-    # Pricing - continue on same page if space allows
-    body.append(Paragraph("The Hardware Investment", heading_style))
-    body.append(Spacer(1, 0.3*inch))
-    
-    body.append(Paragraph("Black Friday 2025 Deal", subheading_style))
-    body.append(Spacer(1, 0.2*inch))
-    
-    body.append(Paragraph(
-        '• Corsair 300 AI Workstation: <b>$1800</b> (128GB Strix Halo system)'
-        '<br/>• Sold NVIDIA RTX 3060 rig to fund the purchase'
-        '<br/>• Today\'s equivalent: ~$3000+ (RTX 4090 configurations)'
-        '<br/>'
-        '<b>The Verdict:</b> "The Strix Halo was a bargain at $1800 for what it delivers - '
-        'today you\'d pay 2x that for equivalent performance with discrete GPU"',
-        normal_style
-    ))
-    
-    body.append(Spacer(1, 0.5*inch))
     body.append(PageBreak())
     
     # ============================================
